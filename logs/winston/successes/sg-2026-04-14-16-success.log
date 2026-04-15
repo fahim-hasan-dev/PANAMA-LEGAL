@@ -1,0 +1,9 @@
+{Tue Apr 14 2026 16:02:25} [APP 🚀] info: ::ffff:10.10.7.94 - GET /api/v1/library 200 - 44.833 ms
+{Tue Apr 14 2026 16:06:28} [APP 🚀] info: ::ffff:10.10.7.94 - GET /api/v1/library 200 - 4.171 ms
+{Tue Apr 14 2026 16:07:52} [APP 🚀] info: ::ffff:10.10.7.94 - PATCH /api/v1/library/699aa608278c7da16e03b9cb 200 - 130.686 ms
+{Tue Apr 14 2026 16:08:24} [APP 🚀] info: ::ffff:10.10.7.94 - GET /file/1776161272795-4pbvdy.pdf 200 - 1.714 ms
+{Tue Apr 14 2026 16:08:46} [APP 🚀] info: ::ffff:10.10.7.94 - GET /api/v1/library 200 - 3.331 ms
+{Tue Apr 14 2026 16:09:26} [APP 🚀] info: ::ffff:10.10.7.94 - PATCH /api/v1/library/699a86e03a87388426732b16 200 - 80.498 ms
+{Tue Apr 14 2026 16:10:19} [APP 🚀] info: ::ffff:10.10.7.94 - POST /api/v1/library 200 - 28.068 ms
+{Tue Apr 14 2026 16:10:28} [APP 🚀] info: ::ffff:10.10.7.94 - GET /api/v1/library 200 - 3.395 ms
+{Tue Apr 14 2026 16:12:35} [APP 🚀] info: ::ffff:10.10.7.94 - GET /api/v1/library/69de128b16734da8ba465e67 200 - 31.447 ms

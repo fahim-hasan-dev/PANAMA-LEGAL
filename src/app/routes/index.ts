@@ -13,6 +13,7 @@ import { CaseMessageRoutes } from '../modules/caseMessage/caseMessage.routes';
 import { NotificationRoutes } from '../modules/notification/notification.routes';
 import { LibraryRoutes } from '../modules/library/library.route';
 import { ArticleRoutes } from '../modules/article/article.route';
+import { CaseQuestionRoutes } from '../modules/caseQuestion/caseQuestion.route';
 
 
 const router = express.Router();
@@ -32,6 +33,7 @@ const apiRoutes = [
     { path: "/notification", route: NotificationRoutes },
     { path: "/library", route: LibraryRoutes },
     { path: "/article", route: ArticleRoutes },
+    { path: "/case-question", route: CaseQuestionRoutes },
 ]
 
 
