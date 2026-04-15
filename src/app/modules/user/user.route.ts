@@ -16,7 +16,7 @@ router.get(
 )
 
 router.get('/random-lawyer',
-  auth(USER_ROLES.CITIZEN),
+  // auth(USER_ROLES.CITIZEN),
   UserController.getRandomLawyer
 )
 
