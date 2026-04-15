@@ -39,3 +39,7 @@
 {Wed Apr 15 2026 15:38:21} [APP 🚀] info: [34mA user connected[39m
 {Wed Apr 15 2026 15:46:35} [APP 🚀] info: ::ffff:10.10.7.34 - GET /api/v1/case-question/get-root-questions 200 - 3.219 ms
 {Wed Apr 15 2026 15:46:35} [APP 🚀] info: ::ffff:10.10.7.34 - GET /api/v1/case-question/get-root-questions 200 - 1.676 ms
+{Wed Apr 15 2026 15:46:38} [APP 🚀] info: ::ffff:10.10.7.34 - GET /api/v1/case-question/get-sub-questions/69df1464c451cd3edf50ad1a 200 - 2.837 ms
+{Wed Apr 15 2026 15:46:40} [APP 🚀] info: ::ffff:10.10.7.34 - GET /api/v1/case-question/get-sub-questions/69df1464c451cd3edf50ad1c 200 - 4.569 ms
+{Wed Apr 15 2026 15:46:42} [APP 🚀] info: ::ffff:10.10.7.34 - GET /api/v1/case-question/get-sub-questions/69df1464c451cd3edf50ad1e 200 - 3.897 ms
+{Wed Apr 15 2026 15:46:43} [APP 🚀] info: ::ffff:10.10.7.34 - GET /api/v1/case-question/get-sub-questions/69df1464c451cd3edf50ad20 200 - 4.165 ms
