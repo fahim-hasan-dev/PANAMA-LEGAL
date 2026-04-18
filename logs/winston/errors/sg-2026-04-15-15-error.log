@@ -1,2 +1,0 @@
-{Wed Apr 15 2026 15:32:22} [APP 🐞] error: ::ffff:10.10.7.101 - GET /api/v1/user/random-lawyer?id=699aa540278c7da16e03b9c3 500 - 16.324 ms
-{Wed Apr 15 2026 15:32:32} [APP 🐞] error: ::ffff:10.10.7.101 - GET /api/v1/user/random-lawyer 500 - 4.218 ms
