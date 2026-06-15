@@ -1,0 +1,54 @@
+{Mon Jun 15 2026 10:01:01} [PANAMA LEGAL ⚖️] info: ::ffff:10.10.26.193 - GET /api/v1/library 200 - 8.575 ms
+{Mon Jun 15 2026 10:01:01} [PANAMA LEGAL ⚖️] info: ::ffff:10.10.26.193 - GET /api/v1/library 200 - 7.481 ms
+{Mon Jun 15 2026 10:01:02} [PANAMA LEGAL ⚖️] info: ::ffff:10.10.26.193 - GET /image/1781428895196-9ojq3h.png 200 - 2.640 ms
+{Mon Jun 15 2026 10:01:30} [PANAMA LEGAL ⚖️] info: ::ffff:10.10.26.193 - GET /file/1781428895203-edla55.pdf 200 - 1.092 ms
+{Mon Jun 15 2026 10:05:47} [PANAMA LEGAL ⚖️] info: ::ffff:10.10.26.193 - GET /api/v1/user/me 200 - 3.602 ms
+{Mon Jun 15 2026 10:05:59} [PANAMA LEGAL ⚖️] info: ::ffff:10.10.26.193 - GET /api/v1/user 200 - 4.933 ms
+{Mon Jun 15 2026 10:06:04} [PANAMA LEGAL ⚖️] info: [31mA user disconnect[39m
+{Mon Jun 15 2026 10:06:10} [PANAMA LEGAL ⚖️] info: [34mA user connected[39m
+{Mon Jun 15 2026 10:06:18} [PANAMA LEGAL ⚖️] info: ::ffff:10.10.26.193 - GET /api/v1/user/me 200 - 2.571 ms
+{Mon Jun 15 2026 10:06:28} [PANAMA LEGAL ⚖️] info: ::ffff:10.10.26.193 - POST /api/v1/auth/login 200 - 225.810 ms
+{Mon Jun 15 2026 10:06:28} [PANAMA LEGAL ⚖️] info: ::ffff:10.10.26.193 - GET /api/v1/user/6a2e1d1aa4f764bb2a5906e2 200 - 1.517 ms
+{Mon Jun 15 2026 10:06:32} [PANAMA LEGAL ⚖️] info: ::ffff:10.10.26.193 - GET /api/v1/library 200 - 2.521 ms
+{Mon Jun 15 2026 10:06:32} [PANAMA LEGAL ⚖️] info: ::ffff:10.10.26.193 - GET /api/v1/library 200 - 1.914 ms
+{Mon Jun 15 2026 10:06:33} [PANAMA LEGAL ⚖️] info: ::ffff:10.10.26.193 - GET /image/1781428895196-9ojq3h.png 200 - 1.666 ms
+{Mon Jun 15 2026 10:07:54} [PANAMA LEGAL ⚖️] info: [31mA user disconnect[39m
+{Mon Jun 15 2026 10:08:02} [PANAMA LEGAL ⚖️] info: [34mA user connected[39m
+{Mon Jun 15 2026 10:08:13} [PANAMA LEGAL ⚖️] info: ::ffff:10.10.26.193 - GET /api/v1/library 200 - 3.749 ms
+{Mon Jun 15 2026 10:08:13} [PANAMA LEGAL ⚖️] info: ::ffff:10.10.26.193 - GET /api/v1/library 200 - 2.236 ms
+{Mon Jun 15 2026 10:08:14} [PANAMA LEGAL ⚖️] info: ::ffff:10.10.26.193 - GET /image/1781428895196-9ojq3h.png 200 - 0.681 ms
+{Mon Jun 15 2026 10:10:39} [PANAMA LEGAL ⚖️] info: ::ffff:10.10.26.193 - GET /file/1781428895203-edla55.pdf 200 - 0.649 ms
+{Mon Jun 15 2026 10:12:49} [PANAMA LEGAL ⚖️] info: ::ffff:10.10.26.193 - GET /api/v1/user/me 200 - 2.749 ms
+{Mon Jun 15 2026 10:13:04} [PANAMA LEGAL ⚖️] info: ::ffff:10.10.26.193 - GET /api/v1/user/me 200 - 1.768 ms
+{Mon Jun 15 2026 10:22:49} [PANAMA LEGAL ⚖️] info: ::ffff:10.10.26.193 - POST /api/v1/auth/login 200 - 222.748 ms
+{Mon Jun 15 2026 10:22:50} [PANAMA LEGAL ⚖️] info: ::ffff:10.10.26.193 - GET /api/v1/user/6a2a6b51206eeae4dddf902d 200 - 1.557 ms
+{Mon Jun 15 2026 10:29:32} [PANAMA LEGAL ⚖️] info: ::ffff:10.10.26.193 - GET /api/v1/library 200 - 6.252 ms
+{Mon Jun 15 2026 10:29:32} [PANAMA LEGAL ⚖️] info: ::ffff:10.10.26.193 - GET /api/v1/library 200 - 3.570 ms
+{Mon Jun 15 2026 10:29:33} [PANAMA LEGAL ⚖️] info: ::ffff:10.10.26.193 - GET /image/1781428895196-9ojq3h.png 200 - 1.883 ms
+{Mon Jun 15 2026 10:29:36} [PANAMA LEGAL ⚖️] info: ::ffff:10.10.26.193 - GET /file/1781428895203-edla55.pdf 200 - 0.869 ms
+{Mon Jun 15 2026 10:35:21} [PANAMA LEGAL ⚖️] info: [31mA user disconnect[39m
+{Mon Jun 15 2026 10:35:27} [PANAMA LEGAL ⚖️] info: [34mA user connected[39m
+{Mon Jun 15 2026 10:35:40} [PANAMA LEGAL ⚖️] info: ::ffff:10.10.26.193 - GET /api/v1/case 200 - 10.396 ms
+{Mon Jun 15 2026 10:35:47} [PANAMA LEGAL ⚖️] info: ::ffff:10.10.26.193 - GET /api/v1/user/me 200 - 2.831 ms
+{Mon Jun 15 2026 10:37:03} [PANAMA LEGAL ⚖️] info: ::ffff:10.10.26.193 - GET /api/v1/library 200 - 4.842 ms
+{Mon Jun 15 2026 10:37:03} [PANAMA LEGAL ⚖️] info: ::ffff:10.10.26.193 - GET /api/v1/library 200 - 3.002 ms
+{Mon Jun 15 2026 10:37:04} [PANAMA LEGAL ⚖️] info: ::ffff:10.10.26.193 - GET /image/1781428895196-9ojq3h.png 200 - 0.735 ms
+{Mon Jun 15 2026 10:38:00} [PANAMA LEGAL ⚖️] info: [31mA user disconnect[39m
+{Mon Jun 15 2026 10:38:09} [PANAMA LEGAL ⚖️] info: [34mA user connected[39m
+{Mon Jun 15 2026 10:42:32} [PANAMA LEGAL ⚖️] info: ::ffff:10.10.26.193 - GET /api/v1/library 200 - 6.705 ms
+{Mon Jun 15 2026 10:42:32} [PANAMA LEGAL ⚖️] info: ::ffff:10.10.26.193 - GET /api/v1/library 200 - 3.488 ms
+{Mon Jun 15 2026 10:42:33} [PANAMA LEGAL ⚖️] info: ::ffff:10.10.26.193 - GET /image/1781428895196-9ojq3h.png 200 - 0.944 ms
+{Mon Jun 15 2026 10:43:40} [PANAMA LEGAL ⚖️] info: [31mA user disconnect[39m
+{Mon Jun 15 2026 10:43:45} [PANAMA LEGAL ⚖️] info: [34mA user connected[39m
+{Mon Jun 15 2026 10:43:57} [PANAMA LEGAL ⚖️] info: ::ffff:10.10.26.193 - GET /api/v1/library 200 - 7.797 ms
+{Mon Jun 15 2026 10:43:57} [PANAMA LEGAL ⚖️] info: ::ffff:10.10.26.193 - GET /api/v1/library 200 - 5.284 ms
+{Mon Jun 15 2026 10:43:58} [PANAMA LEGAL ⚖️] info: ::ffff:10.10.26.193 - GET /image/1781428895196-9ojq3h.png 200 - 1.349 ms
+{Mon Jun 15 2026 10:44:10} [PANAMA LEGAL ⚖️] info: ::ffff:10.10.26.193 - GET /api/v1/case 200 - 8.575 ms
+{Mon Jun 15 2026 10:44:16} [PANAMA LEGAL ⚖️] info: ::ffff:10.10.26.193 - GET /api/v1/user/me 200 - 1.942 ms
+{Mon Jun 15 2026 10:44:42} [PANAMA LEGAL ⚖️] info: ::ffff:10.10.26.193 - POST /api/v1/auth/login 200 - 221.177 ms
+{Mon Jun 15 2026 10:44:42} [PANAMA LEGAL ⚖️] info: ::ffff:10.10.26.193 - GET /api/v1/user/6a2e1fa2a4f764bb2a5906f6 200 - 3.163 ms
+{Mon Jun 15 2026 10:44:54} [PANAMA LEGAL ⚖️] info: ::ffff:10.10.26.193 - GET /api/v1/library 200 - 4.183 ms
+{Mon Jun 15 2026 10:44:54} [PANAMA LEGAL ⚖️] info: ::ffff:10.10.26.193 - GET /api/v1/library 200 - 2.202 ms
+{Mon Jun 15 2026 10:45:15} [PANAMA LEGAL ⚖️] info: ::ffff:10.10.26.193 - GET /image/1781407716550-qwho0v.jpg 200 - 1.707 ms
+{Mon Jun 15 2026 10:45:15} [PANAMA LEGAL ⚖️] info: ::ffff:10.10.26.193 - GET /api/v1/user/me 200 - 3.016 ms
+{Mon Jun 15 2026 10:55:31} [PANAMA LEGAL ⚖️] info: [31mA user disconnect[39m

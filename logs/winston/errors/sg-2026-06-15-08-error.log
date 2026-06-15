@@ -1,0 +1,7 @@
+{Mon Jun 15 2026 08:24:13} [PANAMA LEGAL 🚨] error: ::ffff:10.10.26.193 - POST /api/v1/auth/login 400 - 6.920 ms
+{Mon Jun 15 2026 08:24:20} [PANAMA LEGAL 🚨] error: ::ffff:10.10.26.193 - POST /api/v1/auth/login 400 - 5.950 ms
+{Mon Jun 15 2026 08:24:27} [PANAMA LEGAL 🚨] error: ::ffff:10.10.26.193 - POST /api/v1/auth/login 400 - 0.877 ms
+{Mon Jun 15 2026 08:25:35} [PANAMA LEGAL 🚨] error: ::ffff:10.10.26.193 - POST /api/v1/auth/login 400 - 1.981 ms
+{Mon Jun 15 2026 08:45:33} [PANAMA LEGAL 🚨] error: ::ffff:10.10.26.193 - POST /api/v1/auth/login 400 - 2.072 ms
+{Mon Jun 15 2026 08:49:06} [PANAMA LEGAL 🚨] error: ::ffff:10.10.26.193 - POST /api/v1/auth/login 400 - 4.980 ms
+{Mon Jun 15 2026 08:49:15} [PANAMA LEGAL 🚨] error: ::ffff:10.10.26.193 - POST /api/v1/auth/login 400 - 2.644 ms

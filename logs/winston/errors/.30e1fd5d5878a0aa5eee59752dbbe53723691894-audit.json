@@ -6,109 +6,124 @@
     "auditLog": "D:\\Fahim\\Projects\\PANAMA-LEGAL\\logs\\winston\\errors\\.30e1fd5d5878a0aa5eee59752dbbe53723691894-audit.json",
     "files": [
         {
-            "date": 1776159390290,
-            "name": "D:\\Fahim\\Projects\\PANAMA-LEGAL\\logs\\winston\\errors\\sg-2026-04-14-15-error.log",
-            "hash": "ba3e778dfbf9f75c7508f1befdafe9e9466fd08e6abf09081a8d4b1e6ed05efc"
+            "date": 1781151604555,
+            "name": "D:\\Fahim\\Projects\\PANAMA-LEGAL\\logs\\winston\\errors\\sg-2026-06-11-10-error.log",
+            "hash": "3e2560600c8e517d9f541bb2f0ab35c45ff2d49199c6ce938b635d79d7c20096"
         },
         {
-            "date": 1776219647767,
-            "name": "D:\\Fahim\\Projects\\PANAMA-LEGAL\\logs\\winston\\errors\\sg-2026-04-15-08-error.log",
-            "hash": "998f8fb2ac8f1472794843460a23a26465c18c19a8df8d3555736ccfec809c3d"
+            "date": 1781157819707,
+            "name": "D:\\Fahim\\Projects\\PANAMA-LEGAL\\logs\\winston\\errors\\sg-2026-06-11-12-error.log",
+            "hash": "a64976128918b5aba58d06204b084f2817945a053d64c06b2de8b6afd6e13d5d"
         },
         {
-            "date": 1776222414600,
-            "name": "D:\\Fahim\\Projects\\PANAMA-LEGAL\\logs\\winston\\errors\\sg-2026-04-15-09-error.log",
-            "hash": "c5ae5bca4ba8d9f4f0ecc751c9fd998214a5e37e9ec61bac235cf8b471a73507"
+            "date": 1781164885072,
+            "name": "D:\\Fahim\\Projects\\PANAMA-LEGAL\\logs\\winston\\errors\\sg-2026-06-11-14-error.log",
+            "hash": "e51a4e088905022577438329b019960490bec5bec526f8174f0c89f96df3b2f9"
         },
         {
-            "date": 1776226070939,
-            "name": "D:\\Fahim\\Projects\\PANAMA-LEGAL\\logs\\winston\\errors\\sg-2026-04-15-10-error.log",
-            "hash": "e522d3de6e9dbb31ba08222fd1ca79fa67a81b89c67fe7233fae71425ce4b3f0"
+            "date": 1781168867092,
+            "name": "D:\\Fahim\\Projects\\PANAMA-LEGAL\\logs\\winston\\errors\\sg-2026-06-11-15-error.log",
+            "hash": "208a63615bb1530a3af28f9ab2d2d65d8b899948bbc01521af164bc903e18c2c"
         },
         {
-            "date": 1776235357131,
-            "name": "D:\\Fahim\\Projects\\PANAMA-LEGAL\\logs\\winston\\errors\\sg-2026-04-15-12-error.log",
-            "hash": "d52168a54772cdc0cb92eba876e03b4a71c599a954b5f1ea649ef03b8a403afd"
+            "date": 1781317491033,
+            "name": "D:\\Fahim\\Projects\\PANAMA-LEGAL\\logs\\winston\\errors\\sg-2026-06-13-08-error.log",
+            "hash": "20af3e38c85f9743267f7352303ac30993223aa93f3686bbb0333a45d0ec8836"
         },
         {
-            "date": 1776242377397,
-            "name": "D:\\Fahim\\Projects\\PANAMA-LEGAL\\logs\\winston\\errors\\sg-2026-04-15-14-error.log",
-            "hash": "835079fa597a277ffe4db996664e47f01963758053751fa17becbba224daa50f"
+            "date": 1781319714743,
+            "name": "D:\\Fahim\\Projects\\PANAMA-LEGAL\\logs\\winston\\errors\\sg-2026-06-13-09-error.log",
+            "hash": "12dd75f04d40a8dddfd1b1a4faf2210fec68cf227ea05dd32e37080cc3214a20"
         },
         {
-            "date": 1776245542925,
-            "name": "D:\\Fahim\\Projects\\PANAMA-LEGAL\\logs\\winston\\errors\\sg-2026-04-15-15-error.log",
-            "hash": "77c8692a17f7a0db2f69e78479db7d8a8d02000be1985943d7a3949bda95d2b2"
+            "date": 1781324889969,
+            "name": "D:\\Fahim\\Projects\\PANAMA-LEGAL\\logs\\winston\\errors\\sg-2026-06-13-10-error.log",
+            "hash": "e3addba91b916ec253093737d6925858eb87a1ad554edf61f853b4e09cdff7b6"
         },
         {
-            "date": 1776247654014,
-            "name": "D:\\Fahim\\Projects\\PANAMA-LEGAL\\logs\\winston\\errors\\sg-2026-04-15-16-error.log",
-            "hash": "514ba6644f5d10d1a03ea8dd6a273bb71d0268cca758c3a32318c1a0b9514905"
+            "date": 1781327285500,
+            "name": "D:\\Fahim\\Projects\\PANAMA-LEGAL\\logs\\winston\\errors\\sg-2026-06-13-11-error.log",
+            "hash": "7f5d251650ce7a185992c4d5f8d8e5db9659db47b7647e2d338d0b986bb91663"
         },
         {
-            "date": 1776250825462,
-            "name": "D:\\Fahim\\Projects\\PANAMA-LEGAL\\logs\\winston\\errors\\sg-2026-04-15-17-error.log",
-            "hash": "2cbed0b3b4e52f8d971808dad437db1e1afe134edb7cb5386a5414ef89a6ef23"
+            "date": 1781330623262,
+            "name": "D:\\Fahim\\Projects\\PANAMA-LEGAL\\logs\\winston\\errors\\sg-2026-06-13-12-error.log",
+            "hash": "b0c3afa161f2c7489466c5afe2774a96cceea05bebd81217d04d49e7698aea95"
         },
         {
-            "date": 1776309321078,
-            "name": "D:\\Fahim\\Projects\\PANAMA-LEGAL\\logs\\winston\\errors\\sg-2026-04-16-09-error.log",
-            "hash": "97b22c18ba1041008b0b742a111edad2fbc73d54db6c114b5fcbfd0610459d75"
+            "date": 1781337609762,
+            "name": "D:\\Fahim\\Projects\\PANAMA-LEGAL\\logs\\winston\\errors\\sg-2026-06-13-14-error.log",
+            "hash": "be25d46f72e995047756fed574729212d54c068410678a45c9f1acf9c251b2b8"
         },
         {
-            "date": 1776312043453,
-            "name": "D:\\Fahim\\Projects\\PANAMA-LEGAL\\logs\\winston\\errors\\sg-2026-04-16-10-error.log",
-            "hash": "aebcbbe93f312d9f7146484cfd8a91d8525249dc6dd2250f9710d6bc41deeb64"
+            "date": 1781342696080,
+            "name": "D:\\Fahim\\Projects\\PANAMA-LEGAL\\logs\\winston\\errors\\sg-2026-06-13-15-error.log",
+            "hash": "68c149619b2cc9cc7d4cbe5c64a6c5da7a58e2f5babb8e748cede9d2765bfce2"
         },
         {
-            "date": 1776318618831,
-            "name": "D:\\Fahim\\Projects\\PANAMA-LEGAL\\logs\\winston\\errors\\sg-2026-04-16-11-error.log",
-            "hash": "058d7277ab1028e65c48d379fbdf202135c1da8dd3e9aa217ecb711cbecc3788"
+            "date": 1781346772750,
+            "name": "D:\\Fahim\\Projects\\PANAMA-LEGAL\\logs\\winston\\errors\\sg-2026-06-13-16-error.log",
+            "hash": "b72df88569363ee05923d13f4821246a1e79fb8930bd063c1d40bbc2be55aa62"
         },
         {
-            "date": 1776319512790,
-            "name": "D:\\Fahim\\Projects\\PANAMA-LEGAL\\logs\\winston\\errors\\sg-2026-04-16-12-error.log",
-            "hash": "59002deffe8a4b355d62c176f24b7e7f1742174f6d6e8d0de12294ee352c430f"
+            "date": 1781404278730,
+            "name": "D:\\Fahim\\Projects\\PANAMA-LEGAL\\logs\\winston\\errors\\sg-2026-06-14-08-error.log",
+            "hash": "62cb390ce1b5da961e69671439533016cd4008c002ba4ba15aeea0aeb4f28193"
         },
         {
-            "date": 1776326233426,
-            "name": "D:\\Fahim\\Projects\\PANAMA-LEGAL\\logs\\winston\\errors\\sg-2026-04-16-13-error.log",
-            "hash": "9a694dabe4abf72673e8a7630c2c2a5f5384db7fc2a17241c78bc49f56eb42bb"
+            "date": 1781406352823,
+            "name": "D:\\Fahim\\Projects\\PANAMA-LEGAL\\logs\\winston\\errors\\sg-2026-06-14-09-error.log",
+            "hash": "9f55f2ddb629738a9267d82f27009bedd40e20ac849728413b8adb19bb0645da"
         },
         {
-            "date": 1776326654558,
-            "name": "D:\\Fahim\\Projects\\PANAMA-LEGAL\\logs\\winston\\errors\\sg-2026-04-16-14-error.log",
-            "hash": "9875f0afde72e6a45ec6008367c9a7addc5ad44b54bc570f1ec74d947cae77f6"
+            "date": 1781412631818,
+            "name": "D:\\Fahim\\Projects\\PANAMA-LEGAL\\logs\\winston\\errors\\sg-2026-06-14-10-error.log",
+            "hash": "a038b970b4657b736e6eaca0d57e2bf4f224b1ab2e88acd977dcd8415b128323"
         },
         {
-            "date": 1776330210170,
-            "name": "D:\\Fahim\\Projects\\PANAMA-LEGAL\\logs\\winston\\errors\\sg-2026-04-16-15-error.log",
-            "hash": "a3eb321fd9204209f587fc7b33ea7ea4cffed5a928a08485eee6b7a7d9618468"
+            "date": 1781414720889,
+            "name": "D:\\Fahim\\Projects\\PANAMA-LEGAL\\logs\\winston\\errors\\sg-2026-06-14-11-error.log",
+            "hash": "627ca66aaef7f701c44aa3daa0969a1c15d861f8b8c7e1f0651fdc536c45166a"
         },
         {
-            "date": 1776335291524,
-            "name": "D:\\Fahim\\Projects\\PANAMA-LEGAL\\logs\\winston\\errors\\sg-2026-04-16-16-error.log",
-            "hash": "7a35e40c0c590a4e697aa9ee5f7a1a5e8c5ccf5c5c6b18178f6534d33b49e2ab"
+            "date": 1781416964667,
+            "name": "D:\\Fahim\\Projects\\PANAMA-LEGAL\\logs\\winston\\errors\\sg-2026-06-14-12-error.log",
+            "hash": "c01aaf3d62cddcdc61de67f16ce62757f6f8c4ea999270bad20caefac3615546"
         },
         {
-            "date": 1776430859319,
-            "name": "D:\\Fahim\\Projects\\PANAMA-LEGAL\\logs\\winston\\errors\\sg-2026-04-17-19-error.log",
-            "hash": "bb439fe2f34f32f7c9037e042a909dc1b6be3c3115794359d903da14d75ea3c6"
+            "date": 1781425660830,
+            "name": "D:\\Fahim\\Projects\\PANAMA-LEGAL\\logs\\winston\\errors\\sg-2026-06-14-14-error.log",
+            "hash": "124c8416621fdd32e2227c5acbcd8be50350e2b6c95f503c16917845b30ce69e"
         },
         {
-            "date": 1776479126013,
-            "name": "D:\\Fahim\\Projects\\PANAMA-LEGAL\\logs\\winston\\errors\\sg-2026-04-18-08-error.log",
-            "hash": "4d5e96082708e966300739d8c84933eaf2c0dfd4c074f344217a865d73d0fb97"
+            "date": 1781427802903,
+            "name": "D:\\Fahim\\Projects\\PANAMA-LEGAL\\logs\\winston\\errors\\sg-2026-06-14-15-error.log",
+            "hash": "206c4906e03a903bafcf3a631f385fdfa127f6d36123734ca9c2c5128ebea8ad"
         },
         {
-            "date": 1776484538666,
-            "name": "D:\\Fahim\\Projects\\PANAMA-LEGAL\\logs\\winston\\errors\\sg-2026-04-18-09-error.log",
-            "hash": "27e18e8448245ffc8289b945839a2c26e5da5a235d2c6cadd54a266931758948"
+            "date": 1781431724332,
+            "name": "D:\\Fahim\\Projects\\PANAMA-LEGAL\\logs\\winston\\errors\\sg-2026-06-14-16-error.log",
+            "hash": "5cb7df449d56a27849d8b151373629f7415c95eb6d2c840fe0a4d7d04a793d54"
         },
         {
-            "date": 1776504248037,
-            "name": "D:\\Fahim\\Projects\\PANAMA-LEGAL\\logs\\winston\\errors\\sg-2026-04-18-15-error.log",
-            "hash": "0a47b2d0657d579a0ad4e60dfd638545a16bf0ae81dd3f3a4b324b171c0f67b1"
+            "date": 1781435636770,
+            "name": "D:\\Fahim\\Projects\\PANAMA-LEGAL\\logs\\winston\\errors\\sg-2026-06-14-17-error.log",
+            "hash": "45a65a9b79806e3dbc0442760d5844bea4fff83088de42fa1e2d1ff63ab42fa5"
+        },
+        {
+            "date": 1781487409434,
+            "name": "D:\\Fahim\\Projects\\PANAMA-LEGAL\\logs\\winston\\errors\\sg-2026-06-15-07-error.log",
+            "hash": "20a8d56dcd2fd87b5fdd64ed50779c55811add8be97ccaaf92a5296e090752e1"
+        },
+        {
+            "date": 1781490253229,
+            "name": "D:\\Fahim\\Projects\\PANAMA-LEGAL\\logs\\winston\\errors\\sg-2026-06-15-08-error.log",
+            "hash": "8cbd97b2bde30c491a32e4c597012cc9032bedd7a0e0ddda5ab8fce19375a851"
+        },
+        {
+            "date": 1781500716394,
+            "name": "D:\\Fahim\\Projects\\PANAMA-LEGAL\\logs\\winston\\errors\\sg-2026-06-15-11-error.log",
+            "hash": "0e0b05f797db70c171edca2b2336df2c222a602a2883bad8247375bc5aade170"
         }
     ],
     "hashType": "sha256"

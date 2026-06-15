@@ -1,2 +1,0 @@
-{Wed Apr 15 2026 17:00:25} [APP 🐞] error: ::ffff:10.10.7.34 - POST /api/v1/chatbot/ask 500 - 1299.299 ms
-{Wed Apr 15 2026 17:02:20} [APP 🐞] error: ::ffff:10.10.7.34 - POST /api/v1/chatbot/ask 500 - 2132.068 ms

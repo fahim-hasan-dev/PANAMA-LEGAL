@@ -1,2 +1,0 @@
-{Wed Apr 15 2026 09:06:54} [APP 🐞] error: ::ffff:10.10.7.94 - GET /api/v1/chatbot/categories 500 - 3.442 ms
-{Wed Apr 15 2026 09:10:03} [APP 🐞] error: ::ffff:10.10.7.94 - POST /api/v1/auth/login 400 - 226.182 ms

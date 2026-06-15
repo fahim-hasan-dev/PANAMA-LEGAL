@@ -16,9 +16,7 @@ router.post(
   CaseQuestionControllers.createCaseQuestion
 );
 
-router.get("/get-root-questions", CaseQuestionControllers.getRootQuestions);
-
-router.get("/get-sub-questions/:parentId", CaseQuestionControllers.getSubQuestions);
+router.get("/", CaseQuestionControllers.getCaseQuestions);
 
 router.delete(
   "/delete-question/:id",

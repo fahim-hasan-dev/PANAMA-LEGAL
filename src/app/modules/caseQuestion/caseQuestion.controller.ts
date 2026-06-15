@@ -14,22 +14,15 @@ const createCaseQuestion = catchAsync(async (req: Request, res: Response) => {
   });
 });
 
-const getRootQuestions = catchAsync(async (req: Request, res: Response) => {
-  const result = await CaseQuestionServices.getRootQuestions();
+const getCaseQuestions = catchAsync(async (req: Request, res: Response) => {
+  const parentId = req.query.parentId as string | undefined;
+  const result = await CaseQuestionServices.getCaseQuestions(parentId);
   sendResponse(res, {
     statusCode: StatusCodes.OK,
     success: true,
-    message: "Root questions fetched successfully",
-    data: result,
-  });
-});
-
-const getSubQuestions = catchAsync(async (req: Request, res: Response) => {
-  const result = await CaseQuestionServices.getSubQuestions(req.params.parentId);
-  sendResponse(res, {
-    statusCode: StatusCodes.OK,
-    success: true,
-    message: "Sub questions fetched successfully",
+    message: parentId
+      ? "Sub questions fetched successfully"
+      : "Root questions fetched successfully",
     data: result,
   });
 });
@@ -46,7 +39,6 @@ const deleteCaseQuestion = catchAsync(async (req: Request, res: Response) => {
 
 export const CaseQuestionControllers = {
   createCaseQuestion,
-  getRootQuestions,
-  getSubQuestions,
+  getCaseQuestions,
   deleteCaseQuestion,
 };

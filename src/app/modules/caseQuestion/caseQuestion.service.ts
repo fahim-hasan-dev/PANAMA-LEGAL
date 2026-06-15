@@ -14,13 +14,9 @@ const createCaseQuestion = async (payload: ICaseQuestion) => {
   return result;
 };
 
-const getRootQuestions = async () => {
-  const result = await CaseQuestionModel.find({ parent: null });
-  return result;
-};
-
-const getSubQuestions = async (parentId: string) => {
-  const result = await CaseQuestionModel.find({ parent: parentId });
+const getCaseQuestions = async (parentId?: string) => {
+  const query = parentId ? { parent: parentId } : { parent: null };
+  const result = await CaseQuestionModel.find(query);
   return result;
 };
 
@@ -39,7 +35,6 @@ const deleteCaseQuestion = async (id: string) => {
 
 export const CaseQuestionServices = {
   createCaseQuestion,
-  getRootQuestions,
-  getSubQuestions,
+  getCaseQuestions,
   deleteCaseQuestion,
 };
