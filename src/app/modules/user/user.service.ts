@@ -8,11 +8,20 @@ import { logger } from '../../../shared/logger'
 import QueryBuilder from '../../builder/QueryBuilder'
 import config from '../../../config'
 import mongoose from 'mongoose'
+import { emailTemplate } from '../../../shared/emailTemplate'
+import { emailHelper } from '../../../helpers/emailHelper'
 
 
-// get all users
+// get all users (excludes LAWYER and ADMIN by default for User panel)
 const getAllUsers = async (query: Record<string, unknown>) => {
-    const userQueryBuilder = new QueryBuilder(User.find().select('-password -authentication'), query)
+    let baseFilter: Record<string, any> = {
+        role: { $nin: [USER_ROLES.LAWYER, USER_ROLES.ADMIN] }
+    };
+    if (query.role) {
+        baseFilter = { role: query.role };
+    }
+
+    const userQueryBuilder = new QueryBuilder(User.find(baseFilter).select('-password -authentication'), query)
         .search(['email', 'fullName', 'phoneNumber'])
         .filter()
         .sort()
@@ -199,7 +208,51 @@ const getRandomLawyer = async (excludedId?: string) => {
     return result.length > 0 ? result[0] : null;
 };
 
+// create lawyer (Admin only)
+const createLawyer = async (payload: IUser) => {
+    payload.email = payload.email?.toLowerCase().trim();
+    payload.role = USER_ROLES.LAWYER;
+    payload.verified = true;
+    payload.status = USER_STATUS.ACTIVE;
 
+    const rawPassword = payload.password;
+
+    const isExist = await User.findOne({
+        email: payload.email,
+        status: { $ne: USER_STATUS.DELETED },
+    });
+
+    if (isExist) {
+        throw new ApiError(StatusCodes.BAD_REQUEST, 'Email already exists.');
+    }
+
+    const createdLawyer = await User.create({
+        ...payload,
+        authentication: {
+            oneTimeCode: '',
+            latestRequestAt: new Date(),
+            wrongLoginAttempts: 0,
+            resetPassword: false,
+            restrictionLeftAt: null,
+        },
+    });
+
+    // Send credentials email to lawyer
+    try {
+        const welcomeEmail = emailTemplate.lawyerAccountCreated({
+            name: payload.fullName || 'Attorney',
+            email: payload.email,
+            password: rawPassword || 'Set by Admin',
+        });
+        setTimeout(() => {
+            emailHelper.sendEmail(welcomeEmail);
+        }, 0);
+    } catch (err) {
+        logger.error('Failed to send lawyer credentials email:', err);
+    }
+
+    return createdLawyer;
+};
 
 export const UserServices = {
     updateProfile,
@@ -210,5 +263,6 @@ export const UserServices = {
     deleteMyAccount,
     seedAdmin,
     getRandomLawyer,
+    createLawyer,
 }
 

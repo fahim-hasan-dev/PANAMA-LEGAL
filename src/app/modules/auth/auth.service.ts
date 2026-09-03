@@ -23,10 +23,10 @@ export const createUser = async (payload: IUser) => {
   try {
     session.startTransaction()
 
-    if (payload.role === USER_ROLES.ADMIN) {
+    if (payload.role === USER_ROLES.ADMIN || payload.role === USER_ROLES.LAWYER) {
       throw new ApiError(
         StatusCodes.BAD_REQUEST,
-        `Admin account creation is not allowed.`,
+        `Lawyer accounts must be created by Admin.`,
       )
     }
 

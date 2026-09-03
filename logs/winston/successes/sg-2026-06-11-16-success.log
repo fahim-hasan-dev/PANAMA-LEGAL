@@ -1,9 +1,0 @@
-{Thu Jun 11 2026 16:12:56} [PANAMA LEGAL ⚖️] info: [34mA user connected[39m
-{Thu Jun 11 2026 16:13:02} [PANAMA LEGAL ⚖️] info: [31mA user disconnect[39m
-{Thu Jun 11 2026 16:13:26} [PANAMA LEGAL ⚖️] info: [31mA user disconnect[39m
-{Thu Jun 11 2026 16:13:29} [PANAMA LEGAL ⚖️] info: [34mA user connected[39m
-{Thu Jun 11 2026 16:14:42} [PANAMA LEGAL ⚖️] info: ::ffff:10.10.7.101 - POST /api/v1/auth/login 200 - 257.971 ms
-{Thu Jun 11 2026 16:18:03} [PANAMA LEGAL ⚖️] info: ::ffff:10.10.7.101 - POST /api/v1/auth/signup 200 - 244.868 ms
-{Thu Jun 11 2026 16:18:06} [PANAMA LEGAL ⚖️] info: Mail send successfully
-{Thu Jun 11 2026 16:18:39} [PANAMA LEGAL ⚖️] info: ::ffff:10.10.7.101 - POST /api/v1/auth/verify-account 200 - 10.961 ms
-{Thu Jun 11 2026 16:19:11} [PANAMA LEGAL ⚖️] info: ::ffff:10.10.7.101 - POST /api/v1/auth/login 200 - 216.247 ms

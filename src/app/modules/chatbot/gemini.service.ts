@@ -20,7 +20,7 @@ export const getGeminiResponse = async (
     messages: { role: string; content: string }[],
     initialContext?: string
 ) => {
-    const systemPrompt = `You are a helpful and professional legal assistant for 'Panama Legal'. 
+    const systemPrompt = `You are a helpful and professional legal assistant for 'PV Asociados'. 
         Your goal is to provide accurate and helpful information about Panamanian law. 
         Keep your responses concise and professional. 
         If you are unsure about something, recommend the user to contact a specialist lawyer through the application.
@@ -62,7 +62,7 @@ export const getGeminiStreamingResponse = async (
     onChunk: (chunk: string) => void,
     initialContext?: string
 ) => {
-    const systemPrompt = `You are a helpful and professional legal assistant for 'Panama Legal'. 
+    const systemPrompt = `You are a helpful and professional legal assistant for 'PV Asociados'. 
         Your goal is to provide accurate and helpful information about Panamanian law. 
         Keep your responses concise and professional. 
         If you are unsure about something, recommend the user to contact a specialist lawyer through the application.

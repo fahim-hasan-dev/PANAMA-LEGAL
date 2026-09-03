@@ -15,8 +15,9 @@ const transporter = nodemailer.createTransport({
 
 const sendEmail = async (values: ISendEmail) => {
   try {
+    const fromAddress = config.email.from ? config.email.from.replace(/[<>]/g, '').trim() : ''
     const info = await transporter.sendMail({
-      from: `"App" ${config.email.from}`,
+      from: `"PV ASOCIADOS" <${fromAddress}>`,
       to: values.to,
       subject: values.subject,
       html: values.html,

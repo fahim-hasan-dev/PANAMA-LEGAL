@@ -10,7 +10,8 @@ const articleSchema = new Schema<IArticle>(
         },
         image: {
             type: String,
-            required: true,
+            required: false,
+            default: "",
         },
         category: {
             type: Schema.Types.ObjectId,

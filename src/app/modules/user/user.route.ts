@@ -22,6 +22,13 @@ router.get('/random-lawyer',
 
 router.get('/', auth(USER_ROLES.ADMIN), UserController.getAllUsers);
 
+router.post(
+  '/create-lawyer',
+  auth(USER_ROLES.ADMIN),
+  fileAndBodyProcessorUsingDiskStorage(),
+  UserController.createLawyer
+);
+
 // get single user
 router.get('/:id', UserController.getSingleUser)
 

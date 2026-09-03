@@ -28,7 +28,7 @@ router.get(
 
 router.patch(
     '/status/:id',
-    auth(USER_ROLES.CITIZEN, USER_ROLES.LAWYER),
+    auth(USER_ROLES.ADMIN, USER_ROLES.CITIZEN, USER_ROLES.LAWYER),
     validateRequest(updateCaseStatusZod),
     CaseController.updateCaseStatus
 );

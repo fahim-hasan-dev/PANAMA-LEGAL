@@ -5,6 +5,8 @@ import QueryBuilder from '../../builder/QueryBuilder';
 import { ICase } from './case.interface';
 import { Case } from './case.model';
 
+import { User } from '../user/user.model';
+
 const createCaseToDB = async (payload: Partial<ICase>): Promise<ICase> => {
     const isExist = await Case.findOne({
         citizen: payload.citizen,
@@ -22,19 +24,49 @@ const createCaseToDB = async (payload: Partial<ICase>): Promise<ICase> => {
 
 const getCasesFromDB = async (user: JwtPayload, query: Record<string, unknown>) => {
     if (!query.sort) {
-        query.sort = '-lastMessageAt';
+        query.sort = '-createdAt';
     }
 
-    const caseQuery = new QueryBuilder(
-        Case.find({
+    let searchCondition: Record<string, unknown> = {};
+    if (query.searchTerm && typeof query.searchTerm === 'string' && query.searchTerm.trim() !== '') {
+        const term = query.searchTerm.trim();
+        const matchedUsers = await User.find({
+            $or: [
+                { fullName: { $regex: term, $options: 'i' } },
+                { email: { $regex: term, $options: 'i' } }
+            ]
+        }).select('_id');
+        const matchedUserIds = matchedUsers.map(u => u._id);
+
+        searchCondition = {
+            $or: [
+                { title: { $regex: term, $options: 'i' } },
+                { description: { $regex: term, $options: 'i' } },
+                { citizen: { $in: matchedUserIds } },
+                { lawyer: { $in: matchedUserIds } }
+            ]
+        };
+
+        delete query.searchTerm;
+    }
+
+    const baseFilter = user.role === 'admin'
+        ? {}
+        : {
             $or: [
                 { citizen: user.authId },
                 { lawyer: user.authId }
             ]
-        }),
+        };
+
+    const filterConditions = Object.keys(searchCondition).length > 0
+        ? { $and: [baseFilter, searchCondition] }
+        : baseFilter;
+
+    const caseQuery = new QueryBuilder(
+        Case.find(filterConditions),
         query
     )
-        .search(['title', 'description'])
         .filter()
         .sort()
         .paginate();
@@ -63,7 +95,11 @@ const getCaseByIdFromDB = async (id: string, user: JwtPayload): Promise<ICase | 
         throw new ApiError(StatusCodes.NOT_FOUND, 'Case not found');
     }
 
-    if (result.citizen._id.toString() !== user.authId && result.lawyer._id.toString() !== user.authId) {
+    if (
+        user.role !== 'admin' &&
+        result.citizen?._id?.toString() !== user.authId &&
+        result.lawyer?._id?.toString() !== user.authId
+    ) {
         throw new ApiError(StatusCodes.FORBIDDEN, 'You are not authorized to view this case');
     }
 

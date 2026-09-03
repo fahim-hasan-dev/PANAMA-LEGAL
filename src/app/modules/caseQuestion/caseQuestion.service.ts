@@ -15,8 +15,11 @@ const createCaseQuestion = async (payload: ICaseQuestion) => {
 };
 
 const getCaseQuestions = async (parentId?: string) => {
+  if (parentId === "all") {
+    return await CaseQuestionModel.find({}).populate("parent", "name").lean();
+  }
   const query = parentId ? { parent: parentId } : { parent: null };
-  const result = await CaseQuestionModel.find(query);
+  const result = await CaseQuestionModel.find(query).lean();
   return result;
 };
 

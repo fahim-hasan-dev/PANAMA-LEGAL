@@ -10,7 +10,8 @@ const caseQuestionSchema = new Schema<ICaseQuestion>(
     },
     image: {
       type: String,
-      required: true,
+      required: false,
+      default: "",
     },
     parent: {
       type: Schema.Types.ObjectId,

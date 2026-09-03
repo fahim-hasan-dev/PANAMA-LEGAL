@@ -50,7 +50,7 @@ app.use('/api/v1', router);
 
 
 app.get("/", (req: Request, res: Response) => {
-    res.send("Welcome to the PANAMA LEGAL API!");
+    res.send("Welcome to the PV ASOCIADOS API!");
 })
 
 //global error handle

@@ -10,7 +10,7 @@ const createArticle = async (payload: IArticle) => {
 };
 
 const getAllArticles = async (query: Record<string, unknown>) => {
-    const articleQuery = new QueryBuilder(ArticleModel.find(), query)
+    const articleQuery = new QueryBuilder(ArticleModel.find().populate('category', '_id title name'), query)
         .search(['title', 'description'])
         .filter()
         .sort()

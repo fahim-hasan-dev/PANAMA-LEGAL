@@ -1,81 +1,65 @@
 import config from '../config'
 import { ICreateAccount, IResetPassword } from '../interfaces/emailTemplate'
 
+const darkLogoHeader = `
+          <!-- Company Logo Header -->
+          <tr>
+            <td align="center" style="background-color: #16253E; padding: 10px 20px; border-bottom: 1px solid #1E293B;">
+              <img src="https://i.ibb.co.com/wkXb3dS/PV-logo-login.png" alt="PV ASOCIADOS" style="width: 190px; max-width: 65%; height: auto; display: block; margin: 0 auto; border: 0; outline: none; text-decoration: none;" />
+            </td>
+          </tr>`
+
 const createAccount = (values: ICreateAccount) => {
-  console.log(values, 'values')
+  const userName = values.name?.trim() || 'User'
   const data = {
     to: values.email,
-    subject: `Verify your PANAMA LEGAL account, ${values.name}`,
+    subject: `Verify your account, ${userName} - PV ASOCIADOS`,
     html: `
-<body style="margin:0; padding:0; font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;">
-  <table width="100%" cellpadding="0" cellspacing="0"
-         style="max-width:640px; margin:40px auto; background-color:#ffffff; border-radius:14px;
-                overflow:hidden; box-shadow:0 5px 25px rgba(0,0,0,0.08);">
-    
-    <!-- Header -->
+<body style="margin: 0; padding: 0; background-color: #F8FAFC; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif; -webkit-font-smoothing: antialiased; color: #1E293B;">
+  <table width="100%" border="0" cellpadding="0" cellspacing="0" style="background-color: #F8FAFC; padding: 40px 16px;">
     <tr>
-      <td align="center" style="background:linear-gradient(135deg,#F5FAFF,#E6F0FF); padding:35px 20px; border-bottom:1px solid #16253E33;">
-        <h1 style="color:#16253E; font-size:28px; font-weight:800; margin:0; letter-spacing:1px; text-transform:uppercase;">PANAMA LEGAL</h1>
+      <td align="center">
+        <table width="100%" border="0" cellpadding="0" cellspacing="0" style="max-width: 540px; background-color: #FFFFFF; border-radius: 16px; border: 1px solid #E2E8F0; overflow: hidden; box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.04), 0 2px 4px -1px rgba(0, 0, 0, 0.02);">
+          ${darkLogoHeader}
+
+          <!-- Email Content Body -->
+          <tr>
+            <td style="padding: 36px 32px;">
+              <h1 style="font-size: 22px; font-weight: 700; color: #0F172A; margin: 0 0 16px 0; text-align: center; letter-spacing: -0.01em;">
+                Confirm Your Registration
+              </h1>
+
+              <p style="font-size: 15px; line-height: 1.6; color: #475569; margin: 0 0 24px 0; text-align: center;">
+                Hello <strong style="color: #0F172A;">${userName}</strong>,<br>
+                Thank you for joining <strong>PV ASOCIADOS</strong>. Please use the verification code below to confirm your account and complete your registration.
+              </p>
+
+              <!-- OTP Display Box -->
+              <div style="background-color: #F8FAFC; border: 1px solid #E2E8F0; border-radius: 12px; padding: 20px 16px; text-align: center; margin: 0 0 24px 0;">
+                <span style="font-family: 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, Courier, monospace; font-size: 34px; font-weight: 700; letter-spacing: 8px; color: #0F172A;">
+                  ${values.otp}
+                </span>
+              </div>
+
+              <p style="font-size: 13px; line-height: 1.5; color: #64748B; margin: 0; text-align: center;">
+                This verification code will expire in <strong>5 minutes</strong>.<br>
+                If you did not request this account registration, you can safely ignore this email.
+              </p>
+            </td>
+          </tr>
+
+          <!-- Footer -->
+          <tr>
+            <td align="center" style="padding: 24px 32px; background-color: #F8FAFC; border-top: 1px solid #F1F5F9;">
+              <p style="font-size: 12px; color: #94A3B8; margin: 0; line-height: 1.5;">
+                &copy; ${new Date().getFullYear()} <strong>PV ASOCIADOS</strong>. All rights reserved.
+              </p>
+            </td>
+          </tr>
+
+        </table>
       </td>
     </tr>
-
-    <!-- Body -->
-    <tr>
-      <td style="padding:45px;">
-        <h1 style="color:#16253E; font-size:26px; font-weight:700; margin-bottom:15px; text-align:center;">
-          Verify Your Email ✨
-        </h1>
-
-        <p style="color:#16253E; font-size:16px; line-height:1.6; margin-bottom:25px; text-align:center;">
-          Hey <strong>${values.name}</strong>, welcome to <strong>PANAMA LEGAL</strong>! 🎉<br>
-          Please verify your email to activate your account.
-        </p>
-
-        <!-- OTP Box -->
-        <div style="background:linear-gradient(145deg,#EAF4FF,#D7E9FF); border:2px solid #16253E; 
-                    border-radius:12px; padding:25px 0; text-align:center; margin:30px auto; max-width:300px;">
-          <span style="font-size:40px; font-weight:700; color:#16253E; letter-spacing:6px;">
-            ${values.otp}
-          </span>
-        </div>
-
-        <p style="color:#16253E; font-size:15px; line-height:1.6; text-align:center;">
-          This code will expire in <strong>5 minutes</strong>.<br>
-          If you didn’t request this, you can safely ignore this email.
-        </p>
-
-        <!-- Tip -->
-        <div style="margin-top:35px; background-color:#fff8e1; border-left:6px solid #ffd54f; 
-                    border-radius:8px; padding:15px 18px;">
-          <p style="margin:0; color:#4a4a4a; font-size:14px;">
-            🔒 For security reasons, never share this code with anyone.
-          </p>
-        </div>
-
-        <!-- Button -->
-        <div style="text-align:center; margin-top:45px;">
-          <a href="${config.frontend_url}/otp-verify" 
-             style="background-color:#16253E; color:#ffffff; padding:14px 32px; font-size:16px; 
-                    font-weight:600; border-radius:10px; text-decoration:none; display:inline-block; 
-                    box-shadow:0 4px 12px rgba(22,37,62,0.3); transition:all 0.3s;">
-            Open App 🚀
-          </a>
-        </div>
-      </td>
-    </tr>
-
-    <!-- Footer -->
-    <tr>
-      <td align="center" style="background:linear-gradient(135deg,#F5FAFF,#E6F0FF); padding:25px 20px; border-top:1px solid #16253E33;">
-        <p style="margin:0; color:#16253E; font-size:13px;">
-          © ${new Date().getFullYear()} <strong>PANAMA LEGAL</strong>. All rights reserved.
-        </p>
-        <p style="margin:6px 0 0; color:#16253E; font-size:13px;">
-          Powered by <strong style="color:#16253E;">PANAMA LEGAL API</strong> ✨
-        </p>
-      </td>
-    </tr>
-
   </table>
 </body>
     `,
@@ -84,81 +68,63 @@ const createAccount = (values: ICreateAccount) => {
 }
 
 const resetPassword = (values: IResetPassword) => {
-  console.log(values, 'values')
+  const userName = values.name?.trim() || 'User'
   const data = {
     to: values.email,
-    subject: `Reset your PANAMA LEGAL password, ${values.name}`,
+    subject: `Reset your PV ASOCIADOS password, ${userName}`,
     html: `
-<body style="margin:0; padding:0; font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;">
-  <table width="100%" cellpadding="0" cellspacing="0"
-         style="max-width:640px; margin:40px auto; background-color:#ffffff; border-radius:14px;
-                overflow:hidden; box-shadow:0 5px 25px rgba(0,0,0,0.08);">
-    
-    <!-- Header -->
+<body style="margin: 0; padding: 0; background-color: #F8FAFC; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif; -webkit-font-smoothing: antialiased; color: #1E293B;">
+  <table width="100%" border="0" cellpadding="0" cellspacing="0" style="background-color: #F8FAFC; padding: 40px 16px;">
     <tr>
-      <td align="center" style="background:linear-gradient(135deg,#F5FAFF,#E6F0FF); padding:35px 20px; border-bottom:1px solid #16253E33;">
-        <h1 style="color:#16253E; font-size:28px; font-weight:800; margin:0; letter-spacing:1px; text-transform:uppercase;">PANAMA LEGAL</h1>
+      <td align="center">
+        <table width="100%" border="0" cellpadding="0" cellspacing="0" style="max-width: 540px; background-color: #FFFFFF; border-radius: 16px; border: 1px solid #E2E8F0; overflow: hidden; box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.04), 0 2px 4px -1px rgba(0, 0, 0, 0.02);">
+          ${darkLogoHeader}
+
+          <!-- Body -->
+          <tr>
+            <td style="padding: 36px 32px;">
+              <h1 style="font-size: 22px; font-weight: 700; color: #0F172A; margin: 0 0 16px 0; text-align: center;">
+                Password Reset Request 🔐
+              </h1>
+
+              <p style="font-size: 15px; line-height: 1.6; color: #475569; margin: 0 0 24px 0; text-align: center;">
+                Hi <strong style="color: #0F172A;">${userName}</strong>, 👋<br>
+                We received a request to reset your password for your <strong>PV ASOCIADOS</strong> account. Enter the code below to complete the process:
+              </p>
+
+              <!-- OTP Box -->
+              <div style="background-color: #F8FAFC; border: 1px solid #E2E8F0; border-radius: 12px; padding: 20px 16px; text-align: center; margin: 0 0 24px 0;">
+                <span style="font-family: 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, Courier, monospace; font-size: 34px; font-weight: 700; letter-spacing: 8px; color: #0F172A;">
+                  ${values.otp}
+                </span>
+              </div>
+
+              <p style="font-size: 13px; line-height: 1.5; color: #64748B; margin: 0 0 20px 0; text-align: center;">
+                This verification code is valid for <strong>5 minutes</strong>.<br>
+                If you didn’t request this, please ignore this email — your account is safe.
+              </p>
+
+              <!-- Tip -->
+              <div style="background-color: #FFFBEB; border-left: 4px solid #F59E0B; border-radius: 6px; padding: 12px 16px; margin-top: 20px;">
+                <p style="margin: 0; color: #92400E; font-size: 13px; line-height: 1.5;">
+                  ⚠️ <strong>Security Tip:</strong> Never share your reset code with anyone. PV ASOCIADOS will never ask for it.
+                </p>
+              </div>
+            </td>
+          </tr>
+
+          <!-- Footer -->
+          <tr>
+            <td align="center" style="padding: 24px 32px; background-color: #F8FAFC; border-top: 1px solid #F1F5F9;">
+              <p style="font-size: 12px; color: #94A3B8; margin: 0; line-height: 1.5;">
+                &copy; ${new Date().getFullYear()} <strong>PV ASOCIADOS</strong>. All rights reserved.
+              </p>
+            </td>
+          </tr>
+
+        </table>
       </td>
     </tr>
-
-    <!-- Body -->
-    <tr>
-      <td style="padding:45px;">
-        <h1 style="color:#16253E; font-size:26px; font-weight:700; margin-bottom:15px; text-align:center;">
-          Password Reset Request 🔐
-        </h1>
-
-        <p style="color:#16253E; font-size:16px; line-height:1.6; margin-bottom:25px; text-align:center;">
-          Hi <strong>${values.name}</strong>, 👋<br>
-          We received a request to reset your password for your <strong>PANAMA LEGAL</strong> account.
-          <br>Enter the code below to complete the process:
-        </p>
-
-        <!-- OTP Box -->
-        <div style="background:linear-gradient(145deg,#EAF4FF,#D7E9FF); border:2px solid #16253E;
-                    border-radius:12px; padding:25px 0; text-align:center; margin:30px auto; max-width:300px;">
-          <span style="font-size:40px; font-weight:700; color:#16253E; letter-spacing:6px;">
-            ${values.otp}
-          </span>
-        </div>
-
-        <p style="color:#16253E; font-size:15px; line-height:1.6; text-align:center;">
-          This verification code is valid for <strong>5 minutes</strong>.<br>
-          If you didn’t request this, please ignore this email — your account is safe.
-        </p>
-
-        <!-- Tip -->
-        <div style="margin-top:35px; background-color:#fff8e1; border-left:6px solid #ffd54f;
-                    border-radius:8px; padding:15px 18px;">
-          <p style="margin:0; color:#4a4a4a; font-size:14px;">
-            ⚠️ <strong>Security Tip:</strong> Never share your reset code with anyone. PANAMA LEGAL will never ask for it.
-          </p>
-        </div>
-
-        <!-- Button -->
-        <div style="text-align:center; margin-top:45px;">
-          <a href="${config.frontend_url}/otp-verify" target="_blank"
-             style="background-color:#16253E; color:#ffffff; padding:14px 32px; font-size:16px;
-                    font-weight:600; border-radius:10px; text-decoration:none; display:inline-block;
-                    box-shadow:0 4px 12px rgba(22,37,62,0.3); transition:all 0.3s;">
-            🔑 Reset Password
-          </a>
-        </div>
-      </td>
-    </tr>
-
-    <!-- Footer -->
-    <tr>
-      <td align="center" style="background:linear-gradient(135deg,#F5FAFF,#E6F0FF); padding:25px 20px; border-top:1px solid #16253E33;">
-        <p style="margin:0; color:#16253E; font-size:13px;">
-          © ${new Date().getFullYear()} <strong>PANAMA LEGAL</strong>. All rights reserved.
-        </p>
-        <p style="margin:6px 0 0; color:#16253E; font-size:13px;">
-          Powered by <strong style="color:#16253E;">PANAMA LEGAL API</strong> ✨
-        </p>
-      </td>
-    </tr>
-
   </table>
 </body>
     `,
@@ -173,91 +139,69 @@ const resendOtp = (values: {
   otp: string
   type: 'resetPassword' | 'createAccount'
 }) => {
-  console.log(values, 'values')
   const isReset = values.type === 'resetPassword'
+  const userName = values.name?.trim() || 'User'
 
   const data = {
     to: values.email,
     subject: `${isReset ? 'Password Reset' : 'Account Verification'} - New Code`,
     html: `
-   <body style="margin:0; padding:0; font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;">
-  <table width="100%" cellpadding="0" cellspacing="0"
-         style="max-width:640px; margin:40px auto; background:#ffffff; border-radius:14px;
-                overflow:hidden; box-shadow:0 5px 25px rgba(0,0,0,0.08);">
-
-    <!-- Header -->
+<body style="margin: 0; padding: 0; background-color: #F8FAFC; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif; -webkit-font-smoothing: antialiased; color: #1E293B;">
+  <table width="100%" border="0" cellpadding="0" cellspacing="0" style="background-color: #F8FAFC; padding: 40px 16px;">
     <tr>
-      <td align="center" style="background-color:#f1f8f4; padding:35px 20px; border-top:1px solid #e6f4ea;">
-        <h1 style="color:#16253E; font-size:28px; font-weight:800; margin:0; letter-spacing:1px; text-transform:uppercase;">PANAMA LEGAL</h1>
+      <td align="center">
+        <table width="100%" border="0" cellpadding="0" cellspacing="0" style="max-width: 540px; background-color: #FFFFFF; border-radius: 16px; border: 1px solid #E2E8F0; overflow: hidden; box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.04), 0 2px 4px -1px rgba(0, 0, 0, 0.02);">
+          ${darkLogoHeader}
+
+          <!-- Body -->
+          <tr>
+            <td style="padding: 36px 32px;">
+              <h1 style="font-size: 22px; font-weight: 700; color: #0F172A; margin: 0 0 16px 0; text-align: center;">
+                ${isReset ? 'Reset Your Password 🔐' : 'Verify Your Account 🚀'}
+              </h1>
+
+              <p style="font-size: 15px; line-height: 1.6; color: #475569; margin: 0 0 24px 0; text-align: center;">
+                Hi <strong style="color: #0F172A;">${userName}</strong>, 👋<br>
+                ${isReset
+                  ? 'You requested a new verification code to reset your PV ASOCIADOS password.'
+                  : 'Here is your new verification code to complete your PV ASOCIADOS account setup.'
+                }<br>
+                Use the code below to continue:
+              </p>
+
+              <!-- OTP Box -->
+              <div style="background-color: #F8FAFC; border: 1px solid #E2E8F0; border-radius: 12px; padding: 20px 16px; text-align: center; margin: 0 0 24px 0;">
+                <span style="font-family: 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, Courier, monospace; font-size: 34px; font-weight: 700; letter-spacing: 8px; color: #0F172A;">
+                  ${values.otp}
+                </span>
+              </div>
+
+              <p style="font-size: 13px; line-height: 1.5; color: #64748B; margin: 0 0 20px 0; text-align: center;">
+                This code is valid for <strong>5 minutes</strong>.<br>
+                If this was not you, please ignore the email.
+              </p>
+
+              <!-- Tip -->
+              <div style="background-color: #FFFBEB; border-left: 4px solid #F59E0B; border-radius: 6px; padding: 12px 16px; margin-top: 20px;">
+                <p style="margin: 0; color: #92400E; font-size: 13px; line-height: 1.5;">
+                  🔒 <strong>Security Tip:</strong> Never share your OTP with anyone. PV ASOCIADOS will never request it.
+                </p>
+              </div>
+            </td>
+          </tr>
+
+          <!-- Footer -->
+          <tr>
+            <td align="center" style="padding: 24px 32px; background-color: #F8FAFC; border-top: 1px solid #F1F5F9;">
+              <p style="font-size: 12px; color: #94A3B8; margin: 0; line-height: 1.5;">
+                &copy; ${new Date().getFullYear()} <strong>PV ASOCIADOS</strong>. All rights reserved.
+              </p>
+            </td>
+          </tr>
+
+        </table>
       </td>
     </tr>
-
-    <!-- Body -->
-    <tr>
-      <td style="padding:45px;">
-        <h1 style="color:#16253E; font-size:26px; font-weight:700; margin-bottom:15px; text-align:center;">
-          ${isReset ? 'Reset Your Password 🔐' : 'Verify Your Account 🚀'}
-        </h1>
-
-        <p style="color:#16253E; font-size:16px; line-height:1.6; margin-bottom:25px; text-align:center;">
-          Hi <strong>${values.name}</strong>, 👋<br>
-          ${isReset
-        ? 'You requested a new verification code to reset your PANAMA LEGAL password.'
-        : 'Here is your new verification code to complete your PANAMA LEGAL account setup.'
-      }<br>
-          Use the code below to continue:
-        </p>
-
-        <!-- OTP Box -->
-        <div style="background:linear-gradient(145deg,#d8f3dc,#b7e4c7);
-                    border:2px solid #16253E; border-radius:12px;
-                    padding:25px 0; text-align:center;
-                    margin:30px auto; max-width:300px;">
-          <span style="font-size:40px; font-weight:700; color:#16253E; letter-spacing:6px;">
-            ${values.otp}
-          </span>
-        </div>
-
-        <p style="color:#16253E; font-size:15px; line-height:1.6; text-align:center;">
-          This code is valid for <strong>5 minutes</strong>.<br>
-          If this was not you, please ignore the email.
-        </p>
-
-        <!-- Tip -->
-        <div style="margin-top:35px; background-color:#fff8e1;
-                    border-left:6px solid #ffd54f;
-                    border-radius:8px; padding:15px 18px;">
-          <p style="margin:0; color:#4a4a4a; font-size:14px;">
-            🔒 <strong>Security Tip:</strong> Never share your OTP with anyone. PANAMA LEGAL
- will never request it.
-          </p>
-        </div>
-
-        <!-- Button -->
-        <div style="text-align:center; margin-top:45px;">
-          <a href="${config.frontend_url}/otp-verify"
-             style="background-color:#16253E; color:#ffffff; padding:14px 32px;
-                    font-size:16px; font-weight:600; border-radius:10px;
-                    text-decoration:none; display:inline-block;
-                    box-shadow:0 4px 12px rgba(22,37,62,0.3);">
-            ${isReset ? 'Reset Password' : 'Verify Account'}
-          </a>
-        </div>
-      </td>
-    </tr>
-
-    <!-- Footer -->
-    <tr>
-      <td align="center" style="background-color:#f1f8f4; padding:25px 20px; border-top:1px solid #e6f4ea;">
-        <p style="margin:0; color:#16253E; font-size:13px;">
-          © ${new Date().getFullYear()} <strong>PANAMA LEGAL</strong>. All rights reserved.
-        </p>
-        <p style="margin:6px 0 0; color:#16253E; font-size:13px;">
-          Powered by <strong style="color:#16253E;">PANAMA LEGAL API</strong> 🚀
-        </p>
-      </td>
-    </tr>
-
   </table>
 </body>
     `,
@@ -274,176 +218,136 @@ const adminContactNotificationEmail = (payload: {
 }) => {
   return {
     to: config.super_admin.email as string,
-    subject: '📩 New Contact Form Submission – PANAMA LEGAL',
+    subject: '📩 New Contact Form Submission – PV ASOCIADOS',
     html: `
-<body style="margin:0; padding:0; font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;">
-  <table width="100%" cellpadding="0" cellspacing="0"
-         style="max-width:640px; margin:40px auto; background-color:#ffffff; border-radius:14px;
-                overflow:hidden; box-shadow:0 5px 25px rgba(0,0,0,0.08);">
-
-    <!-- Header -->
+<body style="margin: 0; padding: 0; background-color: #F8FAFC; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif; -webkit-font-smoothing: antialiased; color: #1E293B;">
+  <table width="100%" border="0" cellpadding="0" cellspacing="0" style="background-color: #F8FAFC; padding: 40px 16px;">
     <tr>
-      <td align="center" 
-          style="background:linear-gradient(135deg,#F5FAFF,#E6F0FF); padding:35px 20px; border-bottom:1px solid #16253E33;">
-        <h1 style="color:#16253E; font-size:28px; font-weight:800; margin:0; letter-spacing:1px; text-transform:uppercase;">PANAMA LEGAL</h1>
-      </td>
-    </tr>
+      <td align="center">
+        <table width="100%" border="0" cellpadding="0" cellspacing="0" style="max-width: 540px; background-color: #FFFFFF; border-radius: 16px; border: 1px solid #E2E8F0; overflow: hidden; box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.04), 0 2px 4px -1px rgba(0, 0, 0, 0.02);">
+          ${darkLogoHeader}
 
-    <!-- Body -->
-    <tr>
-      <td style="padding:45px;">
-        <h1 style="color:#16253E; font-size:26px; font-weight:700; margin-bottom:20px; text-align:center;">
-          📬 New Contact Submission
-        </h1>
-
-        <p style="color:#16253E; font-size:16px; text-align:center; margin-bottom:30px;">
-          A new contact message has been submitted on <strong>PANAMA LEGAL</strong>.
-        </p>
-
-        <!-- Contact Details -->
-        <table style="width:100%; border-collapse:collapse; margin:20px 0;">
+          <!-- Body -->
           <tr>
-            <td style="padding:12px 0; font-size:15px; color:#16253E;">👤 <strong>Name:</strong></td>
-            <td style="padding:12px 0; font-size:15px; color:#16253E; text-align:right;">
-              ${payload.name}
+            <td style="padding: 36px 32px;">
+              <h1 style="font-size: 22px; font-weight: 700; color: #0F172A; margin: 0 0 20px 0; text-align: center;">
+                📬 New Contact Submission
+              </h1>
+
+              <p style="color: #475569; font-size: 15px; text-align: center; margin-bottom: 24px;">
+                A new contact message has been submitted on <strong>PV ASOCIADOS</strong>.
+              </p>
+
+              <!-- Contact Details -->
+              <table style="width: 100%; border-collapse: collapse; margin: 20px 0;">
+                <tr>
+                  <td style="padding: 12px 0; font-size: 15px; color: #0F172A;">👤 <strong>Name:</strong></td>
+                  <td style="padding: 12px 0; font-size: 15px; color: #0F172A; text-align: right;">${payload.name}</td>
+                </tr>
+                <tr style="border-top: 1px solid #E2E8F0;">
+                  <td style="padding: 12px 0; font-size: 15px; color: #0F172A;">📧 <strong>Email:</strong></td>
+                  <td style="padding: 12px 0; font-size: 15px; color: #0F172A; text-align: right;">${payload.email}</td>
+                </tr>
+                <tr style="border-top: 1px solid #E2E8F0;">
+                  <td style="padding: 12px 0; font-size: 15px; color: #0F172A;">📞 <strong>Phone:</strong></td>
+                  <td style="padding: 12px 0; font-size: 15px; color: #0F172A; text-align: right;">${payload.phone || 'N/A'}</td>
+                </tr>
+              </table>
+
+              <!-- Message Box -->
+              <div style="background-color: #F8FAFC; border-left: 3px solid #0F172A; border-radius: 4px; padding: 16px 20px; margin-top: 24px;">
+                <p style="margin: 0; font-size: 14px; color: #334155; line-height: 1.6; font-style: italic;">
+                  “${payload.message}”
+                </p>
+              </div>
+
+              <p style="color: #64748B; font-size: 13px; margin-top: 24px; text-align: center;">
+                You can respond directly to <strong>${payload.email}</strong>.
+              </p>
             </td>
           </tr>
 
-          <tr style="border-top:1px solid #16253E22;">
-            <td style="padding:12px 0; font-size:15px; color:#16253E;">📧 <strong>Email:</strong></td>
-            <td style="padding:12px 0; font-size:15px; color:#16253E; text-align:right;">
-              ${payload.email}
+          <!-- Footer -->
+          <tr>
+            <td align="center" style="padding: 24px 32px; background-color: #F8FAFC; border-top: 1px solid #F1F5F9;">
+              <p style="font-size: 12px; color: #94A3B8; margin: 0; line-height: 1.5;">
+                &copy; ${new Date().getFullYear()} <strong>PV ASOCIADOS</strong>. All rights reserved.
+              </p>
             </td>
           </tr>
 
-          <tr style="border-top:1px solid #16253E22;">
-            <td style="padding:12px 0; font-size:15px; color:#16253E;">📞 <strong>Phone:</strong></td>
-            <td style="padding:12px 0; font-size:15px; color:#16253E; text-align:right;">
-              ${payload.phone || 'N/A'}
-            </td>
-          </tr>
         </table>
-
-        <!-- Message Box -->
-        <div style="background:linear-gradient(145deg,#EAF4FF,#D7E9FF); border:2px solid #16253E;
-                    border-radius:12px; padding:20px; margin-top:30px;">
-          <p style="margin:0; font-size:15px; color:#16253E; line-height:1.6;">
-            “${payload.message}”
-          </p>
-        </div>
-
-        <p style="color:#16253E; font-size:14px; margin-top:30px; text-align:center;">
-          You can respond directly to <strong>${payload.email}</strong>.
-        </p>
       </td>
     </tr>
-
-    <!-- Footer -->
-    <tr>
-      <td align="center" 
-          style="background:linear-gradient(135deg,#F5FAFF,#E6F0FF); padding:25px 20px; border-top:1px solid #16253E33;">
-        <p style="margin:0; color:#16253E; font-size:13px;">
-          © ${new Date().getFullYear()} <strong>PANAMA LEGAL</strong>. All rights reserved.
-        </p>
-        <p style="margin:6px 0 0; color:#16253E; font-size:13px;">
-          Powered by <strong style="color:#16253E;">PANAMA LEGAL API</strong> 
-        </p>
-      </td>
-    </tr>
-
   </table>
 </body>
     `,
   }
 }
-
 
 const userContactConfirmationEmail = (payload: {
   name: string
   email: string
   message: string
 }) => {
+  const userName = payload.name?.trim() || 'Valued Client'
   return {
     to: payload.email,
-    subject: '💬 Thank You for Contacting PANAMA LEGAL',
+    subject: 'Thank you for contacting PV ASOCIADOS',
     html: `
-<body style="margin:0; padding:0; font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;">
-  <table width="100%" cellpadding="0" cellspacing="0"
-         style="max-width:640px; margin:40px auto; background-color:#ffffff; border-radius:14px;
-                overflow:hidden; box-shadow:0 5px 25px rgba(0,0,0,0.08);">
-
-    <!-- Header -->
+<body style="margin: 0; padding: 0; background-color: #F8FAFC; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif; -webkit-font-smoothing: antialiased; color: #1E293B;">
+  <table width="100%" border="0" cellpadding="0" cellspacing="0" style="background-color: #F8FAFC; padding: 40px 16px;">
     <tr>
-      <td align="center" 
-          style="background:linear-gradient(135deg,#F5FAFF,#E6F0FF); padding:35px 20px; border-bottom:1px solid #16253E33;">
-        <h1 style="color:#16253E; font-size:28px; font-weight:800; margin:0; letter-spacing:1px; text-transform:uppercase;">PANAMA LEGAL</h1>
+      <td align="center">
+        <table width="100%" border="0" cellpadding="0" cellspacing="0" style="max-width: 540px; background-color: #FFFFFF; border-radius: 16px; border: 1px solid #E2E8F0; overflow: hidden; box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.04), 0 2px 4px -1px rgba(0, 0, 0, 0.02);">
+          ${darkLogoHeader}
+
+          <!-- Email Content Body -->
+          <tr>
+            <td style="padding: 36px 32px;">
+              <h1 style="font-size: 22px; font-weight: 700; color: #0F172A; margin: 0 0 16px 0; text-align: center; letter-spacing: -0.01em;">
+                We Have Received Your Message
+              </h1>
+
+              <p style="font-size: 15px; line-height: 1.6; color: #475569; margin: 0 0 24px 0; text-align: center;">
+                Dear <strong style="color: #0F172A;">${userName}</strong>,<br>
+                Thank you for contacting <strong>PV ASOCIADOS</strong>. We have received your inquiry and our support team will get back to you shortly.
+              </p>
+
+              <!-- Message Card -->
+              <div style="background-color: #F8FAFC; border-left: 3px solid #0F172A; border-radius: 4px; padding: 16px 20px; margin: 0;">
+                <p style="font-size: 14px; line-height: 1.6; color: #334155; margin: 0; font-style: italic;">
+                  “${payload.message}”
+                </p>
+              </div>
+            </td>
+          </tr>
+
+          <!-- Footer -->
+          <tr>
+            <td align="center" style="padding: 24px 32px; background-color: #F8FAFC; border-top: 1px solid #F1F5F9;">
+              <p style="font-size: 12px; color: #94A3B8; margin: 0; line-height: 1.5;">
+                &copy; ${new Date().getFullYear()} <strong>PV ASOCIADOS</strong>. All rights reserved.
+              </p>
+            </td>
+          </tr>
+
+        </table>
       </td>
     </tr>
-
-    <!-- Body -->
-    <tr>
-      <td style="padding:45px;">
-        <h1 style="color:#16253E; font-size:26px; font-weight:700; margin-bottom:20px; text-align:center;">
-          Thank You for Contacting Us 💙
-        </h1>
-
-        <p style="color:#16253E; font-size:16px; line-height:1.6; text-align:center;">
-          Dear <strong>${payload.name}</strong>,<br>
-          We’ve received your message! Our support team will reach out to you shortly.
-        </p>
-
-        <!-- User Message -->
-        <div style="background:linear-gradient(145deg,#EAF4FF,#D7E9FF); border:2px solid #16253E; 
-                    border-radius:12px; padding:25px 20px; text-align:center; margin:30px auto; max-width:500px;">
-          <p style="font-size:15px; color:#16253E; line-height:1.6; margin:0;">
-            <em>“${payload.message}”</em>
-          </p>
-        </div>
-
-        <p style="color:#16253E; font-size:15px; line-height:1.6; text-align:center;">
-          Thanks for reaching out to <strong>PANAMA LEGAL</strong>.<br>
-          We truly appreciate your message 💙
-        </p>
-
-        <!-- Button -->
-        <div style="text-align:center; margin-top:40px;">
-          <a href="${config.frontend_url}"
-             style="background-color:#16253E; color:#ffffff; padding:14px 32px; font-size:16px; 
-                    font-weight:600; border-radius:10px; text-decoration:none; display:inline-block; 
-                    box-shadow:0 4px 12px rgba(22,37,62,0.3); transition:all 0.3s;">
-            Open App 
-          </a>
-        </div>
-      </td>
-    </tr>
-
-    <!-- Footer -->
-    <tr>
-      <td align="center" 
-          style="background:linear-gradient(135deg,#F5FAFF,#E6F0FF); padding:25px 20px; border-top:1px solid #16253E33;">
-        <p style="margin:0; color:#16253E; font-size:13px;">
-          © ${new Date().getFullYear()} <strong>PANAMA LEGAL</strong>. All rights reserved.
-        </p>
-        <p style="margin:6px 0 0; color:#16253E; font-size:13px;">
-          Powered by <strong style="color:#16253E;">PANAMA LEGAL API</strong> ✨
-        </p>
-      </td>
-    </tr>
-
   </table>
 </body>
     `,
   }
 }
 
-
 const sendPaymentConfirmationEmail = (data: any) => {
   const parcelsHtml = data.parcel
     .map(
       (p: any, i: number) => `
         <tr>
-          <td style="padding:6px 0; color:#00000099;">Parcel ${i + 1}:</td>
-          <td style="padding:6px 0; color:#000000; text-align:right;">
+          <td style="padding:6px 0; color:#475569;">Parcel ${i + 1}:</td>
+          <td style="padding:6px 0; color:#0F172A; text-align:right;">
             ${p.name}, ${p.weight}${p.mass_unit}
           </td>
         </tr>
@@ -453,65 +357,50 @@ const sendPaymentConfirmationEmail = (data: any) => {
 
   return {
     to: data.address_to.email,
-    subject: `✅ Payment Completed – PANAMA LEGAL Order`,
+    subject: `✅ Payment Completed – PV ASOCIADOS Order`,
     html: `
-<body style="margin:0; padding:0; font-family:'Inter','Segoe UI',sans-serif;">
-  <table width="100%" cellpadding="0" cellspacing="0" style="max-width:600px; margin:40px auto; background:#ffffff; border-radius:14px; box-shadow:0 4px 12px rgba(0,0,0,0.05);">
-
-    <!-- Header -->
+<body style="margin: 0; padding: 0; background-color: #F8FAFC; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; color: #1E293B;">
+  <table width="100%" border="0" cellpadding="0" cellspacing="0" style="background-color: #F8FAFC; padding: 40px 16px;">
     <tr>
-      <td align="center" style="background:linear-gradient(135deg, #F5FAFF, #E6F0FF); padding:30px 20px;">
-        <h1 style="color:#16253E; font-size:28px; font-weight:800; margin:0; letter-spacing:1px; text-transform:uppercase;">PANAMA LEGAL</h1>
-        <h2 style="color:#16253E; font-size:22px; margin:10px 0 0;">Payment Successful ✅</h2>
+      <td align="center">
+        <table width="100%" border="0" cellpadding="0" cellspacing="0" style="max-width: 580px; background-color: #FFFFFF; border-radius: 16px; border: 1px solid #E2E8F0; overflow: hidden;">
+          ${darkLogoHeader}
+
+          <tr>
+            <td style="padding: 32px;">
+              <h2 style="color:#0F172A; font-size: 20px; text-align: center; margin: 0 0 16px 0;">Payment Successful ✅</h2>
+              <p style="color: #475569; font-size: 15px; line-height: 1.6; text-align: center;">
+                Hello <strong style="color:#0F172A;">${data.address_from.name}</strong>, your payment for your order has been successfully completed.
+              </p>
+
+              <h3 style="color:#0F172A; font-size:16px; margin-top:24px;">📨 Sender & Receiver</h3>
+              <p style="font-size:14px; margin:4px 0; color:#475569;"><strong>From:</strong> ${data.address_from.name}, ${data.address_from.city}, ${data.address_from.country}</p>
+              <p style="font-size:14px; margin:4px 0; color:#475569;"><strong>To:</strong> ${data.address_to.name}, ${data.address_to.city}, ${data.address_to.country}</p>
+
+              <h3 style="color:#0F172A; font-size:16px; margin-top:20px;">📦 Shipping Details</h3>
+              <p style="font-size:14px; margin:4px 0; color:#475569;">Type: <strong>${data.shipping_type}</strong></p>
+              <p style="font-size:14px; margin:4px 0; color:#475569;">Status: <strong>${data.status}</strong></p>
+
+              <h3 style="color:#0F172A; font-size:16px; margin-top:20px;">🛍 Parcels</h3>
+              <table style="width:100%; border-collapse:collapse;">${parcelsHtml}</table>
+
+              <h3 style="color:#0F172A; font-size:16px; margin-top:20px;">💰 Payment Summary</h3>
+              <p style="font-size:14px; margin:4px 0; color:#475569;">Shipping Cost: £${data.shipping_cost}</p>
+              <p style="font-size:14px; margin:4px 0; color:#0F172A; font-weight:700;">Total Paid: £${data.total_cost}</p>
+            </td>
+          </tr>
+
+          <tr>
+            <td align="center" style="padding: 24px 32px; background-color: #F8FAFC; border-top: 1px solid #F1F5F9;">
+              <p style="font-size: 12px; color: #94A3B8; margin: 0;">
+                &copy; ${new Date().getFullYear()} <strong>PV ASOCIADOS</strong>. All rights reserved.
+              </p>
+            </td>
+          </tr>
+
+        </table>
       </td>
     </tr>
-
-    <!-- Body -->
-    <tr>
-      <td style="padding:30px 25px;">
-        <p style="color:#000; font-size:15px; line-height:1.6; text-align:center;">
-          Hello <strong style="color:#16253E;">${data.address_from.name}</strong>, your payment for your shipping order has been successfully completed.
-        </p>
-
-        <!-- Sender & Receiver -->
-        <h2 style="color:#16253E; font-size:17px; margin-top:25px;">📨 Sender & Receiver</h2>
-        <p style="font-size:14px; margin:3px 0;"><strong>From:</strong> ${data.address_from.name}, ${data.address_from.city}, ${data.address_from.country}</p>
-        <p style="font-size:14px; margin:3px 0;"><strong>To:</strong> ${data.address_to.name}, ${data.address_to.city}, ${data.address_to.country}</p>
-
-        <!-- Shipping Summary -->
-        <h3 style="color:#16253E; font-size:16px; margin-top:20px;">📦 Shipping Details</h3>
-        <p style="font-size:14px; margin:3px 0;">Type: <strong>${data.shipping_type}</strong></p>
-        <p style="font-size:14px; margin:3px 0;">Status: <strong>${data.status}</strong></p>
-
-        <!-- Parcel Details -->
-        <h3 style="color:#16253E; font-size:16px; margin-top:20px;">🛍 Parcels</h3>
-        <table style="width:100%; border-collapse:collapse;">${parcelsHtml}</table>
-
-        <!-- Insurance -->
-        <h3 style="color:#16253E; font-size:16px; margin-top:20px;">🛡 Insurance</h3>
-        <p style="font-size:14px; margin:3px 0;">Insured: <strong>${data.insurance.isInsured ? 'Yes' : 'No'}</strong></p>
-        <p style="font-size:14px; margin:3px 0;">Product Value: £${data.insurance.productValue}</p>
-        <p style="font-size:14px; margin:3px 0; color:#16253E; font-weight:700;">Insurance Cost: £${data.insurance.insuranceCost}</p>
-
-        <!-- Payment Summary -->
-        <h3 style="color:#16253E; font-size:16px; margin-top:20px;">💰 Payment</h3>
-        <p style="font-size:14px; margin:3px 0;">Shipping Cost: £${data.shipping_cost}</p>
-        <p style="font-size:14px; margin:3px 0; color:#16253E; font-weight:700;">Total Paid: £${data.total_cost}</p>
-
-        <!-- Notes -->
-        <div style="background:#16253E22; padding:12px 15px; border-radius:10px; margin-top:15px;">
-          <p style="margin:0; font-size:13px; color:#000;">💬 Notes: ${data.notes || 'None'}</p>
-        </div>
-      </td>
-    </tr>
-
-    <!-- Footer -->
-    <tr>
-      <td align="center" style="background:#f5f5f5; padding:15px; font-size:12px; color:#777;">
-        © ${new Date().getFullYear()} — PANAMA LEGAL Services. Built with 💙 for your comfort
-      </td>
-    </tr>
-
   </table>
 </body>
     `,
@@ -523,115 +412,48 @@ const sendAdminPaymentNotificationEmail = (data: any) => {
     to: config.super_admin.email as string,
     subject: `💡 Payment Completed by ${data.address_from.name} – ${data.shipping_type}`,
     html: `
-<body style="margin:0; padding:0; font-family:'Inter','Segoe UI',Tahoma,Geneva,Verdana,sans-serif;">
-  <table width="100%" cellpadding="0" cellspacing="0"
-    style="max-width:640px; margin:40px auto; background:#ffffff; border-radius:16px;
-           overflow:hidden; border:1px solid #16253E55; box-shadow:0 4px 20px #00000011;">
-
-    <!-- Header -->
-   <td align="center" 
-  style="
-    background: linear-gradient(135deg, #F5FAFF, #E6F0FF);
-    padding: 35px 20px; 
-    border-bottom: 1px solid #16253E33;
-  "
->
-  <h1 style="color:#16253E; font-size:28px; font-weight:800; margin:0; letter-spacing:1px; text-transform:uppercase;">PANAMA LEGAL</h1>
-  
-  <h1 style="
-    color:#16253E;  
-    font-size:24px; 
-    font-weight:700; 
-    margin:10px 0 0;
-  ">
-    Payment Completed Notification
-  </h1>
-</td>
-
-
-    <!-- Body -->
+<body style="margin: 0; padding: 0; background-color: #F8FAFC; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; color: #1E293B;">
+  <table width="100%" border="0" cellpadding="0" cellspacing="0" style="background-color: #F8FAFC; padding: 40px 16px;">
     <tr>
-      <td style="padding:40px;">
-        <p style="color:#00000099; font-size:15px; line-height:1.7; text-align:center;">
-          <strong style="color:#16253E;">${data.address_from.name}</strong> has successfully completed the payment for
-          <strong>${data.shipping_type}</strong>.
-        </p>
-
-        <!-- Service Summary -->
-        <h2 style="color:#16253E; font-size:19px; margin-bottom:15px; margin-top:30px;">
-          🧾 Shipping Details
-        </h2>
-
-        <table style="width:100%; border-collapse:collapse;">
+      <td align="center">
+        <table width="100%" border="0" cellpadding="0" cellspacing="0" style="max-width: 580px; background-color: #FFFFFF; border-radius: 16px; border: 1px solid #E2E8F0; overflow: hidden;">
+          ${darkLogoHeader}
 
           <tr>
-            <td style="padding:8px 0; color:#00000099;">Customer Name:</td>
-            <td style="padding:8px 0; color:#000000; text-align:right;">
-              ${data.address_from.name}
+            <td style="padding: 32px;">
+              <h2 style="color:#0F172A; font-size: 20px; text-align: center; margin: 0 0 16px 0;">Payment Notification</h2>
+              <p style="color: #475569; font-size: 15px; line-height: 1.6; text-align: center;">
+                <strong style="color:#0F172A;">${data.address_from.name}</strong> has successfully completed payment for <strong>${data.shipping_type}</strong>.
+              </p>
+
+              <table style="width:100%; border-collapse:collapse; margin-top: 20px;">
+                <tr>
+                  <td style="padding:8px 0; color:#64748B;">Customer Name:</td>
+                  <td style="padding:8px 0; color:#0F172A; text-align:right;">${data.address_from.name}</td>
+                </tr>
+                <tr style="border-top:1px solid #E2E8F0;">
+                  <td style="padding:8px 0; color:#64748B;">Email:</td>
+                  <td style="padding:8px 0; color:#0F172A; text-align:right;">${data.address_from.email}</td>
+                </tr>
+                <tr style="border-top:1px solid #E2E8F0;">
+                  <td style="padding:8px 0; color:#64748B;">Total Paid:</td>
+                  <td style="padding:8px 0; color:#0F172A; font-weight:700; text-align:right;">£${data.total_cost}</td>
+                </tr>
+              </table>
             </td>
           </tr>
 
-          <tr style="border-top:1px solid #16253E22;">
-            <td style="padding:8px 0; color:#00000099;">Email:</td>
-            <td style="padding:8px 0; color:#000000; text-align:right;">
-              ${data.address_from.email}
-            </td>
-          </tr>
-
-          <tr style="border-top:1px solid #16253E22;">
-            <td style="padding:8px 0; color:#00000099;">Phone:</td>
-            <td style="padding:8px 0; color:#000000; text-align:right;">
-              ${data.address_from.phone}
-            </td>
-          </tr>
-
-          <tr style="border-top:1px solid #16253E22;">
-            <td style="padding:8px 0; color:#00000099;">Shipping Type:</td>
-            <td style="padding:8px 0; color:#000000; text-align:right;">
-              ${data.shipping_type}
-            </td>
-          </tr>
-
-          <tr style="border-top:1px solid #16253E22;">
-            <td style="padding:8px 0; color:#00000099;">Address:</td>
-            <td style="padding:8px 0; color:#000000; text-align:right;">
-              ${data.address_from.street1}, ${data.address_from.city}, 
-              ${data.address_from.state}, ${data.address_from.postal_code}, ${data.address_from.country}
-            </td>
-          </tr>
-
-          <tr style="border-top:1px solid #16253E22;">
-            <td style="padding:8px 0; color:#00000099;">Total Paid:</td>
-            <td style="padding:8px 0; color:#16253E; font-weight:700; text-align:right;">
-              £${data.total_cost}
+          <tr>
+            <td align="center" style="padding: 24px 32px; background-color: #F8FAFC; border-top: 1px solid #F1F5F9;">
+              <p style="font-size: 12px; color: #94A3B8; margin: 0;">
+                &copy; ${new Date().getFullYear()} <strong>PV ASOCIADOS</strong>. All rights reserved.
+              </p>
             </td>
           </tr>
 
         </table>
-
-        <!-- Notes -->
-        <div style="background:#16253E22; padding:15px 18px; border-radius:12px;
-                    border-left:4px solid #16253E; margin-top:25px;">
-          <p style="margin:0; color:#000000; font-size:14px;">
-            💬 <strong>Notes:</strong> ${data.notes || 'No additional notes'}
-          </p>
-        </div>
-
       </td>
     </tr>
-
-    <!-- Footer -->
-    <tr>
-      <td align="center" style="background:#f9f9f9; padding:22px; border-top:1px solid #16253E22;">
-        <p style="margin:0; color:#00000099; font-size:12px;">
-          © ${new Date().getFullYear()} — PANAMA LEGAL Services
-        </p>
-        <p style="margin:5px 0 0; color:#00000099; font-size:12px;">
-          Built with 💙 for your comfort
-        </p>
-      </td>
-    </tr>
-
   </table>
 </body>
     `,
@@ -639,377 +461,159 @@ const sendAdminPaymentNotificationEmail = (data: any) => {
 }
 
 const businessUserShipmentInfoEmail = (data: any) => {
-  const parcels = data.parcel
-    .map(
-      (p: any, i: number) => `<tr>
-        <td style="padding:4px 0; color:#555;">Parcel ${i + 1}:</td>
-        <td style="padding:4px 0; text-align:right; color:#000;">
-          ${p.name} — ${p.weight}${p.mass_unit} (${p.length}x${p.width}x${p.height}${p.distance_unit})
-        </td>
-      </tr>`,
-    )
-    .join('')
-
   return {
     to: data.address_from.email,
     subject: `📦 Your Lost Item Has Been Booked – #${data._id}`,
     html: `
-<body style="margin:0;padding:0;font-family:Inter,Segoe UI,sans-serif;background:#f7f9fc;">
-  <table width="100%" cellpadding="0" cellspacing="0" style="max-width:620px;margin:30px auto;background:#fff;border-radius:12px;overflow:hidden;box-shadow:0 4px 14px rgba(0,0,0,0.06);">
-    
-    <!-- Header -->
+<body style="margin: 0; padding: 0; background-color: #F8FAFC; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; color: #1E293B;">
+  <table width="100%" border="0" cellpadding="0" cellspacing="0" style="background-color: #F8FAFC; padding: 40px 16px;">
     <tr>
-      <td align="center" style="background:#EAF4FF;padding:25px 20px;">
-        <h1 style="color:#16253E; font-size:28px; font-weight:800; margin:0; letter-spacing:1px; text-transform:uppercase;">PANAMA LEGAL</h1>
-        <h2 style="margin:10px 0 0;color:#16253E;font-size:20px;">Your Lost Item Has Been Booked!</h2>
-        <p style="margin:4px 0 0;color:#555;font-size:13px;">Booking ID: <strong>${data._id}</strong></p>
-      </td>
-    </tr>
+      <td align="center">
+        <table width="100%" border="0" cellpadding="0" cellspacing="0" style="max-width: 580px; background-color: #FFFFFF; border-radius: 16px; border: 1px solid #E2E8F0; overflow: hidden;">
+          ${darkLogoHeader}
 
-    <!-- Body -->
-    <tr>
-      <td style="padding:25px 20px;">
-        <p style="font-size:14px;color:#000;line-height:1.5;">
-          Hello <strong style="color:#16253E;">${data.address_from.name}</strong>,<br>
-          Your added lost item has been successfully booked for shipment. ✅
-        </p>
+          <tr>
+            <td style="padding: 32px;">
+              <h2 style="color:#0F172A; font-size: 20px; text-align: center; margin: 0 0 16px 0;">Item Booked for Shipment</h2>
+              <p style="color: #475569; font-size: 15px; line-height: 1.6; text-align: center;">
+                Hello <strong style="color:#0F172A;">${data.address_from.name}</strong>,<br>
+                Your added lost item has been successfully booked for shipment (ID: <strong>${data._id}</strong>).
+              </p>
+            </td>
+          </tr>
 
-        <!-- Shipment Summary -->
-        <h3 style="color:#16253E;font-size:15px;margin:15px 0 6px;">📦 Shipment Summary</h3>
-        <p style="font-size:13px;margin:2px 0;"><strong>Type:</strong> ${data.shipping_type}</p>
-        <p style="font-size:13px;margin:2px 0;"><strong>To:</strong> ${data.address_to.name}, ${data.address_to.city}, ${data.address_to.country}</p>
+          <tr>
+            <td align="center" style="padding: 24px 32px; background-color: #F8FAFC; border-top: 1px solid #F1F5F9;">
+              <p style="font-size: 12px; color: #94A3B8; margin: 0;">
+                &copy; ${new Date().getFullYear()} <strong>PV ASOCIADOS</strong>. All rights reserved.
+              </p>
+            </td>
+          </tr>
 
-        <!-- Parcels -->
-        <h3 style="color:#16253E;font-size:15px;margin:15px 0 6px;">🛍 Parcels</h3>
-        <table width="100%" style="margin-top:6px;">${parcels}</table>
-
-        <!-- Notes & Insurance -->
-        <div style="background:#E8F6FF;padding:10px;border-radius:8px;margin-top:15px;">
-          <p style="margin:2px 0;font-size:13px;"><strong>Notes:</strong> ${data.notes || 'None'}</p>
-          ${data.insurance ? `<p style="margin:2px 0;font-size:13px;"><strong>Insurance:</strong> Yes — ${data.insurance.amount}</p>` : ''}
-        </div>
-
-        <!-- Dashboard Button -->
-        <div style="text-align:center;margin-top:20px;">
-          <a href="${config.frontend_url}/dashboard"
-             style="background:#16253E;color:#fff;padding:12px 28px;border-radius:8px;text-decoration:none;font-size:14px;display:inline-block;">
-            Go to Dashboard & Check Shipment
-          </a>
-        </div>
-      </td>
-    </tr>
-
-    <!-- Footer -->
-    <tr>
-      <td align="center" style="background:#f0f0f0;padding:12px;font-size:12px;color:#555;">
-        © ${new Date().getFullYear()} PANAMA LEGAL • Business Services
+        </table>
       </td>
     </tr>
   </table>
 </body>
-`,
+    `,
   }
 }
 
 const businessUserRegistrationInviteEmail = (data: any) => {
-  const parcels = data.parcel
-    .map(
-      (p: any, i: number) => `
-        <tr>
-          <td style="padding:4px 0; color:#555;">Parcel ${i + 1}:</td>
-          <td style="padding:4px 0; text-align:right; color:#000;">
-            ${p.name} — ${p.weight}${p.mass_unit} (${p.length}x${p.width}x${p.height}${p.distance_unit})
-          </td>
-        </tr>`,
-    )
-    .join('')
-
   return {
     to: data.address_from.email,
-    subject: `📦 Action Required – Create Your PANAMA LEGAL Account`,
+    subject: `📦 Action Required – Create Your PV ASOCIADOS Account`,
     html: `
-<body style="margin:0;padding:0;font-family:Inter,Segoe UI,sans-serif;background:#f7f9fc;">
-  <table width="100%" cellpadding="0" cellspacing="0"
-         style="max-width:620px;margin:30px auto;background:#fff;
-         border-radius:12px;overflow:hidden;box-shadow:0 4px 14px rgba(0,0,0,0.06);">
-
-    <!-- Header -->
+<body style="margin: 0; padding: 0; background-color: #F8FAFC; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; color: #1E293B;">
+  <table width="100%" border="0" cellpadding="0" cellspacing="0" style="background-color: #F8FAFC; padding: 40px 16px;">
     <tr>
-      <td align="center" style="background:#EAF4FF;padding:25px 20px;">
-        <h1 style="color:#16253E; font-size:28px; font-weight:800; margin:0; letter-spacing:1px; text-transform:uppercase;">PANAMA LEGAL</h1>
-        <h2 style="margin:10px 0 0;color:#16253E;font-size:20px;">A Lost Item Shipment Was Created</h2>
-        <p style="margin:4px 0 0;color:#555;font-size:13px;">Booking ID: <strong>${data._id}</strong></p>
+      <td align="center">
+        <table width="100%" border="0" cellpadding="0" cellspacing="0" style="max-width: 580px; background-color: #FFFFFF; border-radius: 16px; border: 1px solid #E2E8F0; overflow: hidden;">
+          ${darkLogoHeader}
+
+          <tr>
+            <td style="padding: 32px;">
+              <h2 style="color:#0F172A; font-size: 20px; text-align: center; margin: 0 0 16px 0;">Lost Item Shipment Created</h2>
+              <p style="color: #475569; font-size: 15px; line-height: 1.6; text-align: center;">
+                Hello <strong style="color:#0F172A;">${data.address_from.name}</strong>,<br>
+                A customer has booked a shipment for the lost item found (Booking ID: <strong>${data._id}</strong>).
+              </p>
+            </td>
+          </tr>
+
+          <tr>
+            <td align="center" style="padding: 24px 32px; background-color: #F8FAFC; border-top: 1px solid #F1F5F9;">
+              <p style="font-size: 12px; color: #94A3B8; margin: 0;">
+                &copy; ${new Date().getFullYear()} <strong>PV ASOCIADOS</strong>. All rights reserved.
+              </p>
+            </td>
+          </tr>
+
+        </table>
       </td>
     </tr>
-
-    <!-- Body -->
-    <tr>
-      <td style="padding:25px 20px;">
-        <p style="font-size:14px;color:#000;line-height:1.5;">
-          Hello <strong style="color:#16253E;">${data.address_from.name}</strong>,<br>
-          A customer has booked a shipment for the lost item you found.  
-          To continue and provide shipping information, you must register a business account.
-        </p>
-
-        <!-- Summary -->
-        <h3 style="color:#16253E;font-size:15px;margin:15px 0 6px;">📦 Shipment Summary</h3>
-        <p style="font-size:13px;margin:2px 0;"><strong>Type:</strong> ${data.shipping_type}</p>
-        <p style="font-size:13px;margin:2px 0;"><strong>To:</strong> ${data.address_to.name}, ${data.address_to.city}, ${data.address_to.country}</p>
-
-        <!-- Parcels -->
-        <h3 style="color:#16253E;font-size:15px;margin:15px 0 6px;">🛍 Parcels</h3>
-        <table width="100%" style="margin-top:6px;">${parcels}</table>
-
-        <!-- Notes -->
-        <div style="background:#E8F6FF;padding:10px;border-radius:8px;margin-top:15px;">
-          <p style="margin:2px 0;font-size:13px;">
-            <strong>Notes:</strong> ${data.notes || 'None'}
-          </p>
-        </div>
-
-        <!-- Register Button -->
-        <div style="text-align:center;margin-top:20px;">
-          <a href="${config.frontend_url}/register"
-             style="background:#16253E;color:#fff;padding:12px 28px;border-radius:8px;
-             text-decoration:none;font-size:14px;display:inline-block;">
-            Create Your PANAMA LEGAL Account
-          </a>
-        </div>
-
-        <p style="font-size:13px;color:#555;text-align:center;margin-top:10px;">
-          Registration is required to collect shipping information and proceed with the delivery.
-        </p>
-      </td>
-    </tr>
-
-    <!-- Footer -->
-    <tr>
-      <td align="center" style="background:#f0f0f0;padding:12px;font-size:12px;color:#555;">
-        © ${new Date().getFullYear()} PANAMA LEGAL • Business Services
-      </td>
-    </tr>
-
   </table>
-</body>`,
+</body>
+    `,
   }
 }
 
 const guestLostItemNotificationEmail = (data: any) => {
-  const businessDetails = data?.user?.BusinessDetails;
-  const BASE_URL = "https://api.panamalegal.com";
-
-  const imagesHtml =
-    Array.isArray(data?.images) && data.images.length > 0
-      ? `
-        <h3 style="color:#16253E;font-size:15px;margin:15px 0 8px;">
-          📷 Item Images
-        </h3>
-        <table width="100%" cellpadding="0" cellspacing="0">
-          <tr>
-            ${data.images
-        .map(
-          (img: string) => `
-                <td align="center" style="padding:6px;">
-                  <img
-                    src="${BASE_URL}${img}"
-                    alt="Lost Item Image"
-                    style="width:100%;max-width:170px;
-                    border-radius:10px;border:1px solid #ddd;" />
-                </td>
-              `
-        )
-        .join("")}
-          </tr>
-        </table>
-      `
-      : "";
-
   return {
     to: data.guestEmail,
-    subject: `📦 We Found Your Lost Item – Action Required`,
+    subject: `📦 We Found Your Lost Item`,
     html: `
-<body style="margin:0;padding:0;font-family:Inter,Segoe UI,sans-serif;background:#f7f9fc;">
-  <table width="100%" cellpadding="0" cellspacing="0"
-    style="max-width:620px;margin:30px auto;background:#fff;
-    border-radius:12px;overflow:hidden;box-shadow:0 4px 14px rgba(0,0,0,0.06);">
-
-    <!-- Header -->
+<body style="margin: 0; padding: 0; background-color: #F8FAFC; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; color: #1E293B;">
+  <table width="100%" border="0" cellpadding="0" cellspacing="0" style="background-color: #F8FAFC; padding: 40px 16px;">
     <tr>
-      <td align="center" style="background:#EAF4FF;padding:25px 20px;">
-        <h1 style="color:#16253E; font-size:28px; font-weight:800; margin:0; letter-spacing:1px; text-transform:uppercase;">PANAMA LEGAL</h1>
+      <td align="center">
+        <table width="100%" border="0" cellpadding="0" cellspacing="0" style="max-width: 580px; background-color: #FFFFFF; border-radius: 16px; border: 1px solid #E2E8F0; overflow: hidden;">
+          ${darkLogoHeader}
 
-        <h2 style="margin:10px 0 0;color:#16253E;font-size:20px;">
-          Good News! We Found Your Item
-        </h2>
+          <tr>
+            <td style="padding: 32px;">
+              <h2 style="color:#0F172A; font-size: 20px; text-align: center; margin: 0 0 16px 0;">We Found Your Item!</h2>
+              <p style="color: #475569; font-size: 15px; line-height: 1.6; text-align: center;">
+                Hello <strong style="color:#0F172A;">${data.guestName}</strong>,<br>
+                Our team has located an item matching your belongings: <strong>${data.itemName}</strong>.
+              </p>
+            </td>
+          </tr>
 
-        ${businessDetails
-        ? `<p style="margin-top:6px;font-size:13px;color:#333;">
-                <strong>${businessDetails.BusinessName || ""}</strong>
-                ${businessDetails.companyName
-          ? `• ${businessDetails.companyName}`
-          : ""
-        }
-              </p>`
-        : ""
-      }
+          <tr>
+            <td align="center" style="padding: 24px 32px; background-color: #F8FAFC; border-top: 1px solid #F1F5F9;">
+              <p style="font-size: 12px; color: #94A3B8; margin: 0;">
+                &copy; ${new Date().getFullYear()} <strong>PV ASOCIADOS</strong>. All rights reserved.
+              </p>
+            </td>
+          </tr>
+
+        </table>
       </td>
     </tr>
-
-    <!-- Body -->
-    <tr>
-      <td style="padding:25px 20px;">
-
-        <p style="font-size:14px;color:#000;line-height:1.6;">
-          Hello <strong style="color:#16253E;">${data.guestName}</strong>,<br>
-          We hope you're doing well. Our team has located an item that matches your belongings.
-          Please review the details below.
-        </p>
-
-        ${imagesHtml}
-
-        <!-- Item Details -->
-        <h3 style="color:#16253E;font-size:15px;margin:15px 0 6px;">
-          🟦 Lost Item Details
-        </h3>
-        <p style="font-size:13px;margin:2px 0;"><strong>Item Name:</strong> ${data.itemName}</p>
-        <p style="font-size:13px;margin:2px 0;"><strong>Description:</strong> ${data.itemDescription || "N/A"}</p>
-        <p style="font-size:13px;margin:2px 0;">
-          <strong>Date Found:</strong> ${new Date(data.dateFound).toDateString()}
-        </p>
-        <p style="font-size:13px;margin:2px 0;">
-          <strong>Location Found:</strong> ${data.locationFound}
-        </p>
-
-        <!-- Guest Info -->
-        <h3 style="color:#16253E;font-size:15px;margin:15px 0 6px;">
-          🏨 Your Stay Information
-        </h3>
-        <p style="font-size:13px;margin:2px 0;">
-          <strong>Name on Reservation:</strong> ${data.guestReservationName}
-        </p>
-        <p style="font-size:13px;margin:2px 0;">
-          <strong>Room Number:</strong> ${data.guestRoomNumber}
-        </p>
-        <p style="font-size:13px;margin:2px 0;">
-          <strong>Contact Number:</strong> ${data.guestPhone}
-        </p>
-
-        <!-- Action -->
-        <div style="background:#E8F6FF;padding:12px;border-radius:8px;margin-top:16px;">
-          <p style="margin:0;font-size:13px;color:#000;">
-            To have your item safely shipped to your address, please complete your shipping details below.
-          </p>
-        </div>
-
-        <div style="text-align:center;margin-top:22px;">
-          <a href="${config.frontend_url}/orders/${data._id}"
-            style="background:#16253E;color:#fff;padding:12px 30px;
-            border-radius:8px;text-decoration:none;font-size:14px;display:inline-block;">
-            Book Shipping for Your Item
-          </a>
-        </div>
-
-        <p style="font-size:13px;color:#555;text-align:center;margin-top:12px;">
-          If this item does not belong to you, please ignore this email.
-        </p>
-      </td>
-    </tr>
-
-    <!-- Footer -->
-    <tr>
-      <td align="center" style="background:#f0f0f0;padding:12px;font-size:12px;color:#555;">
-        © ${new Date().getFullYear()} PANAMA LEGAL • Lost & Found Services
-      </td>
-    </tr>
-
   </table>
 </body>
-`,
-  };
-};
-
-
+    `,
+  }
+}
 
 const businessShippingDetailsUpdateEmail = (data: any) => {
   return {
     to: data.address_from.email,
     subject: `📦 Shipping Details Updated – #${data._id}`,
     html: `
-<body style="margin:0;padding:0;font-family:Inter,Segoe UI,sans-serif;background:#f7f9fc;">
-  <table width="100%" cellpadding="0" cellspacing="0"
-         style="max-width:620px;margin:30px auto;background:#fff;
-         border-radius:12px;overflow:hidden;box-shadow:0 4px 14px rgba(0,0,0,0.06);">
-
-    <!-- Header -->
+<body style="margin: 0; padding: 0; background-color: #F8FAFC; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; color: #1E293B;">
+  <table width="100%" border="0" cellpadding="0" cellspacing="0" style="background-color: #F8FAFC; padding: 40px 16px;">
     <tr>
-      <td align="center" style="background:#EAF4FF;padding:25px 20px;">
-        <h1 style="color:#16253E; font-size:28px; font-weight:800; margin:0; letter-spacing:1px; text-transform:uppercase;">PANAMA LEGAL</h1>
-        <h2 style="margin:10px 0 0;color:#16253E;font-size:20px;">Shipping Details Updated</h2>
-        <p style="margin:4px 0 0;color:#555;font-size:13px;">Shipment ID: <strong>${data._id}</strong></p>
+      <td align="center">
+        <table width="100%" border="0" cellpadding="0" cellspacing="0" style="max-width: 580px; background-color: #FFFFFF; border-radius: 16px; border: 1px solid #E2E8F0; overflow: hidden;">
+          ${darkLogoHeader}
+
+          <tr>
+            <td style="padding: 32px;">
+              <h2 style="color:#0F172A; font-size: 20px; text-align: center; margin: 0 0 16px 0;">Shipping Details Updated</h2>
+              <p style="color: #475569; font-size: 15px; line-height: 1.6; text-align: center;">
+                Hello <strong style="color:#0F172A;">${data.address_from.name}</strong>,<br>
+                The shipping for this shipment (ID: <strong>${data._id}</strong>) has been booked with <strong>${data.carrier || 'the carrier'}</strong>.
+              </p>
+              <p style="font-size: 14px; color: #334155; margin-top: 16px; text-align: center;"><strong>Tracking ID:</strong> ${data.tracking_id || 'N/A'}</p>
+            </td>
+          </tr>
+
+          <tr>
+            <td align="center" style="padding: 24px 32px; background-color: #F8FAFC; border-top: 1px solid #F1F5F9;">
+              <p style="font-size: 12px; color: #94A3B8; margin: 0;">
+                &copy; ${new Date().getFullYear()} <strong>PV ASOCIADOS</strong>. All rights reserved.
+              </p>
+            </td>
+          </tr>
+
+        </table>
       </td>
     </tr>
-
-    <!-- Body -->
-    <tr>
-      <td style="padding:25px 20px;">
-
-        <p style="font-size:14px;color:#000;line-height:1.6;">
-          Hello <strong style="color:#16253E;">${data.address_from.name}</strong>,<br>
-          The shipping for this lost-item shipment has now been <strong>booked with <span style="color:#16253E;">${data.carrier || 'the carrier'}</span></strong>.
-        </p>
-
-        <div style="background:#E8F6FF;padding:12px;border-radius:8px;margin:14px 0;">
-          <p style="margin:0;font-size:13px;color:#16253E;line-height:1.5;">
-            This shipment is scheduled for delivery to the item owner. Please <strong>collect the required recipient information</strong> (Shipping Label, Tracking Number) and <strong>prepare the parcel for dispatch</strong> so it's ready for carrier pickup.
-          </p>
-        </div>
-
-        <!-- Shipping Info -->
-        <h3 style="color:#16253E;font-size:15px;margin:12px 0 6px;">🚚 Current Shipping Details</h3>
-        <p style="font-size:13px;margin:2px 0;"><strong>Carrier:</strong> ${data.carrier || 'N/A'}</p>
-        <p style="font-size:13px;margin:2px 0;"><strong>Tracking Number:</strong> ${data.tracking_id || 'N/A'}</p>
-        ${data.tracking_url ? `<p style="font-size:13px;margin:2px 0;"><strong>Tracking URL:</strong> <a href="${data.tracking_url}" style="color:#16253E;">Track Package</a></p>` : ''}
-
-        ${data.shippingLabel
-        ? `
-        <div style="margin-top:12px;">
-      <a href="${config.backend_url}/${data.shippingLabel}"
-   download
-   style="background:#16253E;color:#fff;padding:10px 26px;border-radius:8px;
-   text-decoration:none;font-size:14px;display:inline-block;">
-  Download Shipping Label
-</a>
-
-        </div>`
-        : ''
-      }
-
-        <!-- Action -->
-        <div style="text-align:center;margin-top:18px;">
-          <a href="${config.frontend_url}/dashboard"
-             style="background:#16253E;color:#fff;padding:10px 26px;border-radius:8px;
-             text-decoration:none;font-size:14px;display:inline-block;">
-            Open Shipment in Dashboard
-          </a>
-        </div>
-
-        <p style="font-size:12px;color:#666;text-align:center;margin-top:12px;">
-          If you need assistance, contact support or check the shipment in your dashboard.
-        </p>
-
-      </td>
-    </tr>
-
-    <!-- Footer -->
-    <tr>
-      <td align="center" style="background:#f0f0f0;padding:12px;font-size:12px;color:#555;">
-        © ${new Date().getFullYear()} PANAMA LEGAL • Business Portal
-      </td>
-    </tr>
-
   </table>
 </body>
-`,
+    `,
   }
 }
 
@@ -1018,96 +622,146 @@ const customerShippingDetailsUpdateEmail = (data: any) => {
     to: data.address_to.email,
     subject: `📦 Your Shipment Tracking Details Updated – #${data._id}`,
     html: `
-<body style="margin:0;padding:0;font-family:Inter,Segoe UI,sans-serif;background:#f7f9fc;">
-  <table width="100%" cellpadding="0" cellspacing="0"
-         style="max-width:620px;margin:30px auto;background:#fff;
-         border-radius:12px;overflow:hidden;box-shadow:0 4px 14px rgba(0,0,0,0.06);">
-
-    <!-- Header -->
+<body style="margin: 0; padding: 0; background-color: #F8FAFC; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; color: #1E293B;">
+  <table width="100%" border="0" cellpadding="0" cellspacing="0" style="background-color: #F8FAFC; padding: 40px 16px;">
     <tr>
-      <td align="center" style="background:#EAF4FF;padding:25px 20px;">
-        <h1 style="color:#16253E; font-size:28px; font-weight:800; margin:0; letter-spacing:1px; text-transform:uppercase;">PANAMA LEGAL</h1>
-        <h2 style="margin:10px 0 0;color:#16253E;font-size:20px;">Your Shipment Is Now Trackable</h2>
-        <p style="margin:4px 0 0;color:#555;font-size:13px;">Shipment ID: <strong>${data._id}</strong></p>
+      <td align="center">
+        <table width="100%" border="0" cellpadding="0" cellspacing="0" style="max-width: 580px; background-color: #FFFFFF; border-radius: 16px; border: 1px solid #E2E8F0; overflow: hidden;">
+          ${darkLogoHeader}
+
+          <tr>
+            <td style="padding: 32px;">
+              <h2 style="color:#0F172A; font-size: 20px; text-align: center; margin: 0 0 16px 0;">Shipment Trackable</h2>
+              <p style="color: #475569; font-size: 15px; line-height: 1.6; text-align: center;">
+                Hello <strong style="color:#0F172A;">${data.address_to.name}</strong>,<br>
+                Your shipment has been booked with carrier <strong>${data.carrier || 'N/A'}</strong>.<br>
+                Tracking Number: <strong>${data.tracking_id || 'N/A'}</strong>
+              </p>
+            </td>
+          </tr>
+
+          <tr>
+            <td align="center" style="padding: 24px 32px; background-color: #F8FAFC; border-top: 1px solid #F1F5F9;">
+              <p style="font-size: 12px; color: #94A3B8; margin: 0;">
+                &copy; ${new Date().getFullYear()} <strong>PV ASOCIADOS</strong>. All rights reserved.
+              </p>
+            </td>
+          </tr>
+
+        </table>
       </td>
     </tr>
-
-    <!-- Body -->
-    <tr>
-      <td style="padding:25px 20px;">
-
-        <p style="font-size:14px;color:#000;line-height:1.6;">
-          Hello <strong style="color:#16253E;">${data.address_to.name}</strong>,<br>
-          Your shipment has now been <strong>booked with the carrier</strong> and is ready for delivery.
-          You can use the tracking details below to monitor your package.
-        </p>
-
-        <!-- Tracking Info -->
-        <h3 style="color:#16253E;font-size:15px;margin:16px 0 6px;">🚚 Tracking Details</h3>
-        <p style="font-size:13px;margin:2px 0;"><strong>Carrier:</strong> ${data.carrier || 'N/A'}</p>
-        <p style="font-size:13px;margin:2px 0;"><strong>Tracking Number:</strong> ${data.tracking_id || 'N/A'}</p>
-
-        ${data.tracking_url
-        ? `
-        <div style="margin-top:18px;text-align:center;">
-          <a href="${data.tracking_url}"
-             style="background:#16253E;color:#fff;padding:10px 28px;border-radius:8px;
-             text-decoration:none;font-size:14px;font-weight:500;display:inline-block;">
-            🔍 Track Your Shipment
-          </a>
-        </div>`
-        : ''
-      }
-
-        <p style="font-size:12px;color:#666;text-align:center;margin-top:16px;">
-          If the tracking number is not active yet, please allow a few hours for the carrier to update their system.
-        </p>
-
-      </td>
-    </tr>
-
-    <!-- Footer -->
-    <tr>
-      <td align="center" style="background:#f0f0f0;padding:12px;font-size:12px;color:#555;">
-        © ${new Date().getFullYear()} PANAMA LEGAL • Customer Services
-      </td>
-    </tr>
-
   </table>
 </body>
-`,
+    `,
   }
 }
 
 const subscriptionActivatedEmail = (data: any) => {
   return {
     to: data.user.email,
-    subject: `✅ Subscription Activated – Welcome to PANAMA LEGAL`,
+    subject: `✅ Subscription Activated – Welcome to PV ASOCIADOS`,
     html: `
-<body style="margin:0;padding:0;font-family:Inter,Segoe UI,sans-serif;background:#f7f9fc;">
-  <table width="100%" cellpadding="0" cellspacing="0" style="max-width:620px;margin:30px auto;background:#fff;border-radius:12px;overflow:hidden;box-shadow:0 4px 14px rgba(0,0,0,0.06);">
+<body style="margin: 0; padding: 0; background-color: #F8FAFC; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; color: #1E293B;">
+  <table width="100%" border="0" cellpadding="0" cellspacing="0" style="background-color: #F8FAFC; padding: 40px 16px;">
     <tr>
-      <td align="center" style="background:#EAF4FF;padding:25px 20px;">
-        <h1 style="color:#16253E; font-size:28px; font-weight:800; margin:0; letter-spacing:1px; text-transform:uppercase;">PANAMA LEGAL</h1>
-        <h2 style="margin:10px 0 0;color:#16253E;font-size:20px;">Subscription Activated!</h2>
-      </td>
-    </tr>
-    <tr>
-      <td style="padding:25px 20px;">
-        <p style="font-size:14px;color:#000;line-height:1.5;">
-          Hello <strong>${data.user.firstName}</strong>,<br>
-          Your subscription for <strong>${data.plan.title}</strong> has been successfully activated.
-        </p>
-        <p style="font-size:13px;margin:2px 0;"><strong>Amount Paid:</strong> £${data.amountPaid}</p>
-        <p style="font-size:13px;margin:2px 0;"><strong>Transaction ID:</strong> ${data.trxId}</p>
-        <div style="text-align:center;margin-top:20px;">
-          <a href="${config.frontend_url}/dashboard" style="background:#16253E;color:#fff;padding:12px 28px;border-radius:8px;text-decoration:none;font-size:14px;display:inline-block;">Go to Dashboard</a>
-        </div>
+      <td align="center">
+        <table width="100%" border="0" cellpadding="0" cellspacing="0" style="max-width: 580px; background-color: #FFFFFF; border-radius: 16px; border: 1px solid #E2E8F0; overflow: hidden;">
+          ${darkLogoHeader}
+
+          <tr>
+            <td style="padding: 32px;">
+              <h2 style="color:#0F172A; font-size: 20px; text-align: center; margin: 0 0 16px 0;">Subscription Activated!</h2>
+              <p style="color: #475569; font-size: 15px; line-height: 1.6; text-align: center;">
+                Hello <strong>${data.user.firstName}</strong>,<br>
+                Your subscription for <strong>${data.plan.title}</strong> has been successfully activated.
+              </p>
+              <p style="font-size: 14px; color: #475569; margin: 4px 0; text-align: center;"><strong>Amount Paid:</strong> £${data.amountPaid}</p>
+              <p style="font-size: 14px; color: #475569; margin: 4px 0; text-align: center;"><strong>Transaction ID:</strong> ${data.trxId}</p>
+            </td>
+          </tr>
+
+          <tr>
+            <td align="center" style="padding: 24px 32px; background-color: #F8FAFC; border-top: 1px solid #F1F5F9;">
+              <p style="font-size: 12px; color: #94A3B8; margin: 0;">
+                &copy; ${new Date().getFullYear()} <strong>PV ASOCIADOS</strong>. All rights reserved.
+              </p>
+            </td>
+          </tr>
+
+        </table>
       </td>
     </tr>
   </table>
 </body>
-`,
+    `,
+  }
+}
+
+const lawyerAccountCreated = (values: {
+  name: string
+  email: string
+  password: string
+}) => {
+  const userName = values.name?.trim() || 'Attorney'
+  return {
+    to: values.email,
+    subject: `⚖️ Welcome to PV & ASOCIADOS Legal Group – Your Attorney Credentials`,
+    html: `
+<body style="margin: 0; padding: 0; background-color: #F8FAFC; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; color: #1E293B;">
+  <table width="100%" border="0" cellpadding="0" cellspacing="0" style="background-color: #F8FAFC; padding: 40px 16px;">
+    <tr>
+      <td align="center">
+        <table width="100%" border="0" cellpadding="0" cellspacing="0" style="max-width: 580px; background-color: #FFFFFF; border-radius: 16px; border: 1px solid #E2E8F0; overflow: hidden;">
+          ${darkLogoHeader}
+
+          <tr>
+            <td style="padding: 36px 32px;">
+              <h1 style="color: #0F172A; font-size: 22px; font-weight: 700; margin-bottom: 16px; text-align: center;">
+                Welcome to PV & ASOCIADOS Legal Group, ${userName}! ⚖️
+              </h1>
+
+              <p style="color: #475569; font-size: 15px; line-height: 1.6; margin-bottom: 24px; text-align: center;">
+                An administrator has registered your official <strong>PV & ASOCIADOS Legal Group</strong> attorney account.<br>
+                Use the credentials below to log into the attorney portal:
+              </p>
+
+              <!-- Credentials Box -->
+              <div style="background-color: #F8FAFC; border: 1px solid #E2E8F0; border-radius: 12px; padding: 24px; margin: 24px 0;">
+                <table style="width: 100%; border-collapse: collapse;">
+                  <tr>
+                    <td style="padding: 8px 0; font-size: 14px; color: #64748B;">📧 <strong>Email:</strong></td>
+                    <td style="padding: 8px 0; font-size: 14px; color: #0F172A; font-weight: 700; text-align: right;">${values.email}</td>
+                  </tr>
+                  <tr style="border-top: 1px solid #E2E8F0;">
+                    <td style="padding: 8px 0; font-size: 14px; color: #64748B;">🔑 <strong>Password:</strong></td>
+                    <td style="padding: 8px 0; font-size: 14px; color: #1E3A8A; font-weight: 700; text-align: right;">${values.password}</td>
+                  </tr>
+                </table>
+              </div>
+
+              <div style="background-color: #FFFBEB; border-left: 4px solid #F59E0B; border-radius: 6px; padding: 12px 16px; margin-top: 20px;">
+                <p style="margin: 0; color: #92400E; font-size: 13px; line-height: 1.5;">
+                  🔒 <strong>Security Notice:</strong> Please log in and change your password in account settings for optimal security.
+                </p>
+              </div>
+            </td>
+          </tr>
+
+          <tr>
+            <td align="center" style="padding: 24px 32px; background-color: #F8FAFC; border-top: 1px solid #F1F5F9;">
+              <p style="font-size: 12px; color: #94A3B8; margin: 0;">
+                &copy; ${new Date().getFullYear()} <strong>PV & ASOCIADOS Legal Group</strong>. All rights reserved.
+              </p>
+            </td>
+          </tr>
+
+        </table>
+      </td>
+    </tr>
+  </table>
+</body>
+    `,
   }
 }
 
@@ -1125,4 +779,5 @@ export const emailTemplate = {
   businessShippingDetailsUpdateEmail,
   customerShippingDetailsUpdateEmail,
   subscriptionActivatedEmail,
+  lawyerAccountCreated,
 }

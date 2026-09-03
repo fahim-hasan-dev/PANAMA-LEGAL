@@ -10,7 +10,7 @@ const createLibrary = async (payload: ILibrary) => {
 };
 
 const getAllLibraries = async (query: Record<string, unknown>) => {
-    const libraryQuery = new QueryBuilder(LibraryModel.find(), query)
+    const libraryQuery = new QueryBuilder(LibraryModel.find().populate('category', 'title name description _id'), query)
         .search(['title', 'description'])
         .filter()
         .sort()

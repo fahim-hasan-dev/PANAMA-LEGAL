@@ -1,6 +1,0 @@
-{Thu Jun 11 2026 15:07:47} [PANAMA LEGAL 🚨] error: ::ffff:10.10.7.101 - POST /api/v1/auth/login 407 - 8.002 ms
-{Thu Jun 11 2026 15:33:35} [PANAMA LEGAL 🚨] error: ::ffff:10.10.7.101 - POST /api/v1/auth/login 407 - 9.077 ms
-{Thu Jun 11 2026 15:34:34} [PANAMA LEGAL 🚨] error: ::ffff:10.10.7.101 - POST /api/v1/chatbot/ask 500 - 1076.500 ms
-{Thu Jun 11 2026 15:34:57} [PANAMA LEGAL 🚨] error: ::ffff:10.10.7.101 - POST /api/v1/chatbot/ask 500 - 804.878 ms
-{Thu Jun 11 2026 15:42:32} [PANAMA LEGAL 🚨] error: ::ffff:10.10.7.101 - POST /api/v1/chatbot/ask 500 - 761.970 ms
-{Thu Jun 11 2026 15:45:45} [PANAMA LEGAL 🚨] error: ::ffff:10.10.7.101 - POST /api/v1/auth/login 407 - 8.118 ms

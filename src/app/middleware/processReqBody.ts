@@ -68,16 +68,19 @@ export const fileAndBodyProcessorUsingDiskStorage = () => {
         suitabilityCertificate: ['application/pdf', 'image/jpeg', 'image/png', 'image/jpg'],
         identityDoc: ['application/pdf', 'image/jpeg', 'image/png', 'image/jpg'],
         studentIdOrEnrollmentProof: ['application/pdf', 'image/jpeg', 'image/png', 'image/jpg'],
-        file: ['application/pdf', 'application/msword', 'application/vnd.openxmlformats-officedocument.wordprocessingml.document'],
+        file: ['application/pdf'],
         files: ['image/jpeg', 'image/png', 'image/jpg', 'application/pdf', 'application/msword', 'application/vnd.openxmlformats-officedocument.wordprocessingml.document'],
       };
 
       const fieldType = file.fieldname as IFolderName;
       if (!allowedTypes[fieldType]?.includes(file.mimetype)) {
+        const errorMsg = fieldType === 'file'
+          ? 'Only PDF documents (.pdf) are allowed.'
+          : `Invalid file type for ${file.fieldname}`;
         return cb(
           new ApiError(
             StatusCodes.BAD_REQUEST,
-            `Invalid file type for ${file.fieldname}`,
+            errorMsg,
           ),
         );
       }

@@ -88,6 +88,16 @@ const getRandomLawyer = catchAsync(async (req: Request, res: Response) => {
   })
 })
 
+const createLawyer = catchAsync(async (req: Request, res: Response) => {
+  const result = await UserServices.createLawyer(req.body)
+  sendResponse(res, {
+    statusCode: StatusCodes.OK,
+    success: true,
+    message: 'Lawyer account created successfully',
+    data: result,
+  })
+})
+
 export const UserController = {
   getAllUsers,
   updateProfile,
@@ -96,4 +106,5 @@ export const UserController = {
   getProfile,
   deleteMyAccount,
   getRandomLawyer,
+  createLawyer,
 }

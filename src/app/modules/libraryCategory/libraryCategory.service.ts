@@ -8,7 +8,7 @@ const createLibraryCategory = async (payload: ILibraryCategory) => {
 };
 
 const getAllLibraryCategories = async (query: Record<string, unknown>) => {
-    const libraryCategoryQueryBuilder = new QueryBuilder(LibraryCategory.find({ isActive: true }), query)
+    const libraryCategoryQueryBuilder = new QueryBuilder(LibraryCategory.find(), query)
         .filter()
         .search(['title', 'description'])
         .sort()

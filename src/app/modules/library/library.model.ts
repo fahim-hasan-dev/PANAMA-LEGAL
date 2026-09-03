@@ -19,7 +19,8 @@ const librarySchema = new Schema<ILibrary>(
         },
         image: {
             type: String,
-            required: true,
+            required: false,
+            default: "",
         },
         file: {
             type: String,

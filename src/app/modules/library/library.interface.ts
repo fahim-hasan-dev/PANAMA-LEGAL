@@ -4,6 +4,6 @@ export interface ILibrary {
     title: string;
     description: string;
     category: Types.ObjectId;
-    image: string;
+    image?: string;
     file: string;
 }

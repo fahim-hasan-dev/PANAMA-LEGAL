@@ -1,5 +1,5 @@
 {
-  "name": "panama-legal",
+  "name": "pv-asociados",
   "version": "1.0.0",
   "main": "app.ts",
   "scripts": {
@@ -11,7 +11,7 @@
   },
   "author": "Nadir Hossain",
   "license": "ISC",
-  "description": "PANAMA LEGAL API",
+  "description": "PV ASOCIADOS API",
   "devDependencies": {
     "@types/bcrypt": "^5.0.2",
     "@types/bcryptjs": "^2.4.6",
