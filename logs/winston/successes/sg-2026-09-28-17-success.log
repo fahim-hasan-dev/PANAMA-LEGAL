@@ -1,0 +1,4 @@
+{Mon Sep 28 2026 17:29:04} [PV ASOCIADOS ⚖️] info: ::ffff:10.10.26.207 - OPTIONS /api/v1/user/me 204 - 0.334 ms
+{Mon Sep 28 2026 17:29:04} [PV ASOCIADOS ⚖️] info: ::ffff:10.10.26.207 - OPTIONS /api/v1/user?page=1&limit=10&role=lawyer 204 - 0.034 ms
+{Mon Sep 28 2026 17:29:04} [PV ASOCIADOS ⚖️] info: ::ffff:10.10.26.207 - GET /api/v1/user/me 304 - 15.504 ms
+{Mon Sep 28 2026 17:29:04} [PV ASOCIADOS ⚖️] info: ::ffff:10.10.26.207 - GET /api/v1/user?page=1&limit=10&role=lawyer 304 - 10.290 ms

@@ -26,7 +26,7 @@ const getChatHistory = catchAsync(async (req: Request, res: Response) => {
 
 const askAI = catchAsync(async (req: Request, res: Response) => {
     const { question, topic } = req.body;
-    const result = await ChatbotService.askAI(req.user.authId, question, topic);
+    const result = await ChatbotService.askAI(req.user.authId, question, topic, req.user.role);
     sendResponse(res, {
         statusCode: StatusCodes.OK,
         success: true,
@@ -74,8 +74,19 @@ const deleteCategory = catchAsync(async (req: Request, res: Response) => {
     });
 });
 
+const getAiChatStatus = catchAsync(async (req: Request, res: Response) => {
+    const result = await ChatbotService.getAiChatStatus(req.user.authId, req.user.role);
+    sendResponse(res, {
+        statusCode: StatusCodes.OK,
+        success: true,
+        message: 'AI Chat status retrieved successfully',
+        data: result,
+    });
+});
+
 export const ChatbotController = {
     getAllCategories,
+    getAiChatStatus,
     getChatHistory,
     askAI,
     createCategory,

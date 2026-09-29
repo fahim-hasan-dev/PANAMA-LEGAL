@@ -50,8 +50,15 @@ export const userUpdateSchema = z.object({
     }).strict()
 });
 
+export const updateFcmTokenSchema = z.object({
+    body: z.object({
+        fcmToken: z.string().optional().or(z.literal('')),
+    })
+});
+
 export const UserValidations = {
     userSignupSchema,
     userLoginSchema,
     userUpdateSchema,
+    updateFcmTokenSchema,
 };

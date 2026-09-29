@@ -1,0 +1,21 @@
+{Tue Sep 29 2026 11:00:21} [PV ASOCIADOS ⚖️] info: ::ffff:10.10.26.207 - GET /api/v1/user/me 200 - 4.910 ms
+{Tue Sep 29 2026 11:00:21} [PV ASOCIADOS ⚖️] info: ::ffff:10.10.26.207 - GET /image/1788404433067-m3p2xe.png 200 - 5.177 ms
+{Tue Sep 29 2026 11:00:32} [PV ASOCIADOS ⚖️] info: ::ffff:10.10.26.207 - PATCH /api/v1/user/fcm-token 200 - 8.728 ms
+{Tue Sep 29 2026 11:00:48} [PV ASOCIADOS ⚖️] info: ::ffff:10.10.26.207 - POST /api/v1/auth/login 200 - 234.004 ms
+{Tue Sep 29 2026 11:00:48} [PV ASOCIADOS ⚖️] info: ::ffff:10.10.26.207 - GET /api/v1/user/6a86728686d74b1b1bfb24e0 200 - 2.815 ms
+{Tue Sep 29 2026 11:01:12} [PV ASOCIADOS ⚖️] info: [31mA user disconnect[39m
+{Tue Sep 29 2026 11:01:14} [PV ASOCIADOS ⚖️] info: [34mA user connected[39m
+{Tue Sep 29 2026 11:25:58} [PV ASOCIADOS ⚖️] info: [34mA user connected[39m
+{Tue Sep 29 2026 11:26:55} [PV ASOCIADOS ⚖️] info: [31mA user disconnect[39m
+{Tue Sep 29 2026 11:42:05} [PV ASOCIADOS ⚖️] info: ::ffff:10.10.26.207 - GET /api/v1/user/me 200 - 9.620 ms
+{Tue Sep 29 2026 11:46:28} [PV ASOCIADOS ⚖️] info: ::ffff:10.10.26.207 - POST /api/v1/auth/login 200 - 222.581 ms
+{Tue Sep 29 2026 11:46:29} [PV ASOCIADOS ⚖️] info: ::ffff:10.10.26.207 - GET /api/v1/user/6a86728686d74b1b1bfb24e0 200 - 7.196 ms
+{Tue Sep 29 2026 11:56:28} [PV ASOCIADOS ⚖️] info: ::ffff:10.10.26.207 - GET /api/v1/case 200 - 24.951 ms
+{Tue Sep 29 2026 11:56:50} [PV ASOCIADOS ⚖️] info: ::ffff:10.10.26.207 - GET /api/v1/user/me 200 - 4.975 ms
+{Tue Sep 29 2026 11:56:53} [PV ASOCIADOS ⚖️] info: ::ffff:10.10.26.207 - PATCH /api/v1/user/fcm-token 200 - 56.371 ms
+{Tue Sep 29 2026 11:56:59} [PV ASOCIADOS ⚖️] info: ::ffff:10.10.26.207 - POST /api/v1/auth/login 200 - 219.999 ms
+{Tue Sep 29 2026 11:57:00} [PV ASOCIADOS ⚖️] info: ::ffff:10.10.26.207 - GET /api/v1/user/6aba25ab4840049cd7599ebe 200 - 2.127 ms
+{Tue Sep 29 2026 11:57:04} [PV ASOCIADOS ⚖️] info: ::ffff:10.10.26.207 - GET /api/v1/article-category 200 - 81.393 ms
+{Tue Sep 29 2026 11:57:04} [PV ASOCIADOS ⚖️] info: ::ffff:10.10.26.207 - GET /api/v1/user/me 200 - 15.101 ms
+{Tue Sep 29 2026 11:57:04} [PV ASOCIADOS ⚖️] info: ::ffff:10.10.26.207 - GET /api/v1/case 200 - 28.447 ms
+{Tue Sep 29 2026 11:57:04} [PV ASOCIADOS ⚖️] info: ::ffff:10.10.26.207 - GET /api/v1/article?category=6a30ef5b8e711c745828995b&page=1&limit=10 200 - 31.026 ms

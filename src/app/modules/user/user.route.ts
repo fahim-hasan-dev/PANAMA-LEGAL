@@ -33,6 +33,13 @@ router.post(
 router.get('/:id', UserController.getSingleUser)
 
 router.patch(
+  '/fcm-token',
+  auth(USER_ROLES.ADMIN, USER_ROLES.CITIZEN, USER_ROLES.LAWYER, USER_ROLES.EXPERT, USER_ROLES.STUDENT),
+  validateRequest(UserValidations.updateFcmTokenSchema),
+  UserController.updateFcmToken
+)
+
+router.patch(
   '/profile',
   auth(USER_ROLES.ADMIN, USER_ROLES.CITIZEN, USER_ROLES.LAWYER, USER_ROLES.EXPERT, USER_ROLES.STUDENT),
   fileAndBodyProcessorUsingDiskStorage(),
@@ -47,9 +54,6 @@ router.delete(
   auth(USER_ROLES.ADMIN, USER_ROLES.CITIZEN, USER_ROLES.LAWYER, USER_ROLES.EXPERT, USER_ROLES.STUDENT),
   UserController.deleteMyAccount,
 )
-
-
-
 
 
 // delete user

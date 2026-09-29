@@ -3,6 +3,7 @@ import { USER_ROLES } from '../../../enum/user';
 import auth from '../../middleware/auth';
 import { ChatbotController } from './chatbot.controller';
 import validateRequest from '../../middleware/validateRequest';
+import { checkAiChatLimit } from '../../middleware/checkAiChatLimit';
 import { ChatbotValidations } from './chatbot.validation';
 
 const router = express.Router();
@@ -40,6 +41,13 @@ router.delete(
     ChatbotController.deleteCategory
 );
 
+// Status
+router.get(
+    '/status',
+    auth(USER_ROLES.ADMIN, USER_ROLES.CITIZEN, USER_ROLES.LAWYER, USER_ROLES.EXPERT, USER_ROLES.STUDENT),
+    ChatbotController.getAiChatStatus
+);
+
 // History
 router.get(
     '/history',
@@ -51,6 +59,7 @@ router.get(
 router.post(
     '/ask',
     auth(USER_ROLES.ADMIN, USER_ROLES.CITIZEN, USER_ROLES.LAWYER, USER_ROLES.EXPERT, USER_ROLES.STUDENT),
+    checkAiChatLimit,
     validateRequest(ChatbotValidations.askAISchema),
     ChatbotController.askAI
 );

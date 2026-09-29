@@ -98,6 +98,16 @@ const createLawyer = catchAsync(async (req: Request, res: Response) => {
   })
 })
 
+const updateFcmToken = catchAsync(async (req: Request, res: Response) => {
+  const result = await UserServices.updateFcmToken(req.user!.authId, req.body.fcmToken || "")
+  sendResponse(res, {
+    statusCode: StatusCodes.OK,
+    success: true,
+    message: 'FCM token updated successfully',
+    data: result,
+  })
+})
+
 export const UserController = {
   getAllUsers,
   updateProfile,
@@ -107,4 +117,5 @@ export const UserController = {
   deleteMyAccount,
   getRandomLawyer,
   createLawyer,
+  updateFcmToken,
 }

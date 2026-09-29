@@ -6,6 +6,10 @@ import { ICase } from './case.interface';
 import { Case } from './case.model';
 
 import { User } from '../user/user.model';
+import { AiChatUsage } from '../chatbot/aiChatUsage.model';
+import { NotificationService } from '../notification/notification.service';
+import { emailHelper } from '../../../helpers/emailHelper';
+import { emailTemplate } from '../../../shared/emailTemplate';
 
 const createCaseToDB = async (payload: Partial<ICase>): Promise<ICase> => {
     const isExist = await Case.findOne({
@@ -19,6 +23,44 @@ const createCaseToDB = async (payload: Partial<ICase>): Promise<ICase> => {
     }
 
     const result = await Case.create(payload);
+
+    // Update AI Chat Usage for the citizen
+    if (payload.citizen) {
+        await AiChatUsage.findOneAndUpdate(
+            { user: payload.citizen },
+            { hasContactedLawyer: true, questionCount: 0, lockExpiresAt: null },
+            { upsert: true }
+        );
+    }
+
+    const citizen = await User.findById(payload.citizen).select('fullName email');
+    const citizenName = citizen?.fullName || 'A citizen';
+    
+    await NotificationService.insertNotification({
+        title: 'New Case Request',
+        message: `You have received a new case request from ${citizenName}`,
+        receiver: result.lawyer as any,
+        type: 'USER',
+        referenceId: result._id,
+        screen: 'CASE',
+    });
+
+    try {
+        const lawyerUser = await User.findById(payload.lawyer).select('fullName email');
+        if (lawyerUser?.email) {
+            const emailContent = emailTemplate.caseRequestSentEmail({
+                lawyerName: lawyerUser.fullName || 'Attorney',
+                lawyerEmail: lawyerUser.email,
+                citizenName: citizenName
+            });
+            setTimeout(() => {
+                emailHelper.sendEmail(emailContent);
+            }, 0);
+        }
+    } catch (error) {
+        console.error("Failed to send case request email", error);
+    }
+
     return result;
 };
 
@@ -138,6 +180,78 @@ const updateCaseStatusToDB = async (id: string, user: JwtPayload, status: string
         { status },
         { new: true, runValidators: true }
     );
+
+    if (result) {
+        const citizenUser = await User.findById(result.citizen).select('fullName email');
+        const lawyerUser = await User.findById(result.lawyer).select('fullName email');
+
+        let title = '';
+        let message = '';
+        let receiverId = null;
+
+        if (status === 'accepted') {
+            title = 'Case Request Accepted';
+            message = `Your case request has been accepted by ${lawyerUser?.fullName || 'the lawyer'}.`;
+            receiverId = result.citizen;
+
+            try {
+                if (citizenUser?.email) {
+                    const emailContent = emailTemplate.caseRequestAcceptedEmail({
+                        citizenName: citizenUser.fullName || 'User',
+                        citizenEmail: citizenUser.email,
+                        lawyerName: lawyerUser?.fullName || 'Attorney'
+                    });
+                    setTimeout(() => {
+                        emailHelper.sendEmail(emailContent);
+                    }, 0);
+                }
+            } catch (err) { console.error("Failed to send accept email", err); }
+
+        } else if (status === 'cancelled') {
+            if (user.role === 'lawyer') {
+                title = 'Case Request Declined';
+                message = `Your case request was declined by ${lawyerUser?.fullName || 'the lawyer'}.`;
+                receiverId = result.citizen;
+
+                try {
+                    if (citizenUser?.email) {
+                        const emailContent = emailTemplate.caseRequestRejectedEmail({
+                            citizenName: citizenUser.fullName || 'User',
+                            citizenEmail: citizenUser.email,
+                            lawyerName: lawyerUser?.fullName || 'Attorney'
+                        });
+                        setTimeout(() => {
+                            emailHelper.sendEmail(emailContent);
+                        }, 0);
+                    }
+                } catch (err) { console.error("Failed to send reject email", err); }
+            } else if (user.role === 'citizen') {
+                title = 'Case Request Cancelled';
+                message = `The case request was cancelled by ${citizenUser?.fullName || 'the citizen'}.`;
+                receiverId = result.lawyer;
+            }
+        } else if (status === 'closed') {
+            title = 'Case Closed';
+            if (user.role === 'lawyer') {
+                message = `Your case with ${lawyerUser?.fullName || 'the lawyer'} has been closed.`;
+                receiverId = result.citizen;
+            } else {
+                message = `The case with ${citizenUser?.fullName || 'the citizen'} has been closed.`;
+                receiverId = result.lawyer;
+            }
+        }
+
+        if (receiverId && title && message) {
+            await NotificationService.insertNotification({
+                title,
+                message,
+                receiver: receiverId as any,
+                type: 'USER',
+                referenceId: result._id,
+                screen: 'CASE',
+            });
+        }
+    }
 
     return result;
 };

@@ -100,6 +100,22 @@ const updateProfile = async (
     return updatedUser
 }
 
+// update FCM token
+const updateFcmToken = async (userId: string, fcmToken: string) => {
+    const isExistUser = await User.findById(userId)
+    if (!isExistUser) {
+        throw new ApiError(StatusCodes.NOT_FOUND, 'User not found')
+    }
+
+    const updatedUser = await User.findByIdAndUpdate(
+        userId,
+        { fcmToken },
+        { new: true }
+    ).select('fcmToken')
+
+    return updatedUser
+}
+
 // get profile
 const getProfile = async (user: JwtPayload) => {
     const result = await User.findById(user.authId).select('-password -authentication')
@@ -264,5 +280,6 @@ export const UserServices = {
     seedAdmin,
     getRandomLawyer,
     createLawyer,
+    updateFcmToken,
 }
 

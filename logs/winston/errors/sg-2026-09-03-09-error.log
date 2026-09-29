@@ -1,5 +1,0 @@
-{Thu Sep 03 2026 09:10:46} [PANAMA LEGAL 🚨] error: ::ffff:10.10.26.207 - GET /image/1781592946506-0orl0p.png 404 - 1.334 ms
-{Thu Sep 03 2026 09:10:46} [PANAMA LEGAL 🚨] error: ::ffff:10.10.26.207 - GET /image/1781592929023-hri086.png 404 - 0.276 ms
-{Thu Sep 03 2026 09:34:42} [PANAMA LEGAL 🚨] error: ::ffff:10.10.26.182 - GET /favicon.ico 404 - 1.743 ms
-{Thu Sep 03 2026 09:35:45} [PANAMA LEGAL 🚨] error: ::ffff:10.10.26.182 - POST /api/v1/auth/signup 400 - 41.227 ms
-{Thu Sep 03 2026 09:52:50} [PV ASOCIADOS 🚨] error: ::ffff:10.10.26.182 - POST /api/v1/auth/signup 400 - 330.939 ms

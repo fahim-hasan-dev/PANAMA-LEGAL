@@ -6,49 +6,39 @@
     "auditLog": "D:\\Fahim\\projects\\PANAMA-LEGAL\\logs\\winston\\errors\\.9742797bf21b4f2510af213cbc98ee40b78be057-audit.json",
     "files": [
         {
-            "date": 1787205778865,
-            "name": "D:\\Fahim\\projects\\PANAMA-LEGAL\\logs\\winston\\errors\\sg-2026-08-20-12-error.log",
-            "hash": "a29ddc48c59d208dcf9742d533188ad094bc30a1c978f30f947fca047f1def86"
+            "date": 1790565987829,
+            "name": "D:\\Fahim\\projects\\PANAMA-LEGAL\\logs\\winston\\errors\\sg-2026-09-28-09-error.log",
+            "hash": "9f50d8905796775f2588bb36ef1f68e2dca78be394b165abbe3d0c56cd0a11fd"
         },
         {
-            "date": 1787218392480,
-            "name": "D:\\Fahim\\projects\\PANAMA-LEGAL\\logs\\winston\\errors\\sg-2026-08-20-15-error.log",
-            "hash": "412774874a675efc4c90fbf9f70999303ddc9b6b92330b858de663d3c484c406"
+            "date": 1790574381359,
+            "name": "D:\\Fahim\\projects\\PANAMA-LEGAL\\logs\\winston\\errors\\sg-2026-09-28-11-error.log",
+            "hash": "490cc4ef38e7eee5af354bc65720978c08432f15461f3c63eed910f8322c4d97"
         },
         {
-            "date": 1787249344489,
-            "name": "D:\\Fahim\\projects\\PANAMA-LEGAL\\logs\\winston\\errors\\sg-2026-08-21-00-error.log",
-            "hash": "485b292a8f816ae42d0bef5703365ebac6539bb3d88ab0980e27ef2a46d3233b"
+            "date": 1790575958566,
+            "name": "D:\\Fahim\\projects\\PANAMA-LEGAL\\logs\\winston\\errors\\sg-2026-09-28-12-error.log",
+            "hash": "63f78409049a22d433d5ecf63e1198a628d46552b6f70e1634326735028057ca"
         },
         {
-            "date": 1787369375246,
-            "name": "D:\\Fahim\\projects\\PANAMA-LEGAL\\logs\\winston\\errors\\sg-2026-08-22-09-error.log",
-            "hash": "d7abdb7d54fa4912bcafd905814889942668f76211c46763cc03420ba6a045ac"
+            "date": 1790582698126,
+            "name": "D:\\Fahim\\projects\\PANAMA-LEGAL\\logs\\winston\\errors\\sg-2026-09-28-14-error.log",
+            "hash": "aefda1b5441971c29ec7c366e8f40f83febd96ab4f1d6f679a945f61a6643545"
         },
         {
-            "date": 1787741771670,
-            "name": "D:\\Fahim\\projects\\PANAMA-LEGAL\\logs\\winston\\errors\\sg-2026-08-26-16-error.log",
-            "hash": "b5395a0513d4c47386b0ac470ce7e51dacfe7337037bf2d00ca65159e047f70b"
+            "date": 1790655402952,
+            "name": "D:\\Fahim\\projects\\PANAMA-LEGAL\\logs\\winston\\errors\\sg-2026-09-29-10-error.log",
+            "hash": "6d35424c19e04b8e5f07079772d3cf90a6aedab233b605b2831052b8822e5b4a"
         },
         {
-            "date": 1787760651267,
-            "name": "D:\\Fahim\\projects\\PANAMA-LEGAL\\logs\\winston\\errors\\sg-2026-08-26-22-error.log",
-            "hash": "559c4d8efd73db24bcafd413a5bb6659f8c8b0226154d7b97405f65f82ef279e"
+            "date": 1790661426009,
+            "name": "D:\\Fahim\\projects\\PANAMA-LEGAL\\logs\\winston\\errors\\sg-2026-09-29-11-error.log",
+            "hash": "a09d332c80a785e924787f1cc4b4dbe7af01368aa0282352903e2fd68ac909d2"
         },
         {
-            "date": 1788402286187,
-            "name": "D:\\Fahim\\projects\\PANAMA-LEGAL\\logs\\winston\\errors\\sg-2026-09-03-08-error.log",
-            "hash": "69849e0d9186c98ad9a9efa2d76f9613659c89f0554a6436ad9cc072f65dc0ca"
-        },
-        {
-            "date": 1788405046038,
-            "name": "D:\\Fahim\\projects\\PANAMA-LEGAL\\logs\\winston\\errors\\sg-2026-09-03-09-error.log",
-            "hash": "f5bc8438af53dcba3a2f2442e5b6ac1ef5e9670df6e6d6a0cdfad5517d3eef26"
-        },
-        {
-            "date": 1788408169095,
-            "name": "D:\\Fahim\\projects\\PANAMA-LEGAL\\logs\\winston\\errors\\sg-2026-09-03-10-error.log",
-            "hash": "75427faffc82944a1f861843fad41da26369b9821c2f4ae4a7d284eb0cc6b11c"
+            "date": 1790661663497,
+            "name": "D:\\Fahim\\projects\\PANAMA-LEGAL\\logs\\winston\\errors\\sg-2026-09-29-12-error.log",
+            "hash": "f42eeb49a753e5441e9721d93b8997c2af2b0eb3ca14abc5bccf0b3dbe42d2ae"
         }
     ],
     "hashType": "sha256"

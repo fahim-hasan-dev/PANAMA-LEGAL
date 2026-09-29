@@ -25,31 +25,19 @@ export type IUser = {
     role: USER_ROLES;
     authentication: IAuthentication;
     fcmToken?: string;
-
-    // Citizen specific fields
     residentialArea?: string;
     dateOfBirth?: Date;
     exactAddress?: string;
-
-    // Lawyer specific fields
     workArea?: string;
     identityNumber?: string;
     suitabilityCertificate?: string[];
-
-    // Expert specific fields
     identityDoc?: string[];
     specialty?: string;
-
-    // Student specific fields
     university?: string;
     currentYear?: number;
     studentIdOrEnrollmentProof?: string[];
-
-    // Lawyer rating fields
     averageRating: number;
     totalReviews: number;
-
-    // Subscription fields
     isSubscribed: boolean;
     subscriptionExpiry: Date | null;
 };

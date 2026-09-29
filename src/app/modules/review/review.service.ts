@@ -7,6 +7,7 @@ import { USER_ROLES } from '../../../enum/user';
 import ApiError from '../../../errors/ApiError';
 import { StatusCodes } from 'http-status-codes';
 import { updateLawyerRating } from '../../../util/calculateRating';
+import { NotificationService } from '../notification/notification.service';
 
 
 // create review
@@ -37,6 +38,15 @@ const createReview = async (payload: IReview) => {
 
   // Update lawyer's aggregated ratings
   await updateLawyerRating(new mongoose.Types.ObjectId(payload.lawyer));
+
+  await NotificationService.insertNotification({
+      title: 'New Review Received',
+      message: `You received a ${payload.rating}-star review from ${citizen.fullName || 'a citizen'}.`,
+      receiver: result.lawyer as any,
+      type: 'USER',
+      referenceId: result._id as any,
+      screen: 'REVIEW',
+  });
 
   return result;
 };

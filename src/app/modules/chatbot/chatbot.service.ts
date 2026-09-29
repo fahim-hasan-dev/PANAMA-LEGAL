@@ -2,6 +2,7 @@ import { StatusCodes } from 'http-status-codes';
 import ApiError from '../../../errors/ApiError';
 import { ChatbotCategory, ChatbotHistory } from './chatbot.model';
 import { IChatbotCategory, IChatMessage } from './chatbot.interface';
+import { AiChatUsage } from './aiChatUsage.model';
 import { getGeminiResponse } from './gemini.service';
 import mongoose from 'mongoose';
 
@@ -13,7 +14,7 @@ const getChatHistory = async (userId: string) => {
     return await ChatbotHistory.findOne({ user: new mongoose.Types.ObjectId(userId) });
 };
 
-const askAI = async (userId: string, userMessage: string, initialContext?: string) => {
+const askAI = async (userId: string, userMessage: string, initialContext?: string, role?: string) => {
     let history = await ChatbotHistory.findOne({ user: new mongoose.Types.ObjectId(userId) });
 
     if (!history) {
@@ -66,6 +67,22 @@ const askAI = async (userId: string, userMessage: string, initialContext?: strin
 
     await history.save();
 
+    // Limit logic for citizen
+    if (role === 'citizen') {
+        let usage = await AiChatUsage.findOne({ user: userId });
+        if (!usage) {
+            usage = await AiChatUsage.create({ user: userId });
+        }
+        
+        if (!usage.hasContactedLawyer) {
+            usage.questionCount += 1;
+            if (usage.questionCount >= 3) {
+                usage.lockExpiresAt = new Date(Date.now() + 48 * 60 * 60 * 1000);
+            }
+            await usage.save();
+        }
+    }
+
     // Emit socket event for real-time update
     //@ts-ignore
     const io = global.io;
@@ -106,8 +123,40 @@ const deleteCategory = async (id: string) => {
     return await ChatbotCategory.findByIdAndDelete(id);
 };
 
+const getAiChatStatus = async (userId: string, role: string) => {
+    if (role !== 'citizen') {
+        return {
+            isLocked: false,
+            lockExpiresAt: null,
+            hasContactedLawyer: false
+        };
+    }
+
+    let usage = await AiChatUsage.findOne({ user: userId });
+    if (!usage) {
+        usage = await AiChatUsage.create({ user: userId });
+    }
+
+    const now = new Date();
+    
+    if (usage.lockExpiresAt && now >= usage.lockExpiresAt) {
+        usage.questionCount = 0;
+        usage.lockExpiresAt = null;
+        await usage.save();
+    }
+
+    const isLocked = !usage.hasContactedLawyer && usage.lockExpiresAt !== null && now < usage.lockExpiresAt;
+
+    return {
+        isLocked,
+        lockExpiresAt: usage.lockExpiresAt,
+        hasContactedLawyer: usage.hasContactedLawyer
+    };
+};
+
 export const ChatbotService = {
     getAllCategories,
+    getAiChatStatus,
     getChatHistory,
     askAI,
     createCategory,

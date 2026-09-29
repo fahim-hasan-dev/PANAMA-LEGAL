@@ -765,6 +765,130 @@ const lawyerAccountCreated = (values: {
   }
 }
 
+const caseRequestSentEmail = (values: {
+  lawyerName: string
+  lawyerEmail: string
+  citizenName: string
+}) => {
+  return {
+    to: values.lawyerEmail,
+    subject: `⚖️ New Case Request from ${values.citizenName} – PV ASOCIADOS`,
+    html: `
+<body style="margin: 0; padding: 0; background-color: #F8FAFC; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; color: #1E293B;">
+  <table width="100%" border="0" cellpadding="0" cellspacing="0" style="background-color: #F8FAFC; padding: 40px 16px;">
+    <tr>
+      <td align="center">
+        <table width="100%" border="0" cellpadding="0" cellspacing="0" style="max-width: 580px; background-color: #FFFFFF; border-radius: 16px; border: 1px solid #E2E8F0; overflow: hidden;">
+          ${darkLogoHeader}
+          <tr>
+            <td style="padding: 36px 32px;">
+              <h1 style="color: #0F172A; font-size: 22px; font-weight: 700; margin-bottom: 16px; text-align: center;">
+                New Case Request Received ⚖️
+              </h1>
+              <p style="color: #475569; font-size: 15px; line-height: 1.6; margin-bottom: 24px; text-align: center;">
+                Hello <strong>${values.lawyerName}</strong>,<br>
+                You have received a new case request from <strong>${values.citizenName}</strong> on PV ASOCIADOS.<br>
+                Please log in to your dashboard to review and accept or decline this request.
+              </p>
+            </td>
+          </tr>
+          <tr>
+            <td align="center" style="padding: 24px 32px; background-color: #F8FAFC; border-top: 1px solid #F1F5F9;">
+              <p style="font-size: 12px; color: #94A3B8; margin: 0;">&copy; ${new Date().getFullYear()} <strong>PV ASOCIADOS</strong>. All rights reserved.</p>
+            </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+  </table>
+</body>
+    `,
+  }
+}
+
+const caseRequestAcceptedEmail = (values: {
+  citizenName: string
+  citizenEmail: string
+  lawyerName: string
+}) => {
+  return {
+    to: values.citizenEmail,
+    subject: `✅ Case Request Accepted by ${values.lawyerName} – PV ASOCIADOS`,
+    html: `
+<body style="margin: 0; padding: 0; background-color: #F8FAFC; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; color: #1E293B;">
+  <table width="100%" border="0" cellpadding="0" cellspacing="0" style="background-color: #F8FAFC; padding: 40px 16px;">
+    <tr>
+      <td align="center">
+        <table width="100%" border="0" cellpadding="0" cellspacing="0" style="max-width: 580px; background-color: #FFFFFF; border-radius: 16px; border: 1px solid #E2E8F0; overflow: hidden;">
+          ${darkLogoHeader}
+          <tr>
+            <td style="padding: 36px 32px;">
+              <h1 style="color: #0F172A; font-size: 22px; font-weight: 700; margin-bottom: 16px; text-align: center;">
+                Case Request Accepted ✅
+              </h1>
+              <p style="color: #475569; font-size: 15px; line-height: 1.6; margin-bottom: 24px; text-align: center;">
+                Hello <strong>${values.citizenName}</strong>,<br>
+                Great news! Your case request has been accepted by <strong>${values.lawyerName}</strong>.<br>
+                You can now log in to PV ASOCIADOS to communicate with your lawyer.
+              </p>
+            </td>
+          </tr>
+          <tr>
+            <td align="center" style="padding: 24px 32px; background-color: #F8FAFC; border-top: 1px solid #F1F5F9;">
+              <p style="font-size: 12px; color: #94A3B8; margin: 0;">&copy; ${new Date().getFullYear()} <strong>PV ASOCIADOS</strong>. All rights reserved.</p>
+            </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+  </table>
+</body>
+    `,
+  }
+}
+
+const caseRequestRejectedEmail = (values: {
+  citizenName: string
+  citizenEmail: string
+  lawyerName: string
+}) => {
+  return {
+    to: values.citizenEmail,
+    subject: `❌ Case Request Declined by ${values.lawyerName} – PV ASOCIADOS`,
+    html: `
+<body style="margin: 0; padding: 0; background-color: #F8FAFC; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; color: #1E293B;">
+  <table width="100%" border="0" cellpadding="0" cellspacing="0" style="background-color: #F8FAFC; padding: 40px 16px;">
+    <tr>
+      <td align="center">
+        <table width="100%" border="0" cellpadding="0" cellspacing="0" style="max-width: 580px; background-color: #FFFFFF; border-radius: 16px; border: 1px solid #E2E8F0; overflow: hidden;">
+          ${darkLogoHeader}
+          <tr>
+            <td style="padding: 36px 32px;">
+              <h1 style="color: #0F172A; font-size: 22px; font-weight: 700; margin-bottom: 16px; text-align: center;">
+                Case Request Declined ❌
+              </h1>
+              <p style="color: #475569; font-size: 15px; line-height: 1.6; margin-bottom: 24px; text-align: center;">
+                Hello <strong>${values.citizenName}</strong>,<br>
+                Unfortunately, your case request has been declined by <strong>${values.lawyerName}</strong>.<br>
+                Please log in to PV ASOCIADOS to find and request another available lawyer.
+              </p>
+            </td>
+          </tr>
+          <tr>
+            <td align="center" style="padding: 24px 32px; background-color: #F8FAFC; border-top: 1px solid #F1F5F9;">
+              <p style="font-size: 12px; color: #94A3B8; margin: 0;">&copy; ${new Date().getFullYear()} <strong>PV ASOCIADOS</strong>. All rights reserved.</p>
+            </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+  </table>
+</body>
+    `,
+  }
+}
+
+
 export const emailTemplate = {
   createAccount,
   resetPassword,
@@ -780,4 +904,7 @@ export const emailTemplate = {
   customerShippingDetailsUpdateEmail,
   subscriptionActivatedEmail,
   lawyerAccountCreated,
+  caseRequestSentEmail,
+  caseRequestAcceptedEmail,
+  caseRequestRejectedEmail,
 }
