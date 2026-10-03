@@ -1,0 +1,5 @@
+{Sat Oct 03 2026 14:30:28} [PV ASOCIADOS 🚨] error: ::ffff:10.10.26.207 - GET /api/v1/user?role=lawyer&limit=1000 401 - 28.575 ms
+{Sat Oct 03 2026 14:30:28} [PV ASOCIADOS 🚨] error: ::ffff:10.10.26.207 - GET /api/v1/user?limit=1000 401 - 45.452 ms
+{Sat Oct 03 2026 14:30:28} [PV ASOCIADOS 🚨] error: ::ffff:10.10.26.207 - GET /api/v1/case?limit=1000 401 - 10.050 ms
+{Sat Oct 03 2026 14:30:28} [PV ASOCIADOS 🚨] error: ::ffff:10.10.26.207 - GET /api/v1/user/me 401 - 12.811 ms
+{Sat Oct 03 2026 14:30:39} [PV ASOCIADOS 🚨] error: ::ffff:10.10.26.207 - GET /api/v1/user?page=1&limit=10 401 - 2.157 ms
