@@ -23,10 +23,10 @@ router.get('/random-lawyer',
 router.get('/', auth(USER_ROLES.ADMIN), UserController.getAllUsers);
 
 router.post(
-  '/create-lawyer',
+  '/create-user',
   auth(USER_ROLES.ADMIN),
   fileAndBodyProcessorUsingDiskStorage(),
-  UserController.createLawyer
+  UserController.createUser
 );
 
 // get single user

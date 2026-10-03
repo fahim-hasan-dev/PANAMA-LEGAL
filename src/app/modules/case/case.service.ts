@@ -10,6 +10,7 @@ import { AiChatUsage } from '../chatbot/aiChatUsage.model';
 import { NotificationService } from '../notification/notification.service';
 import { emailHelper } from '../../../helpers/emailHelper';
 import { emailTemplate } from '../../../shared/emailTemplate';
+import { getTranslation } from '../../../shared/translations';
 
 const createCaseToDB = async (payload: Partial<ICase>): Promise<ICase> => {
     const isExist = await Case.findOne({
@@ -36,9 +37,14 @@ const createCaseToDB = async (payload: Partial<ICase>): Promise<ICase> => {
     const citizen = await User.findById(payload.citizen).select('fullName email');
     const citizenName = citizen?.fullName || 'A citizen';
     
+    // We need lawyer to get their language for push and email
+    const lawyerUser = await User.findById(payload.lawyer).select('fullName email language');
+    const lawyerLang = lawyerUser?.language;
+    const tLawyer = getTranslation(lawyerLang);
+
     await NotificationService.insertNotification({
-        title: 'New Case Request',
-        message: `You have received a new case request from ${citizenName}`,
+        title: tLawyer.caseRequestPushTitle,
+        message: tLawyer.caseRequestPushBody(citizenName),
         receiver: result.lawyer as any,
         type: 'USER',
         referenceId: result._id,
@@ -46,12 +52,12 @@ const createCaseToDB = async (payload: Partial<ICase>): Promise<ICase> => {
     });
 
     try {
-        const lawyerUser = await User.findById(payload.lawyer).select('fullName email');
         if (lawyerUser?.email) {
             const emailContent = emailTemplate.caseRequestSentEmail({
                 lawyerName: lawyerUser.fullName || 'Attorney',
                 lawyerEmail: lawyerUser.email,
-                citizenName: citizenName
+                citizenName: citizenName,
+                lang: lawyerLang
             });
             setTimeout(() => {
                 emailHelper.sendEmail(emailContent);
@@ -182,16 +188,21 @@ const updateCaseStatusToDB = async (id: string, user: JwtPayload, status: string
     );
 
     if (result) {
-        const citizenUser = await User.findById(result.citizen).select('fullName email');
-        const lawyerUser = await User.findById(result.lawyer).select('fullName email');
+        const citizenUser = await User.findById(result.citizen).select('fullName email language');
+        const lawyerUser = await User.findById(result.lawyer).select('fullName email language');
+
+        const citizenLang = citizenUser?.language;
+        const lawyerLang = lawyerUser?.language;
+        const tCitizen = getTranslation(citizenLang);
+        const tLawyer = getTranslation(lawyerLang);
 
         let title = '';
         let message = '';
         let receiverId = null;
 
         if (status === 'accepted') {
-            title = 'Case Request Accepted';
-            message = `Your case request has been accepted by ${lawyerUser?.fullName || 'the lawyer'}.`;
+            title = tCitizen.caseAcceptedPushTitle;
+            message = tCitizen.caseAcceptedPushBody(lawyerUser?.fullName || 'the lawyer');
             receiverId = result.citizen;
 
             try {
@@ -199,7 +210,8 @@ const updateCaseStatusToDB = async (id: string, user: JwtPayload, status: string
                     const emailContent = emailTemplate.caseRequestAcceptedEmail({
                         citizenName: citizenUser.fullName || 'User',
                         citizenEmail: citizenUser.email,
-                        lawyerName: lawyerUser?.fullName || 'Attorney'
+                        lawyerName: lawyerUser?.fullName || 'Attorney',
+                        lang: citizenLang
                     });
                     setTimeout(() => {
                         emailHelper.sendEmail(emailContent);
@@ -209,8 +221,8 @@ const updateCaseStatusToDB = async (id: string, user: JwtPayload, status: string
 
         } else if (status === 'cancelled') {
             if (user.role === 'lawyer') {
-                title = 'Case Request Declined';
-                message = `Your case request was declined by ${lawyerUser?.fullName || 'the lawyer'}.`;
+                title = tCitizen.caseDeclinedPushTitle;
+                message = tCitizen.caseDeclinedPushBody(lawyerUser?.fullName || 'the lawyer');
                 receiverId = result.citizen;
 
                 try {
@@ -218,7 +230,8 @@ const updateCaseStatusToDB = async (id: string, user: JwtPayload, status: string
                         const emailContent = emailTemplate.caseRequestRejectedEmail({
                             citizenName: citizenUser.fullName || 'User',
                             citizenEmail: citizenUser.email,
-                            lawyerName: lawyerUser?.fullName || 'Attorney'
+                            lawyerName: lawyerUser?.fullName || 'Attorney',
+                            lang: citizenLang
                         });
                         setTimeout(() => {
                             emailHelper.sendEmail(emailContent);
@@ -226,17 +239,18 @@ const updateCaseStatusToDB = async (id: string, user: JwtPayload, status: string
                     }
                 } catch (err) { console.error("Failed to send reject email", err); }
             } else if (user.role === 'citizen') {
-                title = 'Case Request Cancelled';
-                message = `The case request was cancelled by ${citizenUser?.fullName || 'the citizen'}.`;
+                title = tLawyer.caseCancelledPushTitle;
+                message = tLawyer.caseCancelledPushBody(citizenUser?.fullName || 'the citizen');
                 receiverId = result.lawyer;
             }
         } else if (status === 'closed') {
-            title = 'Case Closed';
             if (user.role === 'lawyer') {
-                message = `Your case with ${lawyerUser?.fullName || 'the lawyer'} has been closed.`;
+                title = tCitizen.caseClosedPushTitle;
+                message = tCitizen.caseClosedPushBody(lawyerUser?.fullName || 'the lawyer');
                 receiverId = result.citizen;
             } else {
-                message = `The case with ${citizenUser?.fullName || 'the citizen'} has been closed.`;
+                title = tLawyer.caseClosedPushTitle;
+                message = tLawyer.caseClosedPushBody(citizenUser?.fullName || 'the citizen');
                 receiverId = result.lawyer;
             }
         }

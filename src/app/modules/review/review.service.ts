@@ -8,6 +8,7 @@ import ApiError from '../../../errors/ApiError';
 import { StatusCodes } from 'http-status-codes';
 import { updateLawyerRating } from '../../../util/calculateRating';
 import { NotificationService } from '../notification/notification.service';
+import { getTranslation } from '../../../shared/translations';
 
 
 // create review
@@ -39,9 +40,11 @@ const createReview = async (payload: IReview) => {
   // Update lawyer's aggregated ratings
   await updateLawyerRating(new mongoose.Types.ObjectId(payload.lawyer));
 
+  const tLawyer = getTranslation(lawyer.language);
+
   await NotificationService.insertNotification({
-      title: 'New Review Received',
-      message: `You received a ${payload.rating}-star review from ${citizen.fullName || 'a citizen'}.`,
+      title: tLawyer.newReviewPushTitle,
+      message: tLawyer.newReviewPushBody(citizen.fullName || 'a citizen'),
       receiver: result.lawyer as any,
       type: 'USER',
       referenceId: result._id as any,

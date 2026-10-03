@@ -64,6 +64,7 @@ export const createUser = async (payload: IUser) => {
         name: payload.fullName!,
         email: payload.email,
         otp,
+        lang: payload.language,
       })
       emailHelper.sendEmail(createAccountEmail)
     }, 0)
@@ -144,6 +145,7 @@ const forgetPassword = async (email?: string, phone?: string) => {
       name: isUserExist.fullName!,
       email: isUserExist.email,
       otp,
+      lang: isUserExist.language,
     })
 
     setTimeout(() => {
@@ -458,6 +460,7 @@ const resendOtp = async (
       name: isUserExist.fullName!,
       otp,
       type: authType,
+      lang: isUserExist.language,
     })
 
     setTimeout(() => {

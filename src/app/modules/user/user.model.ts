@@ -83,6 +83,11 @@ const UserSchema = new Schema(
             type: String,
             default: "",
         },
+        language: {
+            type: String,
+            enum: ['en', 'es'],
+            default: 'es',
+        },
 
         // Citizen fields
         residentialArea: String,

@@ -1,5 +1,5 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
 import { ErrorRequestHandler, NextFunction, Request, Response } from 'express'
+import { getTranslation } from '../../shared/translations'
 import config from '../../config'
 import { IGenericErrorMessage } from '../../interfaces/error'
 import handleValidationError from '../../errors/handleValidationError'
@@ -72,10 +72,32 @@ const globalErrorHandler: ErrorRequestHandler = (
       : []
   }
 
+  // Extract language from headers for translations
+  const langHeader = req.headers['accept-language'];
+  const lang = langHeader?.startsWith('en') ? 'en' : 'es';
+  const t = getTranslation(lang);
+
+  // Translate message if it exists in dictionary
+  if (message) {
+    const key = message as keyof typeof t;
+    if (t[key] && typeof t[key] === 'string') {
+      message = t[key] as string;
+    }
+  }
+
+  // Also try translating individual error messages if applicable
+  const translatedErrorMessages = errorMessages.map(err => {
+    const key = err.message as keyof typeof t;
+    if (t[key] && typeof t[key] === 'string') {
+      return { ...err, message: t[key] as string };
+    }
+    return err;
+  });
+
   res.status(statusCode).json({
     success: false,
     message: message,
-    errorMessages,
+    errorMessages: translatedErrorMessages,
     stack: config.node_env === 'production' ? undefined : error?.stack,
   })
 }

@@ -1,5 +1,6 @@
-import config from '../config'
 import { ICreateAccount, IResetPassword } from '../interfaces/emailTemplate'
+import { getTranslation } from './translations'
+import config from '../config'
 
 const darkLogoHeader = `
           <!-- Company Logo Header -->
@@ -11,9 +12,10 @@ const darkLogoHeader = `
 
 const createAccount = (values: ICreateAccount) => {
   const userName = values.name?.trim() || 'User'
+  const t = getTranslation(values.lang)
   const data = {
     to: values.email,
-    subject: `Verify your account, ${userName} - PV ASOCIADOS`,
+    subject: t.createAccountSubject(userName),
     html: `
 <body style="margin: 0; padding: 0; background-color: #F8FAFC; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif; -webkit-font-smoothing: antialiased; color: #1E293B;">
   <table width="100%" border="0" cellpadding="0" cellspacing="0" style="background-color: #F8FAFC; padding: 40px 16px;">
@@ -26,12 +28,11 @@ const createAccount = (values: ICreateAccount) => {
           <tr>
             <td style="padding: 36px 32px;">
               <h1 style="font-size: 22px; font-weight: 700; color: #0F172A; margin: 0 0 16px 0; text-align: center; letter-spacing: -0.01em;">
-                Confirm Your Registration
+                ${t.createAccountTitle}
               </h1>
 
               <p style="font-size: 15px; line-height: 1.6; color: #475569; margin: 0 0 24px 0; text-align: center;">
-                Hello <strong style="color: #0F172A;">${userName}</strong>,<br>
-                Thank you for joining <strong>PV ASOCIADOS</strong>. Please use the verification code below to confirm your account and complete your registration.
+                ${t.createAccountBody(userName)}
               </p>
 
               <!-- OTP Display Box -->
@@ -42,8 +43,8 @@ const createAccount = (values: ICreateAccount) => {
               </div>
 
               <p style="font-size: 13px; line-height: 1.5; color: #64748B; margin: 0; text-align: center;">
-                This verification code will expire in <strong>5 minutes</strong>.<br>
-                If you did not request this account registration, you can safely ignore this email.
+                ${t.otpExpireWarning}<br>
+                ${t.ignoreWarning}
               </p>
             </td>
           </tr>
@@ -69,9 +70,10 @@ const createAccount = (values: ICreateAccount) => {
 
 const resetPassword = (values: IResetPassword) => {
   const userName = values.name?.trim() || 'User'
+  const t = getTranslation(values.lang)
   const data = {
     to: values.email,
-    subject: `Reset your PV ASOCIADOS password, ${userName}`,
+    subject: t.resetPasswordSubject(userName),
     html: `
 <body style="margin: 0; padding: 0; background-color: #F8FAFC; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif; -webkit-font-smoothing: antialiased; color: #1E293B;">
   <table width="100%" border="0" cellpadding="0" cellspacing="0" style="background-color: #F8FAFC; padding: 40px 16px;">
@@ -84,12 +86,11 @@ const resetPassword = (values: IResetPassword) => {
           <tr>
             <td style="padding: 36px 32px;">
               <h1 style="font-size: 22px; font-weight: 700; color: #0F172A; margin: 0 0 16px 0; text-align: center;">
-                Password Reset Request 🔐
+                ${t.resetPasswordTitle}
               </h1>
 
               <p style="font-size: 15px; line-height: 1.6; color: #475569; margin: 0 0 24px 0; text-align: center;">
-                Hi <strong style="color: #0F172A;">${userName}</strong>, 👋<br>
-                We received a request to reset your password for your <strong>PV ASOCIADOS</strong> account. Enter the code below to complete the process:
+                ${t.resetPasswordBody(userName)}
               </p>
 
               <!-- OTP Box -->
@@ -100,14 +101,14 @@ const resetPassword = (values: IResetPassword) => {
               </div>
 
               <p style="font-size: 13px; line-height: 1.5; color: #64748B; margin: 0 0 20px 0; text-align: center;">
-                This verification code is valid for <strong>5 minutes</strong>.<br>
-                If you didn’t request this, please ignore this email — your account is safe.
+                ${t.otpExpireWarning}<br>
+                ${t.ignoreWarning}
               </p>
 
               <!-- Tip -->
               <div style="background-color: #FFFBEB; border-left: 4px solid #F59E0B; border-radius: 6px; padding: 12px 16px; margin-top: 20px;">
                 <p style="margin: 0; color: #92400E; font-size: 13px; line-height: 1.5;">
-                  ⚠️ <strong>Security Tip:</strong> Never share your reset code with anyone. PV ASOCIADOS will never ask for it.
+                  ${t.securityTip}
                 </p>
               </div>
             </td>
@@ -138,13 +139,15 @@ const resendOtp = (values: {
   name: string
   otp: string
   type: 'resetPassword' | 'createAccount'
+  lang?: string
 }) => {
   const isReset = values.type === 'resetPassword'
   const userName = values.name?.trim() || 'User'
+  const t = getTranslation(values.lang)
 
   const data = {
     to: values.email,
-    subject: `${isReset ? 'Password Reset' : 'Account Verification'} - New Code`,
+    subject: isReset ? t.resendOtpSubjectReset : t.resendOtpSubjectCreate,
     html: `
 <body style="margin: 0; padding: 0; background-color: #F8FAFC; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif; -webkit-font-smoothing: antialiased; color: #1E293B;">
   <table width="100%" border="0" cellpadding="0" cellspacing="0" style="background-color: #F8FAFC; padding: 40px 16px;">
@@ -157,14 +160,14 @@ const resendOtp = (values: {
           <tr>
             <td style="padding: 36px 32px;">
               <h1 style="font-size: 22px; font-weight: 700; color: #0F172A; margin: 0 0 16px 0; text-align: center;">
-                ${isReset ? 'Reset Your Password 🔐' : 'Verify Your Account 🚀'}
+                ${isReset ? t.resendOtpTitleReset : t.resendOtpTitleCreate}
               </h1>
 
               <p style="font-size: 15px; line-height: 1.6; color: #475569; margin: 0 0 24px 0; text-align: center;">
                 Hi <strong style="color: #0F172A;">${userName}</strong>, 👋<br>
                 ${isReset
-                  ? 'You requested a new verification code to reset your PV ASOCIADOS password.'
-                  : 'Here is your new verification code to complete your PV ASOCIADOS account setup.'
+                  ? t.resendOtpBodyReset
+                  : t.resendOtpBodyCreate
                 }<br>
                 Use the code below to continue:
               </p>
@@ -177,16 +180,20 @@ const resendOtp = (values: {
               </div>
 
               <p style="font-size: 13px; line-height: 1.5; color: #64748B; margin: 0 0 20px 0; text-align: center;">
-                This code is valid for <strong>5 minutes</strong>.<br>
-                If this was not you, please ignore the email.
+                ${t.otpExpireWarning}<br>
+                ${t.ignoreWarning}
               </p>
-
+              ${
+                isReset
+                  ? `
               <!-- Tip -->
               <div style="background-color: #FFFBEB; border-left: 4px solid #F59E0B; border-radius: 6px; padding: 12px 16px; margin-top: 20px;">
                 <p style="margin: 0; color: #92400E; font-size: 13px; line-height: 1.5;">
-                  🔒 <strong>Security Tip:</strong> Never share your OTP with anyone. PV ASOCIADOS will never request it.
+                  ${t.securityTip}
                 </p>
-              </div>
+              </div>`
+                  : ''
+              }
             </td>
           </tr>
 
@@ -698,15 +705,16 @@ const subscriptionActivatedEmail = (data: any) => {
   }
 }
 
-const lawyerAccountCreated = (values: {
+const userAccountCreatedByAdmin = (values: {
   name: string
   email: string
   password: string
+  role: string
 }) => {
-  const userName = values.name?.trim() || 'Attorney'
+  const userName = values.name?.trim() || 'User'
   return {
     to: values.email,
-    subject: `⚖️ Welcome to PV & ASOCIADOS Legal Group – Your Attorney Credentials`,
+    subject: `⚖️ Welcome to PV & ASOCIADOS Legal Group – Your Credentials`,
     html: `
 <body style="margin: 0; padding: 0; background-color: #F8FAFC; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; color: #1E293B;">
   <table width="100%" border="0" cellpadding="0" cellspacing="0" style="background-color: #F8FAFC; padding: 40px 16px;">
@@ -722,8 +730,8 @@ const lawyerAccountCreated = (values: {
               </h1>
 
               <p style="color: #475569; font-size: 15px; line-height: 1.6; margin-bottom: 24px; text-align: center;">
-                An administrator has registered your official <strong>PV & ASOCIADOS Legal Group</strong> attorney account.<br>
-                Use the credentials below to log into the attorney portal:
+                An administrator has registered your official <strong>PV & ASOCIADOS Legal Group</strong> account with the role of <strong>${values.role}</strong>.<br>
+                Use the credentials below to log into the portal:
               </p>
 
               <!-- Credentials Box -->
@@ -736,6 +744,10 @@ const lawyerAccountCreated = (values: {
                   <tr style="border-top: 1px solid #E2E8F0;">
                     <td style="padding: 8px 0; font-size: 14px; color: #64748B;">🔑 <strong>Password:</strong></td>
                     <td style="padding: 8px 0; font-size: 14px; color: #1E3A8A; font-weight: 700; text-align: right;">${values.password}</td>
+                  </tr>
+                  <tr style="border-top: 1px solid #E2E8F0;">
+                    <td style="padding: 8px 0; font-size: 14px; color: #64748B;">👤 <strong>Role:</strong></td>
+                    <td style="padding: 8px 0; font-size: 14px; color: #0F172A; font-weight: 700; text-align: right; text-transform: capitalize;">${values.role.toLowerCase()}</td>
                   </tr>
                 </table>
               </div>
@@ -769,10 +781,12 @@ const caseRequestSentEmail = (values: {
   lawyerName: string
   lawyerEmail: string
   citizenName: string
+  lang?: string
 }) => {
+  const t = getTranslation(values.lang);
   return {
     to: values.lawyerEmail,
-    subject: `⚖️ New Case Request from ${values.citizenName} – PV ASOCIADOS`,
+    subject: t.caseRequestSentSubject(values.citizenName),
     html: `
 <body style="margin: 0; padding: 0; background-color: #F8FAFC; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; color: #1E293B;">
   <table width="100%" border="0" cellpadding="0" cellspacing="0" style="background-color: #F8FAFC; padding: 40px 16px;">
@@ -783,12 +797,10 @@ const caseRequestSentEmail = (values: {
           <tr>
             <td style="padding: 36px 32px;">
               <h1 style="color: #0F172A; font-size: 22px; font-weight: 700; margin-bottom: 16px; text-align: center;">
-                New Case Request Received ⚖️
+                ${t.caseRequestSentTitle}
               </h1>
               <p style="color: #475569; font-size: 15px; line-height: 1.6; margin-bottom: 24px; text-align: center;">
-                Hello <strong>${values.lawyerName}</strong>,<br>
-                You have received a new case request from <strong>${values.citizenName}</strong> on PV ASOCIADOS.<br>
-                Please log in to your dashboard to review and accept or decline this request.
+                ${t.caseRequestSentBody(values.lawyerName, values.citizenName)}
               </p>
             </td>
           </tr>
@@ -810,10 +822,12 @@ const caseRequestAcceptedEmail = (values: {
   citizenName: string
   citizenEmail: string
   lawyerName: string
+  lang?: string
 }) => {
+  const t = getTranslation(values.lang);
   return {
     to: values.citizenEmail,
-    subject: `✅ Case Request Accepted by ${values.lawyerName} – PV ASOCIADOS`,
+    subject: t.caseRequestAcceptedSubject(values.lawyerName),
     html: `
 <body style="margin: 0; padding: 0; background-color: #F8FAFC; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; color: #1E293B;">
   <table width="100%" border="0" cellpadding="0" cellspacing="0" style="background-color: #F8FAFC; padding: 40px 16px;">
@@ -824,12 +838,10 @@ const caseRequestAcceptedEmail = (values: {
           <tr>
             <td style="padding: 36px 32px;">
               <h1 style="color: #0F172A; font-size: 22px; font-weight: 700; margin-bottom: 16px; text-align: center;">
-                Case Request Accepted ✅
+                ${t.caseRequestAcceptedTitle}
               </h1>
               <p style="color: #475569; font-size: 15px; line-height: 1.6; margin-bottom: 24px; text-align: center;">
-                Hello <strong>${values.citizenName}</strong>,<br>
-                Great news! Your case request has been accepted by <strong>${values.lawyerName}</strong>.<br>
-                You can now log in to PV ASOCIADOS to communicate with your lawyer.
+                ${t.caseRequestAcceptedBody(values.citizenName, values.lawyerName)}
               </p>
             </td>
           </tr>
@@ -851,10 +863,12 @@ const caseRequestRejectedEmail = (values: {
   citizenName: string
   citizenEmail: string
   lawyerName: string
+  lang?: string
 }) => {
+  const t = getTranslation(values.lang);
   return {
     to: values.citizenEmail,
-    subject: `❌ Case Request Declined by ${values.lawyerName} – PV ASOCIADOS`,
+    subject: t.caseRequestRejectedSubject(values.lawyerName),
     html: `
 <body style="margin: 0; padding: 0; background-color: #F8FAFC; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; color: #1E293B;">
   <table width="100%" border="0" cellpadding="0" cellspacing="0" style="background-color: #F8FAFC; padding: 40px 16px;">
@@ -865,12 +879,10 @@ const caseRequestRejectedEmail = (values: {
           <tr>
             <td style="padding: 36px 32px;">
               <h1 style="color: #0F172A; font-size: 22px; font-weight: 700; margin-bottom: 16px; text-align: center;">
-                Case Request Declined ❌
+                ${t.caseRequestRejectedTitle}
               </h1>
               <p style="color: #475569; font-size: 15px; line-height: 1.6; margin-bottom: 24px; text-align: center;">
-                Hello <strong>${values.citizenName}</strong>,<br>
-                Unfortunately, your case request has been declined by <strong>${values.lawyerName}</strong>.<br>
-                Please log in to PV ASOCIADOS to find and request another available lawyer.
+                ${t.caseRequestRejectedBody(values.citizenName, values.lawyerName)}
               </p>
             </td>
           </tr>
@@ -903,7 +915,7 @@ export const emailTemplate = {
   businessShippingDetailsUpdateEmail,
   customerShippingDetailsUpdateEmail,
   subscriptionActivatedEmail,
-  lawyerAccountCreated,
+  userAccountCreatedByAdmin,
   caseRequestSentEmail,
   caseRequestAcceptedEmail,
   caseRequestRejectedEmail,

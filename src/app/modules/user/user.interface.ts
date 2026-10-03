@@ -25,6 +25,7 @@ export type IUser = {
     role: USER_ROLES;
     authentication: IAuthentication;
     fcmToken?: string;
+    language?: 'en' | 'es';
     residentialArea?: string;
     dateOfBirth?: Date;
     exactAddress?: string;

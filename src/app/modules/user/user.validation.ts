@@ -15,6 +15,7 @@ export const userSignupSchema = z.object({
         confirmPassword: z.string(),
         role: z.nativeEnum(USER_ROLES),
         image: z.string().optional(),
+        language: z.enum(['en', 'es']),
     }).strict()
 });
 
@@ -32,6 +33,7 @@ export const userUpdateSchema = z.object({
         image: z.string().optional(),
         password: passwordSchema.optional(),
         fcmToken: z.string().optional(),
+        language: z.enum(['en', 'es']).optional(),
 
         residentialArea: z.string().optional(),
         dateOfBirth: z.string().or(z.date()).optional(),

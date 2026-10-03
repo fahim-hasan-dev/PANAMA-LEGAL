@@ -2,12 +2,14 @@ export type ICreateAccount = {
   name: string
   email: string
   otp: string
+  lang?: string
 }
 
 export type IResetPassword = {
   name: string
   email: string
   otp: string
+  lang?: string
 }
 
 
@@ -16,4 +18,5 @@ export type IEmailOrPhoneVerification = {
   email?: string
   phone?: string
   type: 'createAccount' | 'resetPassword'
+  lang?: string
 }

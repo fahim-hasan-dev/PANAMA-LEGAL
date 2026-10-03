@@ -224,10 +224,14 @@ const getRandomLawyer = async (excludedId?: string) => {
     return result.length > 0 ? result[0] : null;
 };
 
-// create lawyer (Admin only)
-const createLawyer = async (payload: IUser) => {
+// create user (Admin only)
+const createUser = async (payload: IUser) => {
     payload.email = payload.email?.toLowerCase().trim();
-    payload.role = USER_ROLES.LAWYER;
+    
+    if (!payload.role) {
+        throw new ApiError(StatusCodes.BAD_REQUEST, 'User role is required.');
+    }
+    
     payload.verified = true;
     payload.status = USER_STATUS.ACTIVE;
 
@@ -242,7 +246,7 @@ const createLawyer = async (payload: IUser) => {
         throw new ApiError(StatusCodes.BAD_REQUEST, 'Email already exists.');
     }
 
-    const createdLawyer = await User.create({
+    const createdUser = await User.create({
         ...payload,
         authentication: {
             oneTimeCode: '',
@@ -253,21 +257,22 @@ const createLawyer = async (payload: IUser) => {
         },
     });
 
-    // Send credentials email to lawyer
+    // Send credentials email to user
     try {
-        const welcomeEmail = emailTemplate.lawyerAccountCreated({
-            name: payload.fullName || 'Attorney',
+        const welcomeEmail = emailTemplate.userAccountCreatedByAdmin({
+            name: payload.fullName || 'User',
             email: payload.email,
             password: rawPassword || 'Set by Admin',
+            role: payload.role
         });
         setTimeout(() => {
             emailHelper.sendEmail(welcomeEmail);
         }, 0);
     } catch (err) {
-        logger.error('Failed to send lawyer credentials email:', err);
+        logger.error('Failed to send user credentials email:', err);
     }
 
-    return createdLawyer;
+    return createdUser;
 };
 
 export const UserServices = {
@@ -279,7 +284,7 @@ export const UserServices = {
     deleteMyAccount,
     seedAdmin,
     getRandomLawyer,
-    createLawyer,
+    createUser,
     updateFcmToken,
 }
 
