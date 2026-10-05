@@ -130,12 +130,27 @@ const getProfile = async (user: JwtPayload) => {
 }
 
 // delete my account
-const deleteMyAccount = async (user: JwtPayload) => {
-    const isExistUser = await User.findById(user.authId)
+const deleteMyAccount = async (user: JwtPayload, payload: { password?: string }) => {
+    const isExistUser = await User.findById(user.authId).select('+password')
     if (!isExistUser) {
         throw new ApiError(
             StatusCodes.NOT_FOUND,
             'The requested profile not found or deleted.',
+        )
+    }
+
+    if (!payload.password) {
+        throw new ApiError(
+            StatusCodes.BAD_REQUEST,
+            'Password is required to delete account'
+        )
+    }
+
+    const isPasswordMatch = await User.isPasswordMatched(payload.password, isExistUser.password)
+    if (!isPasswordMatch) {
+        throw new ApiError(
+            StatusCodes.UNAUTHORIZED,
+            'Invalid password'
         )
     }
 

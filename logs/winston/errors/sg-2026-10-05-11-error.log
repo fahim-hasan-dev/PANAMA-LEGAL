@@ -1,0 +1,10 @@
+{Mon Oct 05 2026 11:38:31} [PV ASOCIADOS 🚨] error: ::ffff:10.10.26.207 - POST /api/v1/user/create-lawyer 404 - 6.771 ms
+{Mon Oct 05 2026 11:38:36} [PV ASOCIADOS 🚨] error: ::ffff:10.10.26.207 - POST /api/v1/user/create-lawyer 404 - 0.269 ms
+{Mon Oct 05 2026 11:38:37} [PV ASOCIADOS 🚨] error: ::ffff:10.10.26.207 - POST /api/v1/user/create-lawyer 404 - 0.335 ms
+{Mon Oct 05 2026 11:38:40} [PV ASOCIADOS 🚨] error: ::ffff:10.10.26.207 - POST /api/v1/user/create-lawyer 404 - 0.258 ms
+{Mon Oct 05 2026 11:38:41} [PV ASOCIADOS 🚨] error: ::ffff:10.10.26.207 - POST /api/v1/user/create-lawyer 404 - 0.335 ms
+{Mon Oct 05 2026 11:38:49} [PV ASOCIADOS 🚨] error: ::ffff:10.10.26.207 - POST /api/v1/user/create-lawyer 404 - 0.260 ms
+{Mon Oct 05 2026 11:38:50} [PV ASOCIADOS 🚨] error: ::ffff:10.10.26.207 - POST /api/v1/user/create-lawyer 404 - 0.245 ms
+{Mon Oct 05 2026 11:38:54} [PV ASOCIADOS 🚨] error: ::ffff:10.10.26.207 - POST /api/v1/user/create-lawyer 404 - 0.243 ms
+{Mon Oct 05 2026 11:38:55} [PV ASOCIADOS 🚨] error: ::ffff:10.10.26.207 - POST /api/v1/user/create-lawyer 404 - 0.305 ms
+{Mon Oct 05 2026 11:38:55} [PV ASOCIADOS 🚨] error: ::ffff:10.10.26.207 - POST /api/v1/user/create-lawyer 404 - 0.275 ms

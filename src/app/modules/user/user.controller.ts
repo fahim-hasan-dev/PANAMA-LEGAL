@@ -67,7 +67,7 @@ const getProfile = catchAsync(async (req: Request, res: Response) => {
 
 // delete my account
 const deleteMyAccount = catchAsync(async (req: Request, res: Response) => {
-  const result = await UserServices.deleteMyAccount(req.user! as JwtPayload)
+  const result = await UserServices.deleteMyAccount(req.user! as JwtPayload, req.body)
   sendResponse(res, {
     statusCode: StatusCodes.OK,
     success: true,

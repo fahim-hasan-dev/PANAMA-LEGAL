@@ -58,9 +58,16 @@ export const updateFcmTokenSchema = z.object({
     })
 });
 
+export const deleteAccountSchema = z.object({
+    body: z.object({
+        password: z.string({ required_error: "Password is required to delete account" }),
+    })
+});
+
 export const UserValidations = {
     userSignupSchema,
     userLoginSchema,
     userUpdateSchema,
     updateFcmTokenSchema,
+    deleteAccountSchema,
 };

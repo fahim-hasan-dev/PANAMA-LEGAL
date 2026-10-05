@@ -52,6 +52,7 @@ router.patch(
 router.delete(
   '/me',
   auth(USER_ROLES.ADMIN, USER_ROLES.CITIZEN, USER_ROLES.LAWYER, USER_ROLES.EXPERT, USER_ROLES.STUDENT),
+  validateRequest(UserValidations.deleteAccountSchema),
   UserController.deleteMyAccount,
 )
 
