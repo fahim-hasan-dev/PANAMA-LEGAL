@@ -274,11 +274,13 @@ const createUser = async (payload: IUser) => {
 
     // Send credentials email to user
     try {
+        const userLang = payload.language === 'en' || createdUser.language === 'en' ? 'en' : 'es';
         const welcomeEmail = emailTemplate.userAccountCreatedByAdmin({
             name: payload.fullName || 'User',
             email: payload.email,
             password: rawPassword || 'Set by Admin',
-            role: payload.role
+            role: payload.role,
+            lang: userLang,
         });
         setTimeout(() => {
             emailHelper.sendEmail(welcomeEmail);

@@ -6,7 +6,7 @@ const darkLogoHeader = `
           <!-- Company Logo Header -->
           <tr>
             <td align="center" style="background-color: #16253E; padding: 10px 20px; border-bottom: 1px solid #1E293B;">
-              <img src="https://i.ibb.co.com/wkXb3dS/PV-logo-login.png" alt="PV ASOCIADOS" style="width: 190px; max-width: 65%; height: auto; display: block; margin: 0 auto; border: 0; outline: none; text-decoration: none;" />
+              <img src="https://api.pvasociados.com/image/1794193135759-9rxwlz.png" alt="PV ASOCIADOS" style="width: 190px; max-width: 65%; height: auto; display: block; margin: 0 auto; border: 0; outline: none; text-decoration: none;" />
             </td>
           </tr>`
 
@@ -53,7 +53,7 @@ const createAccount = (values: ICreateAccount) => {
           <tr>
             <td align="center" style="padding: 24px 32px; background-color: #F8FAFC; border-top: 1px solid #F1F5F9;">
               <p style="font-size: 12px; color: #94A3B8; margin: 0; line-height: 1.5;">
-                &copy; ${new Date().getFullYear()} <strong>PV ASOCIADOS</strong>. All rights reserved.
+                &copy; ${new Date().getFullYear()} <strong>PV ASOCIADOS</strong>. ${t.allRightsReserved}
               </p>
             </td>
           </tr>
@@ -118,7 +118,7 @@ const resetPassword = (values: IResetPassword) => {
           <tr>
             <td align="center" style="padding: 24px 32px; background-color: #F8FAFC; border-top: 1px solid #F1F5F9;">
               <p style="font-size: 12px; color: #94A3B8; margin: 0; line-height: 1.5;">
-                &copy; ${new Date().getFullYear()} <strong>PV ASOCIADOS</strong>. All rights reserved.
+                &copy; ${new Date().getFullYear()} <strong>PV ASOCIADOS</strong>. ${t.allRightsReserved}
               </p>
             </td>
           </tr>
@@ -164,12 +164,12 @@ const resendOtp = (values: {
               </h1>
 
               <p style="font-size: 15px; line-height: 1.6; color: #475569; margin: 0 0 24px 0; text-align: center;">
-                Hi <strong style="color: #0F172A;">${userName}</strong>, 👋<br>
+                ${t.greeting(userName)}<br>
                 ${isReset
                   ? t.resendOtpBodyReset
                   : t.resendOtpBodyCreate
                 }<br>
-                Use the code below to continue:
+                ${t.useCodeBelow}
               </p>
 
               <!-- OTP Box -->
@@ -201,7 +201,7 @@ const resendOtp = (values: {
           <tr>
             <td align="center" style="padding: 24px 32px; background-color: #F8FAFC; border-top: 1px solid #F1F5F9;">
               <p style="font-size: 12px; color: #94A3B8; margin: 0; line-height: 1.5;">
-                &copy; ${new Date().getFullYear()} <strong>PV ASOCIADOS</strong>. All rights reserved.
+                &copy; ${new Date().getFullYear()} <strong>PV ASOCIADOS</strong>. ${t.allRightsReserved}
               </p>
             </td>
           </tr>
@@ -222,10 +222,12 @@ const adminContactNotificationEmail = (payload: {
   email: string
   phone?: string
   message: string
+  lang?: string
 }) => {
+  const t = getTranslation(payload.lang)
   return {
     to: config.super_admin.email as string,
-    subject: '📩 New Contact Form Submission – PV ASOCIADOS',
+    subject: t.adminContactNotificationSubject,
     html: `
 <body style="margin: 0; padding: 0; background-color: #F8FAFC; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif; -webkit-font-smoothing: antialiased; color: #1E293B;">
   <table width="100%" border="0" cellpadding="0" cellspacing="0" style="background-color: #F8FAFC; padding: 40px 16px;">
@@ -238,25 +240,25 @@ const adminContactNotificationEmail = (payload: {
           <tr>
             <td style="padding: 36px 32px;">
               <h1 style="font-size: 22px; font-weight: 700; color: #0F172A; margin: 0 0 20px 0; text-align: center;">
-                📬 New Contact Submission
+                ${t.adminContactNotificationTitle}
               </h1>
 
               <p style="color: #475569; font-size: 15px; text-align: center; margin-bottom: 24px;">
-                A new contact message has been submitted on <strong>PV ASOCIADOS</strong>.
+                ${t.adminContactNotificationSubtitle}
               </p>
 
               <!-- Contact Details -->
               <table style="width: 100%; border-collapse: collapse; margin: 20px 0;">
                 <tr>
-                  <td style="padding: 12px 0; font-size: 15px; color: #0F172A;">👤 <strong>Name:</strong></td>
+                  <td style="padding: 12px 0; font-size: 15px; color: #0F172A;">👤 <strong>${t.nameLabel}:</strong></td>
                   <td style="padding: 12px 0; font-size: 15px; color: #0F172A; text-align: right;">${payload.name}</td>
                 </tr>
                 <tr style="border-top: 1px solid #E2E8F0;">
-                  <td style="padding: 12px 0; font-size: 15px; color: #0F172A;">📧 <strong>Email:</strong></td>
+                  <td style="padding: 12px 0; font-size: 15px; color: #0F172A;">📧 <strong>${t.emailLabel}:</strong></td>
                   <td style="padding: 12px 0; font-size: 15px; color: #0F172A; text-align: right;">${payload.email}</td>
                 </tr>
                 <tr style="border-top: 1px solid #E2E8F0;">
-                  <td style="padding: 12px 0; font-size: 15px; color: #0F172A;">📞 <strong>Phone:</strong></td>
+                  <td style="padding: 12px 0; font-size: 15px; color: #0F172A;">📞 <strong>${t.phoneLabel}:</strong></td>
                   <td style="padding: 12px 0; font-size: 15px; color: #0F172A; text-align: right;">${payload.phone || 'N/A'}</td>
                 </tr>
               </table>
@@ -269,7 +271,7 @@ const adminContactNotificationEmail = (payload: {
               </div>
 
               <p style="color: #64748B; font-size: 13px; margin-top: 24px; text-align: center;">
-                You can respond directly to <strong>${payload.email}</strong>.
+                ${t.adminContactReplyNotice(payload.email)}
               </p>
             </td>
           </tr>
@@ -278,7 +280,7 @@ const adminContactNotificationEmail = (payload: {
           <tr>
             <td align="center" style="padding: 24px 32px; background-color: #F8FAFC; border-top: 1px solid #F1F5F9;">
               <p style="font-size: 12px; color: #94A3B8; margin: 0; line-height: 1.5;">
-                &copy; ${new Date().getFullYear()} <strong>PV ASOCIADOS</strong>. All rights reserved.
+                &copy; ${new Date().getFullYear()} <strong>PV ASOCIADOS</strong>. ${t.allRightsReserved}
               </p>
             </td>
           </tr>
@@ -296,11 +298,13 @@ const userContactConfirmationEmail = (payload: {
   name: string
   email: string
   message: string
+  lang?: string
 }) => {
   const userName = payload.name?.trim() || 'Valued Client'
+  const t = getTranslation(payload.lang)
   return {
     to: payload.email,
-    subject: 'Thank you for contacting PV ASOCIADOS',
+    subject: t.userContactConfirmationSubject,
     html: `
 <body style="margin: 0; padding: 0; background-color: #F8FAFC; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif; -webkit-font-smoothing: antialiased; color: #1E293B;">
   <table width="100%" border="0" cellpadding="0" cellspacing="0" style="background-color: #F8FAFC; padding: 40px 16px;">
@@ -313,12 +317,11 @@ const userContactConfirmationEmail = (payload: {
           <tr>
             <td style="padding: 36px 32px;">
               <h1 style="font-size: 22px; font-weight: 700; color: #0F172A; margin: 0 0 16px 0; text-align: center; letter-spacing: -0.01em;">
-                We Have Received Your Message
+                ${t.userContactConfirmationTitle}
               </h1>
 
               <p style="font-size: 15px; line-height: 1.6; color: #475569; margin: 0 0 24px 0; text-align: center;">
-                Dear <strong style="color: #0F172A;">${userName}</strong>,<br>
-                Thank you for contacting <strong>PV ASOCIADOS</strong>. We have received your inquiry and our support team will get back to you shortly.
+                ${t.userContactConfirmationBody(userName)}
               </p>
 
               <!-- Message Card -->
@@ -334,7 +337,7 @@ const userContactConfirmationEmail = (payload: {
           <tr>
             <td align="center" style="padding: 24px 32px; background-color: #F8FAFC; border-top: 1px solid #F1F5F9;">
               <p style="font-size: 12px; color: #94A3B8; margin: 0; line-height: 1.5;">
-                &copy; ${new Date().getFullYear()} <strong>PV ASOCIADOS</strong>. All rights reserved.
+                &copy; ${new Date().getFullYear()} <strong>PV ASOCIADOS</strong>. ${t.allRightsReserved}
               </p>
             </td>
           </tr>
@@ -705,16 +708,34 @@ const subscriptionActivatedEmail = (data: any) => {
   }
 }
 
+const getRoleLabel = (role: string, lang?: string) => {
+  if (lang === 'en') {
+    return role.toLowerCase();
+  }
+  const roleMap: Record<string, string> = {
+    ADMIN: 'Administrador',
+    CITIZEN: 'Ciudadano',
+    LAWYER: 'Abogado',
+    EXPERT: 'Perito',
+    STUDENT: 'Estudiante',
+  };
+  return roleMap[role.toUpperCase()] || role;
+};
+
 const userAccountCreatedByAdmin = (values: {
   name: string
   email: string
   password: string
   role: string
+  lang?: string
 }) => {
   const userName = values.name?.trim() || 'User'
+  const t = getTranslation(values.lang)
+  const roleDisplay = getRoleLabel(values.role, values.lang === 'en' ? 'en' : 'es')
+
   return {
     to: values.email,
-    subject: `⚖️ Welcome to PV & ASOCIADOS Legal Group – Your Credentials`,
+    subject: t.userAccountCreatedSubject,
     html: `
 <body style="margin: 0; padding: 0; background-color: #F8FAFC; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; color: #1E293B;">
   <table width="100%" border="0" cellpadding="0" cellspacing="0" style="background-color: #F8FAFC; padding: 40px 16px;">
@@ -726,35 +747,34 @@ const userAccountCreatedByAdmin = (values: {
           <tr>
             <td style="padding: 36px 32px;">
               <h1 style="color: #0F172A; font-size: 22px; font-weight: 700; margin-bottom: 16px; text-align: center;">
-                Welcome to PV & ASOCIADOS Legal Group, ${userName}! ⚖️
+                ${t.userAccountCreatedTitle(userName)}
               </h1>
 
               <p style="color: #475569; font-size: 15px; line-height: 1.6; margin-bottom: 24px; text-align: center;">
-                An administrator has registered your official <strong>PV & ASOCIADOS Legal Group</strong> account with the role of <strong>${values.role}</strong>.<br>
-                Use the credentials below to log into the portal:
+                ${t.userAccountCreatedBody(roleDisplay)}
               </p>
 
               <!-- Credentials Box -->
               <div style="background-color: #F8FAFC; border: 1px solid #E2E8F0; border-radius: 12px; padding: 24px; margin: 24px 0;">
                 <table style="width: 100%; border-collapse: collapse;">
                   <tr>
-                    <td style="padding: 8px 0; font-size: 14px; color: #64748B;">📧 <strong>Email:</strong></td>
+                    <td style="padding: 8px 0; font-size: 14px; color: #64748B;">📧 <strong>${t.emailLabel}:</strong></td>
                     <td style="padding: 8px 0; font-size: 14px; color: #0F172A; font-weight: 700; text-align: right;">${values.email}</td>
                   </tr>
                   <tr style="border-top: 1px solid #E2E8F0;">
-                    <td style="padding: 8px 0; font-size: 14px; color: #64748B;">🔑 <strong>Password:</strong></td>
+                    <td style="padding: 8px 0; font-size: 14px; color: #64748B;">🔑 <strong>${t.passwordLabel}:</strong></td>
                     <td style="padding: 8px 0; font-size: 14px; color: #1E3A8A; font-weight: 700; text-align: right;">${values.password}</td>
                   </tr>
                   <tr style="border-top: 1px solid #E2E8F0;">
-                    <td style="padding: 8px 0; font-size: 14px; color: #64748B;">👤 <strong>Role:</strong></td>
-                    <td style="padding: 8px 0; font-size: 14px; color: #0F172A; font-weight: 700; text-align: right; text-transform: capitalize;">${values.role.toLowerCase()}</td>
+                    <td style="padding: 8px 0; font-size: 14px; color: #64748B;">👤 <strong>${t.roleLabel}:</strong></td>
+                    <td style="padding: 8px 0; font-size: 14px; color: #0F172A; font-weight: 700; text-align: right; text-transform: capitalize;">${roleDisplay}</td>
                   </tr>
                 </table>
               </div>
 
               <div style="background-color: #FFFBEB; border-left: 4px solid #F59E0B; border-radius: 6px; padding: 12px 16px; margin-top: 20px;">
                 <p style="margin: 0; color: #92400E; font-size: 13px; line-height: 1.5;">
-                  🔒 <strong>Security Notice:</strong> Please log in and change your password in account settings for optimal security.
+                  ${t.userAccountSecurityNotice}
                 </p>
               </div>
             </td>
@@ -763,7 +783,7 @@ const userAccountCreatedByAdmin = (values: {
           <tr>
             <td align="center" style="padding: 24px 32px; background-color: #F8FAFC; border-top: 1px solid #F1F5F9;">
               <p style="font-size: 12px; color: #94A3B8; margin: 0;">
-                &copy; ${new Date().getFullYear()} <strong>PV & ASOCIADOS Legal Group</strong>. All rights reserved.
+                &copy; ${new Date().getFullYear()} <strong>PV & ASOCIADOS Legal Group</strong>. ${t.allRightsReserved}
               </p>
             </td>
           </tr>
@@ -806,7 +826,7 @@ const caseRequestSentEmail = (values: {
           </tr>
           <tr>
             <td align="center" style="padding: 24px 32px; background-color: #F8FAFC; border-top: 1px solid #F1F5F9;">
-              <p style="font-size: 12px; color: #94A3B8; margin: 0;">&copy; ${new Date().getFullYear()} <strong>PV ASOCIADOS</strong>. All rights reserved.</p>
+              <p style="font-size: 12px; color: #94A3B8; margin: 0;">&copy; ${new Date().getFullYear()} <strong>PV ASOCIADOS</strong>. ${t.allRightsReserved}</p>
             </td>
           </tr>
         </table>
@@ -847,7 +867,7 @@ const caseRequestAcceptedEmail = (values: {
           </tr>
           <tr>
             <td align="center" style="padding: 24px 32px; background-color: #F8FAFC; border-top: 1px solid #F1F5F9;">
-              <p style="font-size: 12px; color: #94A3B8; margin: 0;">&copy; ${new Date().getFullYear()} <strong>PV ASOCIADOS</strong>. All rights reserved.</p>
+              <p style="font-size: 12px; color: #94A3B8; margin: 0;">&copy; ${new Date().getFullYear()} <strong>PV ASOCIADOS</strong>. ${t.allRightsReserved}</p>
             </td>
           </tr>
         </table>
@@ -888,7 +908,7 @@ const caseRequestRejectedEmail = (values: {
           </tr>
           <tr>
             <td align="center" style="padding: 24px 32px; background-color: #F8FAFC; border-top: 1px solid #F1F5F9;">
-              <p style="font-size: 12px; color: #94A3B8; margin: 0;">&copy; ${new Date().getFullYear()} <strong>PV ASOCIADOS</strong>. All rights reserved.</p>
+              <p style="font-size: 12px; color: #94A3B8; margin: 0;">&copy; ${new Date().getFullYear()} <strong>PV ASOCIADOS</strong>. ${t.allRightsReserved}</p>
             </td>
           </tr>
         </table>

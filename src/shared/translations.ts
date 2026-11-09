@@ -21,6 +21,31 @@ export const translations = {
     otpExpireWarning: "This verification code will expire in <strong>5 minutes</strong>.",
     ignoreWarning: "If you did not request this, you can safely ignore this email.",
     securityTip: "⚠️ <strong>Security Tip:</strong> Never share your reset code with anyone. PV ASOCIADOS will never ask for it.",
+    greeting: (name: string) => `Hi <strong style="color: #0F172A;">${name}</strong>, 👋`,
+    useCodeBelow: "Use the code below to continue:",
+
+    // Admin Created Account Email
+    userAccountCreatedSubject: "⚖️ Welcome to PV & ASOCIADOS Legal Group – Your Credentials",
+    userAccountCreatedTitle: (userName: string) => `Welcome to PV & ASOCIADOS Legal Group, ${userName}! ⚖️`,
+    userAccountCreatedBody: (role: string) => `An administrator has registered your official <strong>PV & ASOCIADOS Legal Group</strong> account with the role of <strong>${role}</strong>.<br>Use the credentials below to log into the portal:`,
+    userAccountSecurityNotice: "🔒 <strong>Security Notice:</strong> Please log in and change your password in account settings for optimal security.",
+
+    // Contact Form Emails
+    userContactConfirmationSubject: "Thank you for contacting PV ASOCIADOS",
+    userContactConfirmationTitle: "We Have Received Your Message",
+    userContactConfirmationBody: (userName: string) => `Dear <strong style="color: #0F172A;">${userName}</strong>,<br>Thank you for contacting <strong>PV ASOCIADOS</strong>. We have received your inquiry and our support team will get back to you shortly.`,
+    adminContactNotificationSubject: "📩 New Contact Form Submission – PV ASOCIADOS",
+    adminContactNotificationTitle: "📬 New Contact Submission",
+    adminContactNotificationSubtitle: "A new contact message has been submitted on <strong>PV ASOCIADOS</strong>.",
+    adminContactReplyNotice: (email: string) => `You can respond directly to <strong>${email}</strong>.`,
+
+    // Common Email Labels
+    emailLabel: "Email",
+    passwordLabel: "Password",
+    roleLabel: "Role",
+    nameLabel: "Name",
+    phoneLabel: "Phone",
+    allRightsReserved: "All rights reserved.",
 
     // Emails
     caseRequestSentSubject: (citizenName: string) => `⚖️ New Case Request from ${citizenName} – PV ASOCIADOS`,
@@ -81,6 +106,12 @@ export const translations = {
     "Invalid Access Token": "Invalid Access Token",
     "User not found": "User not found",
     "Email already exists.": "Email already exists.",
+    "Article category created successfully": "Article category created successfully",
+    "Article categories retrieved successfully": "Article categories retrieved successfully",
+    "Article category retrieved successfully": "Article category retrieved successfully",
+    "Article category updated successfully": "Article category updated successfully",
+    "Article category deleted successfully": "Article category deleted successfully",
+    "Article category not found": "Article category not found",
   },
 
   es: {
@@ -105,6 +136,31 @@ export const translations = {
     otpExpireWarning: "Este código de verificación expirará en <strong>5 minutos</strong>.",
     ignoreWarning: "Si no solicitó esto, puede ignorar este correo electrónico de forma segura.",
     securityTip: "⚠️ <strong>Consejo de seguridad:</strong> Nunca comparta su código de restablecimiento con nadie. PV ASOCIADOS nunca se lo pedirá.",
+    greeting: (name: string) => `Hola <strong style="color: #0F172A;">${name}</strong>, 👋`,
+    useCodeBelow: "Utilice el código a continuación para continuar:",
+
+    // Admin Created Account Email
+    userAccountCreatedSubject: "⚖️ Bienvenido a PV & ASOCIADOS Legal Group – Sus Credenciales",
+    userAccountCreatedTitle: (userName: string) => `¡Bienvenido a PV & ASOCIADOS Legal Group, ${userName}! ⚖️`,
+    userAccountCreatedBody: (role: string) => `Un administrador ha registrado su cuenta oficial de <strong>PV & ASOCIADOS Legal Group</strong> con el rol de <strong>${role}</strong>.<br>Utilice las credenciales a continuación para iniciar sesión en el portal:`,
+    userAccountSecurityNotice: "🔒 <strong>Aviso de seguridad:</strong> Inicie sesión y cambie su contraseña en la configuración de la cuenta para una seguridad óptima.",
+
+    // Contact Form Emails
+    userContactConfirmationSubject: "Gracias por contactar a PV ASOCIADOS",
+    userContactConfirmationTitle: "Hemos Recibido Su Mensaje",
+    userContactConfirmationBody: (userName: string) => `Estimado/a <strong style="color: #0F172A;">${userName}</strong>,<br>Gracias por ponerse en contacto con <strong>PV ASOCIADOS</strong>. Hemos recibido su consulta y nuestro equipo de soporte se pondrá en contacto con usted a la brevedad.`,
+    adminContactNotificationSubject: "📩 Nuevo Formulario de Contacto – PV ASOCIADOS",
+    adminContactNotificationTitle: "📬 Nuevo Mensaje de Contacto",
+    adminContactNotificationSubtitle: "Se ha recibido un nuevo mensaje de contacto en <strong>PV ASOCIADOS</strong>.",
+    adminContactReplyNotice: (email: string) => `Puede responder directamente a <strong>${email}</strong>.`,
+
+    // Common Email Labels
+    emailLabel: "Correo Electrónico",
+    passwordLabel: "Contraseña",
+    roleLabel: "Rol",
+    nameLabel: "Nombre",
+    phoneLabel: "Teléfono",
+    allRightsReserved: "Todos los derechos reservados.",
 
     // Emails
     caseRequestSentSubject: (citizenName: string) => `⚖️ Nueva solicitud de caso de ${citizenName} – PV ASOCIADOS`,
@@ -165,11 +221,17 @@ export const translations = {
     "Invalid Access Token": "Token de acceso inválido",
     "User not found": "Usuario no encontrado",
     "Email already exists.": "El correo electrónico ya existe.",
+    "Article category created successfully": "Categoría de artículo creada con éxito",
+    "Article categories retrieved successfully": "Categorías de artículos obtenidas con éxito",
+    "Article category retrieved successfully": "Categoría de artículo obtenida con éxito",
+    "Article category updated successfully": "Categoría de artículo actualizada con éxito",
+    "Article category deleted successfully": "Categoría de artículo eliminada con éxito",
+    "Article category not found": "Categoría de artículo no encontrada",
   }
 }
 
 export type LanguageCode = keyof typeof translations;
 export const getTranslation = (lang?: string) => {
-  const language = (lang === 'es' || lang === 'en') ? lang : 'es'; // Default to Spanish since it's Panama Legal
+  const language = lang === 'en' ? 'en' : 'es';
   return translations[language];
 }

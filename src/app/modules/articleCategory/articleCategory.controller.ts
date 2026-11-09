@@ -26,6 +26,29 @@ const getAllArticleCategories = catchAsync(async (req: Request, res: Response) =
     });
 });
 
+const getSingleArticleCategory = catchAsync(async (req: Request, res: Response) => {
+    const id = req.params.id;
+    const result = await ArticleCategoryServices.getSingleArticleCategory(id);
+    sendResponse(res, {
+        statusCode: StatusCodes.OK,
+        success: true,
+        message: "Article category retrieved successfully",
+        data: result,
+    });
+});
+
+const updateArticleCategory = catchAsync(async (req: Request, res: Response) => {
+    const id = req.params.id;
+    const payload = req.body;
+    const result = await ArticleCategoryServices.updateArticleCategory(id, payload);
+    sendResponse(res, {
+        statusCode: StatusCodes.OK,
+        success: true,
+        message: "Article category updated successfully",
+        data: result,
+    });
+});
+
 const deleteArticleCategory = catchAsync(async (req: Request, res: Response) => {
     const id = req.params.id;
     await ArticleCategoryServices.deleteArticleCategory(id);
@@ -40,5 +63,7 @@ const deleteArticleCategory = catchAsync(async (req: Request, res: Response) => 
 export const ArticleCategoryController = {
     createArticleCategory,
     getAllArticleCategories,
+    getSingleArticleCategory,
+    updateArticleCategory,
     deleteArticleCategory,
 };

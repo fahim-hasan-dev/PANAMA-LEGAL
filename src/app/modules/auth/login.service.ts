@@ -53,6 +53,7 @@ const login = async (payload: ILoginData): Promise<IAuthResponse> => {
             name: isUserExist.fullName!,
             email: isUserExist.email!,
             otp,
+            lang: isUserExist.language,
         });
 
         setTimeout(() => {

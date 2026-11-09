@@ -7,6 +7,14 @@ export const articleCategoryValidation = z.object({
     }).strict()
 });
 
+export const updateArticleCategoryValidation = z.object({
+    body: z.object({
+        title: z.string().optional(),
+        isActive: z.boolean().optional(),
+    }).strict()
+});
+
 export const ArticleCategoryValidations = {
     articleCategoryValidation,
+    updateArticleCategoryValidation,
 };
