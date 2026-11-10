@@ -1,0 +1,2 @@
+{Tue Nov 10 2026 09:50:48} [PV ASOCIADOS 🚨] error: ::ffff:10.10.26.182 - POST /api/v1/chatbot/ask 500 - 532.634 ms
+{Tue Nov 10 2026 09:50:52} [PV ASOCIADOS 🚨] error: ::ffff:10.10.26.182 - POST /api/v1/chatbot/ask 500 - 416.922 ms

@@ -1,0 +1,94 @@
+{Mon Nov 09 2026 12:01:13} [PV ASOCIADOS ⚖️] info: [32m🚀 Database connected successfully[39m
+{Mon Nov 09 2026 12:01:13} [PV ASOCIADOS ⚖️] info: ℹ️ Admin already exists
+{Mon Nov 09 2026 12:01:13} [PV ASOCIADOS ⚖️] info: [32m🍁 Server connected successfully[39m
+{Mon Nov 09 2026 12:01:13} [PV ASOCIADOS ⚖️] info: [33m♻️  Application listening on port:5001[39m
+{Mon Nov 09 2026 12:01:40} [PV ASOCIADOS ⚖️] info: [32m🚀 Database connected successfully[39m
+{Mon Nov 09 2026 12:01:40} [PV ASOCIADOS ⚖️] info: ℹ️ Admin already exists
+{Mon Nov 09 2026 12:01:40} [PV ASOCIADOS ⚖️] info: [32m🍁 Server connected successfully[39m
+{Mon Nov 09 2026 12:01:40} [PV ASOCIADOS ⚖️] info: [33m♻️  Application listening on port:5001[39m
+{Mon Nov 09 2026 12:02:06} [PV ASOCIADOS ⚖️] info: [32m🚀 Database connected successfully[39m
+{Mon Nov 09 2026 12:02:06} [PV ASOCIADOS ⚖️] info: ℹ️ Admin already exists
+{Mon Nov 09 2026 12:02:06} [PV ASOCIADOS ⚖️] info: [32m🍁 Server connected successfully[39m
+{Mon Nov 09 2026 12:02:06} [PV ASOCIADOS ⚖️] info: [33m♻️  Application listening on port:5003[39m
+{Mon Nov 09 2026 12:02:09} [PV ASOCIADOS ⚖️] info: ::ffff:10.10.26.182 - GET / 200 - 6.059 ms
+{Mon Nov 09 2026 12:05:05} [PV ASOCIADOS ⚖️] info: [32m🚀 Database connected successfully[39m
+{Mon Nov 09 2026 12:05:05} [PV ASOCIADOS ⚖️] info: ℹ️ Admin already exists
+{Mon Nov 09 2026 12:05:05} [PV ASOCIADOS ⚖️] info: [32m🍁 Server connected successfully[39m
+{Mon Nov 09 2026 12:05:05} [PV ASOCIADOS ⚖️] info: [33m♻️  Application listening on port:5003[39m
+{Mon Nov 09 2026 12:06:29} [PV ASOCIADOS ⚖️] info: [32m🚀 Database connected successfully[39m
+{Mon Nov 09 2026 12:06:29} [PV ASOCIADOS ⚖️] info: ℹ️ Admin already exists
+{Mon Nov 09 2026 12:06:29} [PV ASOCIADOS ⚖️] info: [32m🍁 Server connected successfully[39m
+{Mon Nov 09 2026 12:06:29} [PV ASOCIADOS ⚖️] info: [33m♻️  Application listening on port:5003[39m
+{Mon Nov 09 2026 12:09:59} [PV ASOCIADOS ⚖️] info: [32m🚀 Database connected successfully[39m
+{Mon Nov 09 2026 12:10:00} [PV ASOCIADOS ⚖️] info: ℹ️ Admin already exists
+{Mon Nov 09 2026 12:10:00} [PV ASOCIADOS ⚖️] info: [32m🍁 Server connected successfully[39m
+{Mon Nov 09 2026 12:10:00} [PV ASOCIADOS ⚖️] info: [33m♻️  Application listening on port:5003[39m
+{Mon Nov 09 2026 12:10:14} [PV ASOCIADOS ⚖️] info: [32m🚀 Database connected successfully[39m
+{Mon Nov 09 2026 12:10:14} [PV ASOCIADOS ⚖️] info: ℹ️ Admin already exists
+{Mon Nov 09 2026 12:10:14} [PV ASOCIADOS ⚖️] info: [32m🍁 Server connected successfully[39m
+{Mon Nov 09 2026 12:10:14} [PV ASOCIADOS ⚖️] info: [33m♻️  Application listening on port:5003[39m
+{Mon Nov 09 2026 12:12:41} [PV ASOCIADOS ⚖️] info: [32m🚀 Database connected successfully[39m
+{Mon Nov 09 2026 12:12:41} [PV ASOCIADOS ⚖️] info: ℹ️ Admin already exists
+{Mon Nov 09 2026 12:12:41} [PV ASOCIADOS ⚖️] info: [32m🍁 Server connected successfully[39m
+{Mon Nov 09 2026 12:12:41} [PV ASOCIADOS ⚖️] info: [33m♻️  Application listening on port:5003[39m
+{Mon Nov 09 2026 12:13:55} [PV ASOCIADOS ⚖️] info: [32m🚀 Database connected successfully[39m
+{Mon Nov 09 2026 12:13:55} [PV ASOCIADOS ⚖️] info: ℹ️ Admin already exists
+{Mon Nov 09 2026 12:13:55} [PV ASOCIADOS ⚖️] info: [32m🍁 Server connected successfully[39m
+{Mon Nov 09 2026 12:13:55} [PV ASOCIADOS ⚖️] info: [33m♻️  Application listening on port:5003[39m
+{Mon Nov 09 2026 12:13:57} [PV ASOCIADOS ⚖️] info: [32m🚀 Database connected successfully[39m
+{Mon Nov 09 2026 12:13:58} [PV ASOCIADOS ⚖️] info: ℹ️ Admin already exists
+{Mon Nov 09 2026 12:13:58} [PV ASOCIADOS ⚖️] info: [32m🍁 Server connected successfully[39m
+{Mon Nov 09 2026 12:13:58} [PV ASOCIADOS ⚖️] info: [33m♻️  Application listening on port:5003[39m
+{Mon Nov 09 2026 12:21:28} [PV ASOCIADOS ⚖️] info: ::ffff:10.10.26.182 - POST /api/v1/chatbot/ask 200 - 306366.120 ms
+{Mon Nov 09 2026 12:27:20} [PV ASOCIADOS ⚖️] info: [32m🚀 Database connected successfully[39m
+{Mon Nov 09 2026 12:27:20} [PV ASOCIADOS ⚖️] info: ℹ️ Admin already exists
+{Mon Nov 09 2026 12:27:20} [PV ASOCIADOS ⚖️] info: [32m🍁 Server connected successfully[39m
+{Mon Nov 09 2026 12:27:20} [PV ASOCIADOS ⚖️] info: [33m♻️  Application listening on port:5003[39m
+{Mon Nov 09 2026 12:29:24} [PV ASOCIADOS ⚖️] info: [32m🚀 Database connected successfully[39m
+{Mon Nov 09 2026 12:29:24} [PV ASOCIADOS ⚖️] info: ℹ️ Admin already exists
+{Mon Nov 09 2026 12:29:24} [PV ASOCIADOS ⚖️] info: [32m🍁 Server connected successfully[39m
+{Mon Nov 09 2026 12:29:24} [PV ASOCIADOS ⚖️] info: [33m♻️  Application listening on port:5003[39m
+{Mon Nov 09 2026 12:30:15} [PV ASOCIADOS ⚖️] info: [32m🚀 Database connected successfully[39m
+{Mon Nov 09 2026 12:30:15} [PV ASOCIADOS ⚖️] info: ℹ️ Admin already exists
+{Mon Nov 09 2026 12:30:15} [PV ASOCIADOS ⚖️] info: [32m🍁 Server connected successfully[39m
+{Mon Nov 09 2026 12:30:15} [PV ASOCIADOS ⚖️] info: [33m♻️  Application listening on port:5003[39m
+{Mon Nov 09 2026 12:31:33} [PV ASOCIADOS ⚖️] info: [32m🚀 Database connected successfully[39m
+{Mon Nov 09 2026 12:31:33} [PV ASOCIADOS ⚖️] info: ℹ️ Admin already exists
+{Mon Nov 09 2026 12:31:33} [PV ASOCIADOS ⚖️] info: [32m🍁 Server connected successfully[39m
+{Mon Nov 09 2026 12:31:33} [PV ASOCIADOS ⚖️] info: [33m♻️  Application listening on port:5003[39m
+{Mon Nov 09 2026 12:31:38} [PV ASOCIADOS ⚖️] info: [32m🚀 Database connected successfully[39m
+{Mon Nov 09 2026 12:31:38} [PV ASOCIADOS ⚖️] info: ℹ️ Admin already exists
+{Mon Nov 09 2026 12:31:38} [PV ASOCIADOS ⚖️] info: [32m🍁 Server connected successfully[39m
+{Mon Nov 09 2026 12:31:38} [PV ASOCIADOS ⚖️] info: [33m♻️  Application listening on port:5003[39m
+{Mon Nov 09 2026 12:31:41} [PV ASOCIADOS ⚖️] info: ::ffff:10.10.26.182 - POST /api/v1/chatbot/ask 200 - 1736.727 ms
+{Mon Nov 09 2026 12:32:01} [PV ASOCIADOS ⚖️] info: ::ffff:10.10.26.182 - POST /api/v1/chatbot/ask 200 - 1332.398 ms
+{Mon Nov 09 2026 12:33:05} [PV ASOCIADOS ⚖️] info: [32m🚀 Database connected successfully[39m
+{Mon Nov 09 2026 12:33:05} [PV ASOCIADOS ⚖️] info: ℹ️ Admin already exists
+{Mon Nov 09 2026 12:33:05} [PV ASOCIADOS ⚖️] info: [32m🍁 Server connected successfully[39m
+{Mon Nov 09 2026 12:33:05} [PV ASOCIADOS ⚖️] info: [33m♻️  Application listening on port:5003[39m
+{Mon Nov 09 2026 12:33:11} [PV ASOCIADOS ⚖️] info: [32m🚀 Database connected successfully[39m
+{Mon Nov 09 2026 12:33:11} [PV ASOCIADOS ⚖️] info: ℹ️ Admin already exists
+{Mon Nov 09 2026 12:33:11} [PV ASOCIADOS ⚖️] info: [32m🍁 Server connected successfully[39m
+{Mon Nov 09 2026 12:33:11} [PV ASOCIADOS ⚖️] info: [33m♻️  Application listening on port:5003[39m
+{Mon Nov 09 2026 12:33:16} [PV ASOCIADOS ⚖️] info: [32m🚀 Database connected successfully[39m
+{Mon Nov 09 2026 12:33:16} [PV ASOCIADOS ⚖️] info: ℹ️ Admin already exists
+{Mon Nov 09 2026 12:33:16} [PV ASOCIADOS ⚖️] info: [32m🍁 Server connected successfully[39m
+{Mon Nov 09 2026 12:33:16} [PV ASOCIADOS ⚖️] info: [33m♻️  Application listening on port:5003[39m
+{Mon Nov 09 2026 12:37:03} [PV ASOCIADOS ⚖️] info: [32m🚀 Database connected successfully[39m
+{Mon Nov 09 2026 12:37:03} [PV ASOCIADOS ⚖️] info: ℹ️ Admin already exists
+{Mon Nov 09 2026 12:37:03} [PV ASOCIADOS ⚖️] info: [32m🍁 Server connected successfully[39m
+{Mon Nov 09 2026 12:37:03} [PV ASOCIADOS ⚖️] info: [33m♻️  Application listening on port:5003[39m
+{Mon Nov 09 2026 12:37:42} [PV ASOCIADOS ⚖️] info: [32m🚀 Database connected successfully[39m
+{Mon Nov 09 2026 12:37:42} [PV ASOCIADOS ⚖️] info: ℹ️ Admin already exists
+{Mon Nov 09 2026 12:37:42} [PV ASOCIADOS ⚖️] info: [32m🍁 Server connected successfully[39m
+{Mon Nov 09 2026 12:37:42} [PV ASOCIADOS ⚖️] info: [33m♻️  Application listening on port:5003[39m
+{Mon Nov 09 2026 12:37:45} [PV ASOCIADOS ⚖️] info: [32m🚀 Database connected successfully[39m
+{Mon Nov 09 2026 12:37:45} [PV ASOCIADOS ⚖️] info: ℹ️ Admin already exists
+{Mon Nov 09 2026 12:37:45} [PV ASOCIADOS ⚖️] info: [32m🍁 Server connected successfully[39m
+{Mon Nov 09 2026 12:37:45} [PV ASOCIADOS ⚖️] info: [33m♻️  Application listening on port:5003[39m
+{Mon Nov 09 2026 12:37:49} [PV ASOCIADOS ⚖️] info: ::ffff:10.10.26.182 - POST /api/v1/chatbot/ask 200 - 1869.519 ms
+{Mon Nov 09 2026 12:37:52} [PV ASOCIADOS ⚖️] info: ::ffff:10.10.26.182 - POST /api/v1/chatbot/ask 200 - 1628.186 ms
+{Mon Nov 09 2026 12:38:30} [PV ASOCIADOS ⚖️] info: [32m🚀 Database connected successfully[39m
+{Mon Nov 09 2026 12:38:30} [PV ASOCIADOS ⚖️] info: ℹ️ Admin already exists
+{Mon Nov 09 2026 12:38:30} [PV ASOCIADOS ⚖️] info: [32m🍁 Server connected successfully[39m
+{Mon Nov 09 2026 12:38:30} [PV ASOCIADOS ⚖️] info: [33m♻️  Application listening on port:5003[39m

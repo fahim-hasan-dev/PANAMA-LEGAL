@@ -26,10 +26,9 @@ export const getGeminiResponse = async (
         If you are unsure about something, recommend the user to contact a specialist lawyer through the application.
         ${initialContext ? `The user is currently interested in: ${initialContext}. Please tailor your initial responses to this topic.` : ''}`;
 
-    // Note: The user had gemini-2.5-flash, but current stable is gemini-1.5-flash
-    // Using gemini-1.5-flash for reliability unless 2.5 is specific to user's environment
+ 
     const model = genAI.getGenerativeModel({
-        model: "gemini-2.5-flash",
+        model: "gemini-3.5-flash-lite",
         systemInstruction: systemPrompt
     });
 
