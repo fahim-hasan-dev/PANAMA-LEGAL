@@ -58,27 +58,29 @@ const fileUploadHandler = () => {
 
     //file filter
     const filterFilter = (req: Request, file: any, cb: FileFilterCallback) => {
+        const mime = file.mimetype?.toLowerCase();
+        const isImage = [
+            'image/jpeg',
+            'image/png',
+            'image/jpg',
+            'image/heic',
+            'image/heif',
+            'image/heic-sequence',
+            'image/heif-sequence',
+            'image/webp',
+        ].includes(mime);
 
-        // console.log("file handler",file)
         if (file.fieldname === 'image') {
-            if (
-                file.mimetype === 'image/jpeg' ||
-                file.mimetype === 'image/png' ||
-                file.mimetype === 'image/jpg'
-            ) {
+            if (isImage) {
                 cb(null, true);
             } else {
-                cb(new ApiError(StatusCodes.BAD_REQUEST, 'Only .jpeg, .png, .jpg file supported'))
+                cb(new ApiError(StatusCodes.BAD_REQUEST, 'Only .jpeg, .png, .jpg, .heic, .heif, .webp file supported'))
             }
         } else if (file.fieldname === 'media') {
-            if (
-                file.mimetype === 'image/jpeg' ||
-                file.mimetype === 'image/png' ||
-                file.mimetype === 'image/jpg'
-            ) {
+            if (isImage) {
                 cb(null, true);
             } else {
-                cb(new ApiError(StatusCodes.BAD_REQUEST, 'Only .png file supported'))
+                cb(new ApiError(StatusCodes.BAD_REQUEST, 'Only image file supported'))
             }
         } else if (file.fieldname === 'file') {
             if (

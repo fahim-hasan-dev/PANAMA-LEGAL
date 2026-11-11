@@ -46,8 +46,16 @@ export const fileAndBodyProcessorUsingDiskStorage = () => {
       cb(null, folderPath);
     },
     filename: (req, file, cb) => {
-      const extension =
-        path.extname(file.originalname) || `.${file.mimetype.split('/')[1]}`;
+      const ext = path.extname(file.originalname);
+      const isHeic =
+        file.mimetype?.toLowerCase().includes('heic') ||
+        file.mimetype?.toLowerCase().includes('heif') ||
+        ext?.toLowerCase() === '.heic' ||
+        ext?.toLowerCase() === '.heif';
+
+      const extension = isHeic
+        ? '.jpeg'
+        : ext || `.${file.mimetype.split('/')[1]}`;
       const filename = `${Date.now()}-${Math.random()
         .toString(36)
         .slice(2, 8)}${extension}`;
@@ -61,19 +69,36 @@ export const fileAndBodyProcessorUsingDiskStorage = () => {
     cb: FileFilterCallback,
   ) => {
     try {
+      const imageTypes = [
+        'image/jpeg',
+        'image/png',
+        'image/jpg',
+        'image/heic',
+        'image/heif',
+        'image/heic-sequence',
+        'image/heif-sequence',
+        'image/webp',
+      ];
+
       const allowedTypes = {
-        image: ['image/jpeg', 'image/png', 'image/jpg'],
+        image: imageTypes,
         media: ['video/mp4', 'audio/mpeg'],
         documents: ['application/pdf'],
-        suitabilityCertificate: ['application/pdf', 'image/jpeg', 'image/png', 'image/jpg'],
-        identityDoc: ['application/pdf', 'image/jpeg', 'image/png', 'image/jpg'],
-        studentIdOrEnrollmentProof: ['application/pdf', 'image/jpeg', 'image/png', 'image/jpg'],
+        suitabilityCertificate: ['application/pdf', ...imageTypes],
+        identityDoc: ['application/pdf', ...imageTypes],
+        studentIdOrEnrollmentProof: ['application/pdf', ...imageTypes],
         file: ['application/pdf'],
-        files: ['image/jpeg', 'image/png', 'image/jpg', 'application/pdf', 'application/msword', 'application/vnd.openxmlformats-officedocument.wordprocessingml.document'],
+        files: [
+          ...imageTypes,
+          'application/pdf',
+          'application/msword',
+          'application/vnd.openxmlformats-officedocument.wordprocessingml.document',
+        ],
       };
 
       const fieldType = file.fieldname as IFolderName;
-      if (!allowedTypes[fieldType]?.includes(file.mimetype)) {
+      const mime = file.mimetype.toLowerCase();
+      if (!allowedTypes[fieldType]?.includes(mime)) {
         const errorMsg = fieldType === 'file'
           ? 'Only PDF documents (.pdf) are allowed.'
           : `Invalid file type for ${file.fieldname}`;
@@ -148,7 +173,7 @@ export const fileAndBodyProcessorUsingDiskStorage = () => {
                       .rotate()
                       .resize(800, null, { withoutEnlargement: true });
 
-                    if (file.mimetype === 'image/png') {
+                    if (file.mimetype?.toLowerCase() === 'image/png') {
                       sharpInstance = sharpInstance.png({ quality: 80 });
                     } else {
                       sharpInstance = sharpInstance.jpeg({
