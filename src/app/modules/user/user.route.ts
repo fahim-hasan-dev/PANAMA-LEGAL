@@ -4,6 +4,7 @@ import auth from '../../middleware/auth'
 import validateRequest from '../../middleware/validateRequest'
 import { USER_ROLES } from '../../../enum/user'
 import { UserValidations } from './user.validation'
+import { AdminValidations } from '../admin/admin.validation'
 import { fileAndBodyProcessorUsingDiskStorage } from '../../middleware/processReqBody'
 
 const router = express.Router()
@@ -11,7 +12,7 @@ const router = express.Router()
 
 router.get(
   '/me',
-  auth(USER_ROLES.ADMIN, USER_ROLES.CITIZEN, USER_ROLES.LAWYER, USER_ROLES.EXPERT, USER_ROLES.STUDENT),
+  auth(USER_ROLES.ADMIN, USER_ROLES.CITIZEN, USER_ROLES.LAWYER, USER_ROLES.STUDENT),
   UserController.getProfile,
 )
 
@@ -33,15 +34,22 @@ router.post(
 router.get('/:id', UserController.getSingleUser)
 
 router.patch(
+  '/status/:id',
+  auth(USER_ROLES.ADMIN),
+  validateRequest(AdminValidations.changeAdminStatusValidation),
+  UserController.changeUserStatus
+)
+
+router.patch(
   '/fcm-token',
-  auth(USER_ROLES.ADMIN, USER_ROLES.CITIZEN, USER_ROLES.LAWYER, USER_ROLES.EXPERT, USER_ROLES.STUDENT),
+  auth(USER_ROLES.ADMIN, USER_ROLES.CITIZEN, USER_ROLES.LAWYER, USER_ROLES.STUDENT),
   validateRequest(UserValidations.updateFcmTokenSchema),
   UserController.updateFcmToken
 )
 
 router.patch(
   '/profile',
-  auth(USER_ROLES.ADMIN, USER_ROLES.CITIZEN, USER_ROLES.LAWYER, USER_ROLES.EXPERT, USER_ROLES.STUDENT),
+  auth(USER_ROLES.ADMIN, USER_ROLES.CITIZEN, USER_ROLES.LAWYER, USER_ROLES.STUDENT),
   fileAndBodyProcessorUsingDiskStorage(),
   validateRequest(UserValidations.userUpdateSchema),
   UserController.updateProfile,
@@ -51,7 +59,7 @@ router.patch(
 // delete my account
 router.delete(
   '/me',
-  auth(USER_ROLES.ADMIN, USER_ROLES.CITIZEN, USER_ROLES.LAWYER, USER_ROLES.EXPERT, USER_ROLES.STUDENT),
+  auth(USER_ROLES.ADMIN, USER_ROLES.CITIZEN, USER_ROLES.LAWYER, USER_ROLES.STUDENT),
   validateRequest(UserValidations.deleteAccountSchema),
   UserController.deleteMyAccount,
 )

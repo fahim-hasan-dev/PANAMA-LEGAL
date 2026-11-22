@@ -10,7 +10,7 @@ const router = express.Router();
 
 // Send a message
 router.post('/',
-    auth(USER_ROLES.ADMIN, USER_ROLES.CITIZEN, USER_ROLES.LAWYER, USER_ROLES.EXPERT, USER_ROLES.STUDENT),
+    auth(USER_ROLES.ADMIN, USER_ROLES.CITIZEN, USER_ROLES.LAWYER, USER_ROLES.STUDENT),
     fileAndBodyProcessorUsingDiskStorage(),
     validateRequest(CaseMessageValidation.sendMessageZod),
     CaseMessageController.sendMessage
@@ -19,28 +19,28 @@ router.post('/',
 // Get messages for a case
 router.get(
     '/:id',
-    auth(USER_ROLES.ADMIN, USER_ROLES.CITIZEN, USER_ROLES.LAWYER, USER_ROLES.EXPERT, USER_ROLES.STUDENT),
+    auth(USER_ROLES.ADMIN, USER_ROLES.CITIZEN, USER_ROLES.LAWYER, USER_ROLES.STUDENT),
     CaseMessageController.getMessage
 );
 
 // Update a message
 router.patch(
     '/:id',
-    auth(USER_ROLES.ADMIN, USER_ROLES.CITIZEN, USER_ROLES.LAWYER, USER_ROLES.EXPERT, USER_ROLES.STUDENT),
+    auth(USER_ROLES.ADMIN, USER_ROLES.CITIZEN, USER_ROLES.LAWYER, USER_ROLES.STUDENT),
     CaseMessageController.updateMessage
 );
 
 // Get total unread count across all cases
 router.get(
     '/unread/count',
-    auth(USER_ROLES.ADMIN, USER_ROLES.CITIZEN, USER_ROLES.LAWYER, USER_ROLES.EXPERT, USER_ROLES.STUDENT),
+    auth(USER_ROLES.ADMIN, USER_ROLES.CITIZEN, USER_ROLES.LAWYER, USER_ROLES.STUDENT),
     CaseMessageController.getUnreadCount
 );
 
 // Delete a message
 router.delete(
     '/:id',
-    auth(USER_ROLES.ADMIN, USER_ROLES.CITIZEN, USER_ROLES.LAWYER, USER_ROLES.EXPERT, USER_ROLES.STUDENT),
+    auth(USER_ROLES.ADMIN, USER_ROLES.CITIZEN, USER_ROLES.LAWYER, USER_ROLES.STUDENT),
     CaseMessageController.deleteMessage
 );
 

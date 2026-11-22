@@ -11,8 +11,8 @@ type IFolderName =
   | 'media'
   | 'documents'
   | 'suitabilityCertificate'
-  | 'identityDoc'
   | 'studentIdOrEnrollmentProof'
+  | 'studentIdCard'
   | 'file'
   | 'files'
 
@@ -25,8 +25,8 @@ const uploadFields = [
   { name: 'media', maxCount: 3 },
   { name: 'documents', maxCount: 3 },
   { name: 'suitabilityCertificate', maxCount: 10 },
-  { name: 'identityDoc', maxCount: 10 },
   { name: 'studentIdOrEnrollmentProof', maxCount: 10 },
+  { name: 'studentIdCard', maxCount: 1 },
   { name: 'file', maxCount: 1 },
   { name: 'files', maxCount: 5 },
 ] as const
@@ -85,8 +85,8 @@ export const fileAndBodyProcessorUsingDiskStorage = () => {
         media: ['video/mp4', 'audio/mpeg'],
         documents: ['application/pdf'],
         suitabilityCertificate: ['application/pdf', ...imageTypes],
-        identityDoc: ['application/pdf', ...imageTypes],
         studentIdOrEnrollmentProof: ['application/pdf', ...imageTypes],
+        studentIdCard: ['application/pdf', ...imageTypes],
         file: ['application/pdf'],
         files: [
           ...imageTypes,
@@ -134,7 +134,6 @@ export const fileAndBodyProcessorUsingDiskStorage = () => {
         if (req.body?.data) {
           req.body = JSON.parse(req.body.data);
         }
-
         if (!req.files) {
           return next();
         }
@@ -156,7 +155,7 @@ export const fileAndBodyProcessorUsingDiskStorage = () => {
                 paths.push(filePath);
 
                 if (
-                  ['image', 'suitabilityCertificate', 'identityDoc', 'studentIdOrEnrollmentProof', 'files'].includes(
+                  ['image', 'suitabilityCertificate', 'studentIdOrEnrollmentProof', 'studentIdCard', 'files'].includes(
                     fieldName,
                   ) &&
                   file.mimetype.startsWith('image/')
@@ -200,8 +199,8 @@ export const fileAndBodyProcessorUsingDiskStorage = () => {
           ...req.body,
           ...(processedFiles.image && { image: processedFiles.image }),
           ...(processedFiles.suitabilityCertificate && { suitabilityCertificate: processedFiles.suitabilityCertificate }),
-          ...(processedFiles.identityDoc && { identityDoc: processedFiles.identityDoc }),
           ...(processedFiles.studentIdOrEnrollmentProof && { studentIdOrEnrollmentProof: processedFiles.studentIdOrEnrollmentProof }),
+          ...(processedFiles.studentIdCard && { studentIdCard: processedFiles.studentIdCard }),
           ...(processedFiles.file && { file: processedFiles.file }),
           ...(processedFiles.files && { files: processedFiles.files }),
           ...(processedFiles.media && { media: processedFiles.media }),

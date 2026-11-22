@@ -43,12 +43,10 @@ export const userUpdateSchema = z.object({
         identityNumber: z.string().optional(),
         suitabilityCertificate: z.array(z.string()).optional(),
 
-        identityDoc: z.string().optional(),
-        specialty: z.string().optional(),
-
         university: z.string().optional(),
         currentYear: z.number().int().min(1).max(6).optional(),
-        studentIdOrEnrollmentProof: z.string().optional(),
+        studentIdOrEnrollmentProof: z.union([z.string(), z.array(z.string())]).optional(),
+        studentIdCard: z.union([z.string(), z.array(z.string())]).optional(),
     }).strict()
 });
 

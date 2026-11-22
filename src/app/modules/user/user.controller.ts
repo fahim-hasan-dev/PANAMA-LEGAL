@@ -108,11 +108,25 @@ const updateFcmToken = catchAsync(async (req: Request, res: Response) => {
   })
 })
 
+const changeUserStatus = catchAsync(async (req: Request, res: Response) => {
+  const currentAdminId = (req.user as JwtPayload).authId;
+  const targetUserId = req.params.id;
+  const { status } = req.body;
+  const result = await UserServices.changeUserStatus(currentAdminId, targetUserId, status);
+  sendResponse(res, {
+    statusCode: StatusCodes.OK,
+    success: true,
+    message: 'User status updated successfully',
+    data: result,
+  });
+});
+
 export const UserController = {
   getAllUsers,
   updateProfile,
   getSingleUser,
   deleteUser,
+  changeUserStatus,
   getProfile,
   deleteMyAccount,
   getRandomLawyer,

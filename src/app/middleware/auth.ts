@@ -40,7 +40,7 @@ const auth =
                         }
 
                         // // Subscription check for relevant roles
-                        // const rolesRequiringSubscription = [USER_ROLES.CITIZEN, USER_ROLES.LAWYER, USER_ROLES.EXPERT];
+                        // const rolesRequiringSubscription = [USER_ROLES.CITIZEN, USER_ROLES.LAWYER];
 
                         // // Whitelist for endpoints that bypass subscription check
                         // const bypassPaths = [

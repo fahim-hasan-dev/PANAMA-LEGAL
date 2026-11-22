@@ -716,7 +716,6 @@ const getRoleLabel = (role: string, lang?: string) => {
     ADMIN: 'Administrador',
     CITIZEN: 'Ciudadano',
     LAWYER: 'Abogado',
-    EXPERT: 'Perito',
     STUDENT: 'Estudiante',
   };
   return roleMap[role.toUpperCase()] || role;

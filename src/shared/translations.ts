@@ -112,6 +112,16 @@ export const translations = {
     "Article category updated successfully": "Article category updated successfully",
     "Article category deleted successfully": "Article category deleted successfully",
     "Article category not found": "Article category not found",
+    "Admin accounts fetched successfully": "Admin accounts fetched successfully",
+    "Admin account fetched successfully": "Admin account fetched successfully",
+    "Admin account created successfully": "Admin account created successfully",
+    "Admin account status updated successfully": "Admin account status updated successfully",
+    "Admin account deleted successfully": "Admin account deleted successfully",
+    "User status updated successfully": "User status updated successfully",
+    "You cannot block your own account": "You cannot block your own account",
+    "You cannot delete your own account": "You cannot delete your own account",
+    "Super admin account cannot be modified or deleted": "Super admin account cannot be modified or deleted",
+    "Admin account not found": "Admin account not found",
   },
 
   es: {
@@ -227,6 +237,16 @@ export const translations = {
     "Article category updated successfully": "Categoría de artículo actualizada con éxito",
     "Article category deleted successfully": "Categoría de artículo eliminada con éxito",
     "Article category not found": "Categoría de artículo no encontrada",
+    "Admin accounts fetched successfully": "Cuentas de administrador obtenidas con éxito",
+    "Admin account fetched successfully": "Cuenta de administrador obtenida con éxito",
+    "Admin account created successfully": "Cuenta de administrador creada con éxito",
+    "Admin account status updated successfully": "Estado de la cuenta de administrador actualizado con éxito",
+    "Admin account deleted successfully": "Cuenta de administrador eliminada con éxito",
+    "User status updated successfully": "Estado del usuario actualizado con éxito",
+    "You cannot block your own account": "No puedes bloquear tu propia cuenta",
+    "You cannot delete your own account": "No puedes eliminar tu propia cuenta",
+    "Super admin account cannot be modified or deleted": "La cuenta de superadministrador no se puede modificar ni eliminar",
+    "Admin account not found": "Cuenta de administrador no encontrada",
   }
 }
 

@@ -106,21 +106,15 @@ const UserSchema = new Schema(
             default: undefined,
         },
 
-        // Expert fields
-        identityDoc: {
-            type: [String],
-            default: undefined,
-        },
-        specialty: {
-            type: String,
-            default: undefined,
-        },
-
         // Student fields
         university: String,
         currentYear: Number,
         studentIdOrEnrollmentProof: {
             type: [String],
+            default: undefined,
+        },
+        studentIdCard: {
+            type: String,
             default: undefined,
         },
 

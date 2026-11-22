@@ -14,11 +14,13 @@ import { NotificationRoutes } from '../modules/notification/notification.routes'
 import { LibraryRoutes } from '../modules/library/library.route';
 import { ArticleRoutes } from '../modules/article/article.route';
 import { CaseQuestionRoutes } from '../modules/caseQuestion/caseQuestion.route';
+import { AdminRoutes } from '../modules/admin/admin.route';
 
 
 const router = express.Router();
 
 const apiRoutes = [
+    { path: "/admin", route: AdminRoutes },
     { path: "/user", route: UserRoutes },
     { path: "/auth", route: AuthRoutes },
     { path: "/library-category", route: LibraryCategoryRoutes },

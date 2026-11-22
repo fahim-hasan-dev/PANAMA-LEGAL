@@ -11,13 +11,13 @@ const router = express.Router();
 // Categories
 router.get(
     '/categories',
-    auth(USER_ROLES.ADMIN, USER_ROLES.CITIZEN, USER_ROLES.LAWYER, USER_ROLES.EXPERT, USER_ROLES.STUDENT),
+    auth(USER_ROLES.ADMIN, USER_ROLES.CITIZEN, USER_ROLES.LAWYER, USER_ROLES.STUDENT),
     ChatbotController.getAllCategories
 );
 
 router.get(
     '/categories/:id',
-    auth(USER_ROLES.ADMIN, USER_ROLES.CITIZEN, USER_ROLES.LAWYER, USER_ROLES.EXPERT, USER_ROLES.STUDENT),
+    auth(USER_ROLES.ADMIN, USER_ROLES.CITIZEN, USER_ROLES.LAWYER, USER_ROLES.STUDENT),
     ChatbotController.getSingleCategory
 );
 
@@ -44,21 +44,21 @@ router.delete(
 // Status
 router.get(
     '/status',
-    auth(USER_ROLES.ADMIN, USER_ROLES.CITIZEN, USER_ROLES.LAWYER, USER_ROLES.EXPERT, USER_ROLES.STUDENT),
+    auth(USER_ROLES.ADMIN, USER_ROLES.CITIZEN, USER_ROLES.LAWYER, USER_ROLES.STUDENT),
     ChatbotController.getAiChatStatus
 );
 
 // History
 router.get(
     '/history',
-    auth(USER_ROLES.ADMIN, USER_ROLES.CITIZEN, USER_ROLES.LAWYER, USER_ROLES.EXPERT, USER_ROLES.STUDENT),
+    auth(USER_ROLES.ADMIN, USER_ROLES.CITIZEN, USER_ROLES.LAWYER, USER_ROLES.STUDENT),
     ChatbotController.getChatHistory
 );
 
 // Ask AI (HTTP fallback for socket)
 router.post(
     '/ask',
-    auth(USER_ROLES.ADMIN, USER_ROLES.CITIZEN, USER_ROLES.LAWYER, USER_ROLES.EXPERT, USER_ROLES.STUDENT),
+    auth(USER_ROLES.ADMIN, USER_ROLES.CITIZEN, USER_ROLES.LAWYER, USER_ROLES.STUDENT),
     checkAiChatLimit,
     validateRequest(ChatbotValidations.askAISchema),
     ChatbotController.askAI

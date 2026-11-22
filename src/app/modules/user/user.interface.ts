@@ -32,11 +32,10 @@ export type IUser = {
     workArea?: string;
     identityNumber?: string;
     suitabilityCertificate?: string[];
-    identityDoc?: string[];
-    specialty?: string;
     university?: string;
     currentYear?: number;
     studentIdOrEnrollmentProof?: string[];
+    studentIdCard?: string;
     averageRating: number;
     totalReviews: number;
     isSubscribed: boolean;

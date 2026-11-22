@@ -10,12 +10,12 @@ router.get("/",
 );
 
 router.get("/my-plan",
-    auth(USER_ROLES.CITIZEN, USER_ROLES.LAWYER, USER_ROLES.EXPERT, USER_ROLES.STUDENT),
+    auth(USER_ROLES.CITIZEN, USER_ROLES.LAWYER, USER_ROLES.STUDENT),
     SubscriptionController.subscriptionDetails
 );
 
 router.post("/verify-purchase",
-    auth(USER_ROLES.CITIZEN, USER_ROLES.LAWYER, USER_ROLES.EXPERT),
+    auth(USER_ROLES.CITIZEN, USER_ROLES.LAWYER),
     SubscriptionController.verifyPurchase
 );
 

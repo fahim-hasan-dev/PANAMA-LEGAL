@@ -144,11 +144,10 @@ const createUserZodSchema = z.object({
         USER_ROLES.ADMIN,
         USER_ROLES.CITIZEN,
         USER_ROLES.LAWYER,
-        USER_ROLES.EXPERT,
         USER_ROLES.STUDENT,
       ],
       {
-        message: 'Role must be one of admin, citizen, lawyer, expert, student',
+        message: 'Role must be one of admin, citizen, lawyer, student',
       },
     ),
 

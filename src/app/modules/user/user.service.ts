@@ -53,9 +53,38 @@ const deleteUser = async (id: string) => {
         throw new ApiError(StatusCodes.NOT_FOUND, 'User not found')
     }
 
+    if (isExistUser.email === config.super_admin.email) {
+        throw new ApiError(StatusCodes.FORBIDDEN, 'Super admin account cannot be modified or deleted');
+    }
+
     const result = await User.findByIdAndDelete(id)
     return result
 }
+
+// change user status (block/unblock)
+const changeUserStatus = async (
+    currentAdminId: string,
+    targetUserId: string,
+    status: USER_STATUS
+) => {
+    if (currentAdminId === targetUserId && status === USER_STATUS.RESTRICTED) {
+        throw new ApiError(StatusCodes.BAD_REQUEST, 'You cannot block your own account');
+    }
+
+    const targetUser = await User.findById(targetUserId);
+    if (!targetUser || targetUser.status === USER_STATUS.DELETED) {
+        throw new ApiError(StatusCodes.NOT_FOUND, 'User not found');
+    }
+
+    if (targetUser.email === config.super_admin.email) {
+        throw new ApiError(StatusCodes.FORBIDDEN, 'Super admin account cannot be modified or deleted');
+    }
+
+    targetUser.status = status;
+    await targetUser.save();
+
+    return await User.findById(targetUserId).select('-password -authentication');
+};
 
 // update profile
 const updateProfile = async (
@@ -73,9 +102,12 @@ const updateProfile = async (
         [USER_ROLES.ADMIN]: [],
         [USER_ROLES.CITIZEN]: ['residentialArea', 'dateOfBirth', 'exactAddress'],
         [USER_ROLES.LAWYER]: ['workArea', 'identityNumber', 'suitabilityCertificate'],
-        [USER_ROLES.EXPERT]: ['identityDoc', 'specialty'],
-        [USER_ROLES.STUDENT]: ['university', 'currentYear', 'studentIdOrEnrollmentProof'],
+        [USER_ROLES.STUDENT]: ['university', 'currentYear', 'studentIdOrEnrollmentProof', 'studentIdCard'],
     };
+
+    if (Array.isArray(payload.studentIdCard)) {
+        payload.studentIdCard = payload.studentIdCard[0];
+    }
 
     const allRoleSpecificFields = Object.values(roleFields).flat();
     const allowedFields = roleFields[isExistUser.role] || [];
@@ -297,6 +329,7 @@ export const UserServices = {
     getAllUsers,
     getSingleUser,
     deleteUser,
+    changeUserStatus,
     getProfile,
     deleteMyAccount,
     seedAdmin,
