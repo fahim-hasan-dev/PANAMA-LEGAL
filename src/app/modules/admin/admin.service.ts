@@ -11,7 +11,7 @@ import { logger } from '../../../shared/logger';
 
 const getAllAdmins = async (query: Record<string, unknown>) => {
     const baseFilter: Record<string, any> = {
-        role: USER_ROLES.ADMIN,
+        role: { $in: [USER_ROLES.ADMIN, 'super_admin'] },
         status: { $ne: USER_STATUS.DELETED },
     };
 

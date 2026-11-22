@@ -30,7 +30,6 @@ const UserSchema = new Schema(
         phoneNumber: {
             type: String,
             required: true,
-            unique: true,
             trim: true,
         },
         status: {
@@ -98,8 +97,7 @@ const UserSchema = new Schema(
         workArea: String,
         identityNumber: {
             type: String,
-            sparse: true,
-            unique: true,
+            trim: true,
         },
         suitabilityCertificate: {
             type: [String],

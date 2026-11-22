@@ -34,6 +34,8 @@ filter() {
   const excludeFields = [
     'searchTerm',
     'sort',
+    'sortBy',
+    'sortOrder',
     'page',
     'limit',
     'fields',
@@ -73,7 +75,12 @@ filter() {
 
   // Sorting
   sort() {
-    let sort = (this?.query?.sort as string) || '-createdAt'
+    let sort = (this?.query?.sort as string)
+    if (!sort && this?.query?.sortBy) {
+      const order = this?.query?.sortOrder === 'asc' ? '' : '-'
+      sort = `${order}${this.query.sortBy}`
+    }
+    sort = sort || '-createdAt'
     this.modelQuery = this.modelQuery.sort(sort)
     return this
   }

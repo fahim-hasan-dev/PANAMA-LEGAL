@@ -193,9 +193,10 @@ const deleteMyAccount = async (user: JwtPayload, payload: { password?: string })
     return 'Account deleted successfully'
 }
 
-// seed admin
+// seed admin and sync user collection indexes
 const seedAdmin = async () => {
     try {
+        await User.syncIndexes();
         const isExistAdmin = await User.findOne({
             email: config.super_admin.email,
             role: USER_ROLES.ADMIN,
