@@ -14,19 +14,30 @@ const formatHistory = (messages: { role: string; content: string }[]): any[] => 
 };
 
 /**
+ * Build system prompt with strict language requirement
+ */
+const buildSystemPrompt = (initialContext?: string) => `You are a helpful and professional legal assistant for 'PV Asociados'. 
+Your goal is to provide accurate and helpful information about Panamanian law. 
+Keep your responses concise and professional. 
+If you are unsure about something, recommend the user to contact a specialist lawyer through the application.
+
+CRITICAL LANGUAGE REQUIREMENT:
+- You MUST ALWAYS respond in the EXACT SAME language that the user used to ask their question or write their message.
+- If the user asks in Spanish, you MUST answer entirely in Spanish.
+- If the user asks in English, you MUST answer entirely in English.
+- If the user asks in any other language, you MUST answer in that exact language.
+- Strictly NEVER switch to or answer in a different language, regardless of previous conversation history or initial context. Matching the language of the user's latest query is mandatory and strictly required.
+${initialContext ? `\nThe user is currently interested in: ${initialContext}. Please tailor your initial responses to this topic while strictly preserving the user's query language.` : ''}`;
+
+/**
  * Get AI response from Gemini
  */
 export const getGeminiResponse = async (
     messages: { role: string; content: string }[],
     initialContext?: string
 ) => {
-    const systemPrompt = `You are a helpful and professional legal assistant for 'PV Asociados'. 
-        Your goal is to provide accurate and helpful information about Panamanian law. 
-        Keep your responses concise and professional. 
-        If you are unsure about something, recommend the user to contact a specialist lawyer through the application.
-        ${initialContext ? `The user is currently interested in: ${initialContext}. Please tailor your initial responses to this topic.` : ''}`;
+    const systemPrompt = buildSystemPrompt(initialContext);
 
- 
     const model = genAI.getGenerativeModel({
         model: "gemini-3.5-flash-lite",
         systemInstruction: systemPrompt
@@ -61,11 +72,7 @@ export const getGeminiStreamingResponse = async (
     onChunk: (chunk: string) => void,
     initialContext?: string
 ) => {
-    const systemPrompt = `You are a helpful and professional legal assistant for 'PV Asociados'. 
-        Your goal is to provide accurate and helpful information about Panamanian law. 
-        Keep your responses concise and professional. 
-        If you are unsure about something, recommend the user to contact a specialist lawyer through the application.
-        ${initialContext ? `The user is currently interested in: ${initialContext}. Please tailor your initial responses to this topic.` : ''}`;
+    const systemPrompt = buildSystemPrompt(initialContext);
 
     const model = genAI.getGenerativeModel({
         model: "gemini-1.5-flash",

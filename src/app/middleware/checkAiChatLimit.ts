@@ -6,8 +6,8 @@ import ApiError from '../../errors/ApiError';
 import { StatusCodes } from 'http-status-codes';
 
 export const checkAiChatLimit = catchAsync(async (req: Request, res: Response, next: NextFunction) => {
-    // Only apply to citizens
-    if (req.user?.role !== USER_ROLES.CITIZEN) {
+    // Only apply to citizens and students
+    if (req.user?.role !== USER_ROLES.CITIZEN && req.user?.role !== USER_ROLES.STUDENT) {
         return next();
     }
 
@@ -18,19 +18,17 @@ export const checkAiChatLimit = catchAsync(async (req: Request, res: Response, n
         usage = await AiChatUsage.create({ user: userId });
     }
 
-    // If they already contacted a lawyer, no restriction
-    if (usage.hasContactedLawyer) {
-        return next();
-    }
-
     const now = new Date();
 
     // Check if currently locked
     if (usage.lockExpiresAt) {
         if (now < usage.lockExpiresAt) {
-            throw new ApiError(StatusCodes.FORBIDDEN, 'Chat is locked. Please consult a lawyer to continue.');
+            throw new ApiError(
+                StatusCodes.FORBIDDEN,
+                'Agotaste tus consultas gratuitas, vuelve a consultar gratis en 72 horas.'
+            );
         } else {
-            // Lock expired (48 hours passed), reset the count
+            // Lock expired (72 hours passed), reset the count
             usage.questionCount = 0;
             usage.lockExpiresAt = null;
             await usage.save();
@@ -38,11 +36,14 @@ export const checkAiChatLimit = catchAsync(async (req: Request, res: Response, n
         }
     }
 
-    // If not locked but count is already 3 (shouldn't normally happen without a lock, but just in case)
+    // If not locked but count is already 3
     if (usage.questionCount >= 3) {
-        usage.lockExpiresAt = new Date(now.getTime() + 48 * 60 * 60 * 1000); // 48 hours
+        usage.lockExpiresAt = new Date(now.getTime() + 72 * 60 * 60 * 1000); // 72 hours
         await usage.save();
-        throw new ApiError(StatusCodes.FORBIDDEN, 'Chat is locked. Please consult a lawyer to continue.');
+        throw new ApiError(
+            StatusCodes.FORBIDDEN,
+            'Agotaste tus consultas gratuitas, vuelve a consultar gratis en 72 horas.'
+        );
     }
 
     next();

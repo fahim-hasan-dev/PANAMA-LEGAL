@@ -4,6 +4,7 @@ import { ChatbotCategory, ChatbotHistory } from './chatbot.model';
 import { IChatbotCategory, IChatMessage } from './chatbot.interface';
 import { AiChatUsage } from './aiChatUsage.model';
 import { getGeminiResponse } from './gemini.service';
+import { USER_ROLES } from '../../../enum/user';
 import mongoose from 'mongoose';
 
 const getAllCategories = async () => {
@@ -67,20 +68,18 @@ const askAI = async (userId: string, userMessage: string, initialContext?: strin
 
     await history.save();
 
-    // Limit logic for citizen
-    if (role === 'citizen') {
+    // Limit logic for citizen and student
+    if (role === USER_ROLES.CITIZEN || role === USER_ROLES.STUDENT) {
         let usage = await AiChatUsage.findOne({ user: userId });
         if (!usage) {
             usage = await AiChatUsage.create({ user: userId });
         }
         
-        if (!usage.hasContactedLawyer) {
-            usage.questionCount += 1;
-            if (usage.questionCount >= 3) {
-                usage.lockExpiresAt = new Date(Date.now() + 48 * 60 * 60 * 1000);
-            }
-            await usage.save();
+        usage.questionCount += 1;
+        if (usage.questionCount >= 3) {
+            usage.lockExpiresAt = new Date(Date.now() + 72 * 60 * 60 * 1000);
         }
+        await usage.save();
     }
 
     // Emit socket event for real-time update
@@ -124,7 +123,7 @@ const deleteCategory = async (id: string) => {
 };
 
 const getAiChatStatus = async (userId: string, role: string) => {
-    if (role !== 'citizen') {
+    if (role !== USER_ROLES.CITIZEN && role !== USER_ROLES.STUDENT) {
         return {
             isLocked: false,
             lockExpiresAt: null,
@@ -145,7 +144,7 @@ const getAiChatStatus = async (userId: string, role: string) => {
         await usage.save();
     }
 
-    const isLocked = !usage.hasContactedLawyer && usage.lockExpiresAt !== null && now < usage.lockExpiresAt;
+    const isLocked = usage.lockExpiresAt !== null && now < usage.lockExpiresAt;
 
     return {
         isLocked,
